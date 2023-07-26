@@ -37,7 +37,7 @@ const QuizCreator = () => {
   const saveQuiz = () => {
     const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, questions: questions };
     // Send the quiz data to the server or perform other actions
-    console.log(dataToSend);
+    // console.log(dataToSend);    
   };
 
   
