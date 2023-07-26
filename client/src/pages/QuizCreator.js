@@ -23,9 +23,6 @@ const QuizCreator = () => {
     newQuestions[index].question = e.target.value;
     setQuestions(newQuestions);
   };
-  // console.log(quizTitle)
-  // console.log(quizDescription)
-  // console.log(questions)
 
   const handleAnswerChange = (e, questionIndex, answerIndex) => {
     const newQuestions = [...questions];
@@ -39,7 +36,6 @@ const QuizCreator = () => {
 
   const handleQuizSave = async () => {
     const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, questions: questions };
-    // Send the quiz data to the server or perform other actions
     // console.log(dataToSend);   
     
     const { data } = await saveQuiz({

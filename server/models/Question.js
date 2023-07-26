@@ -4,6 +4,7 @@ const questionSchema = new Schema({
     question:
         {
             type: String,
+            required: true
         },
     answers : [
         {
