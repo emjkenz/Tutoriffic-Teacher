@@ -2,14 +2,14 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Quiz {
-    id: String
-    title: String
-    description: String
+    id: String!
+    title: String!
+    description: String!
     questions: [Questions]!
   }
 
   type Questions {
-    question: String
+    question: String!
     answers: [String]!
   }
 
@@ -26,8 +26,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    quizes: [Quiz]!
-    quiz(QuizId: ID!): Quiz
+    quizzes: [Quiz]
+    quiz(id: String!): Quiz
   }
 
   type Mutation {
