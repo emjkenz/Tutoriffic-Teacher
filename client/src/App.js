@@ -4,6 +4,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 import QuizCreator from './pages/QuizCreator';
 import Quizzes from './pages/Quizzes';
+import Quiz from './pages/Quiz'
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -23,10 +24,10 @@ function App() {
             path="/quizzes"
             element={<Quizzes />}
           />
-          {/* <Route
+          <Route
             path="/quizzes/:quizId"
             element={<Quiz />}
-          /> */}
+          />
         </Routes>
       </Router>
     </ApolloProvider>

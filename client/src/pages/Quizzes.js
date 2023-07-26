@@ -3,10 +3,10 @@ import { useQuery } from '@apollo/client';
 
 import QuizList from '../components/QuizList';
 
-import { QUERY_QUIZ } from '../utils/queries'
+import { QUERY_ALLQUIZZES } from '../utils/queries'
 
 const Quizzes = () => {
-    const { loading, data } = useQuery(QUERY_QUIZ);
+    const { loading, data } = useQuery(QUERY_ALLQUIZZES);
     const quizzes = data?.quizzes || [];
 
     console.log(quizzes);
