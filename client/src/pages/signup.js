@@ -5,8 +5,9 @@ import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: '', password: '', firstName: '', lastName: '' });
   const [addUser] = useMutation(ADD_USER);
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const mutationResponse = await addUser({
@@ -20,6 +21,7 @@ function Signup(props) {
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
   };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -27,6 +29,7 @@ function Signup(props) {
       [name]: value,
     });
   };
+
   return (
     <div className="container my-1">
       <Link to="/login">← Go to Login</Link>
@@ -38,7 +41,7 @@ function Signup(props) {
           <input
             placeholder="First"
             name="firstName"
-            type="firstName"
+            type="text" 
             id="firstName"
             onChange={handleChange}
           />
@@ -48,7 +51,7 @@ function Signup(props) {
           <input
             placeholder="Last"
             name="lastName"
-            type="lastName"
+            type="text" 
             id="lastName"
             onChange={handleChange}
           />
@@ -80,5 +83,6 @@ function Signup(props) {
     </div>
   );
 }
+
 export default Signup;
 
