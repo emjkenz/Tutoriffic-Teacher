@@ -22,3 +22,19 @@ export const QUERY_QUIZ = gql`
   }
 }
 `;
+
+
+export const QUERY_STUDENTS = gql`
+  query GetStudents {
+    students {
+      id
+      firstName
+      lastName
+      dateOfBirth
+      schoolingLevel
+      parentGuardian
+      contactNumber
+      additionalComments
+    }
+  }
+`;

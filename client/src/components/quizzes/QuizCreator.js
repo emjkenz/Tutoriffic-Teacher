@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { SAVE_QUIZ } from '../utils/mutations';
+mport './QuizCreator.css'
 const generateUniqueId = require('generate-unique-id');
 
 const QuizCreator = () => {
   const [quizTitle, setQuizTitle] = useState('');
   const [quizDescription, setQuizDescription] = useState('');
   const [questions, setQuestions] = useState([{ question: '', answers: ['', '', '', ''] }]);
-
-  const [saveQuiz, { error }] = useMutation(SAVE_QUIZ);
 
   const handleTitleChange = (e) => {
     setQuizTitle(e.target.value);
@@ -23,6 +20,9 @@ const QuizCreator = () => {
     newQuestions[index].question = e.target.value;
     setQuestions(newQuestions);
   };
+  // console.log(quizTitle)
+  // console.log(quizDescription)
+  // console.log(questions)
 
   const handleAnswerChange = (e, questionIndex, answerIndex) => {
     const newQuestions = [...questions];
@@ -34,13 +34,10 @@ const QuizCreator = () => {
     setQuestions([...questions, { question: '', answers: ['', '', '', ''] }]);
   };
 
-  const handleQuizSave = async () => {
+  const saveQuiz = () => {
     const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, questions: questions };
-    // console.log(dataToSend);   
-    
-    const { data } = await saveQuiz({
-      variables: { quizData: dataToSend }
-    })
+    // Send the quiz data to the server or perform other actions
+    console.log(dataToSend);
   };
 
   
@@ -70,7 +67,7 @@ const QuizCreator = () => {
       </div>
 
       <button onClick={addQuestion}>Add Question</button>
-      <button onClick={handleQuizSave}>Save Quiz</button>
+      <button onClick={saveQuiz}>Save Quiz</button>
     </div>
   );
 };
