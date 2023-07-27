@@ -38,3 +38,12 @@ export const QUERY_STUDENTS = gql`
     }
   }
 `;
+
+export const GET_DUE_DATES = gql`
+  query {
+    quizzes {
+      title
+      dueDate
+    }
+  }
+`;

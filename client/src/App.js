@@ -4,17 +4,16 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import './App.css'
 import Dashboard from './components/dashboard/Dashboard';
 import Modules from './components/modules/Modules';
-
 import QuizCreator from './components/quizzes/QuizCreator';
 import Students from './components/students/Students';
 import ModuleCreator from './components/modules/ModuleCreator';
 import Grades from './components/students/Grades';
 import Navbar from './components/navbar/Navbar';
-
 import Quizzes from './pages/Quizzes';
 import Quiz from './pages/Quiz';
 import LoginPage from './pages/login'; 
 import SignupPage from './pages/signup'; 
+import Calendar from './pages/Calendar'
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -44,7 +43,8 @@ const App = () => {
           <Route path="/students/grades" element={<Grades />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-            </Routes>
+          <Route path="/calendar" element={<Calendar />} />
+        </Routes>
           </main>
         </div>
       </Router>

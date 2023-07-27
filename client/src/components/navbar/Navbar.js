@@ -34,6 +34,9 @@ const Navbar = () => {
             {/* Add more dashboard options */}
           </ul>
         </li>
+        <li className='mainNav'>
+          <Link to="/calendar">Calendar</Link>
+        </li>
       </ul>
     </nav>
   );
