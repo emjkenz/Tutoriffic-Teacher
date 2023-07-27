@@ -11,6 +11,9 @@ import ModuleCreator from './components/modules/ModuleCreator';
 import Grades from './components/students/Grades';
 import Navbar from './components/navbar/Navbar';
 
+import QuizCreator from './pages/QuizCreator';
+import Quizzes from './pages/Quizzes';
+import Quiz from './pages/Quiz'
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -33,6 +36,7 @@ const App = () => {
           <Route path="/modules" element={<Modules/>} />
           <Route path="/modules/add" element={<ModuleCreator />} />
           <Route path="/quizzes" element={<Quizzes/>} />
+          <Route path="/quizzes/:quizId" element={<Quiz />} />
           <Route path="/quizzes/add" element={<QuizCreator />} />
           <Route path="/students" element={<Students />} />
           <Route path="/students/grades" element={<Grades />} />

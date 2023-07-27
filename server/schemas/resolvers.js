@@ -1,28 +1,33 @@
-const { Tech, Matchup } = require('../models');
+const { Quiz, Questions } = require('../models');
 
 const resolvers = {
   Query: {
-    tech: async () => {
-      return Tech.find({});
+    quizzes: async () => {
+
+      return await Quiz.find();
     },
-    matchups: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return Matchup.find(params);
-    },
+    quiz: async (parent, { id }) => {
+
+      const foundQuiz = await Quiz.findOne({id: id});
+
+      if (!foundQuiz) {
+        throw new Error('Cannot find a quiz with this id!');
+      }
+
+      return foundQuiz;
+    }
   },
   Mutation: {
-    createMatchup: async (parent, args) => {
-      const matchup = await Matchup.create(args);
-      return matchup;
-    },
-    createVote: async (parent, { _id, techNum }) => {
-      const vote = await Matchup.findOneAndUpdate(
-        { _id },
-        { $inc: { [`tech${techNum}_votes`]: 1 } },
-        { new: true }
-      );
-      return vote;
-    },
+    saveQuiz: async (parent, {quizData}) => {
+      const { id, title, description, questions } = quizData;
+
+      return await Quiz.create({
+        id,
+        title,
+        description,
+        questions
+      })
+    }
   },
 };
 

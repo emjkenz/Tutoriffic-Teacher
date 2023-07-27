@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './QuizCreator.css'
+mport './QuizCreator.css'
+const generateUniqueId = require('generate-unique-id');
 
 const QuizCreator = () => {
   const [quizTitle, setQuizTitle] = useState('');
@@ -34,7 +35,7 @@ const QuizCreator = () => {
   };
 
   const saveQuiz = () => {
-    const dataToSend = { title: quizTitle, description: quizDescription, questions: questions };
+    const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, questions: questions };
     // Send the quiz data to the server or perform other actions
     console.log(dataToSend);
   };
