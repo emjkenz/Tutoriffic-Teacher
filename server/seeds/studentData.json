@@ -1,0 +1,18 @@
+[
+  {
+    "firstName": "Jack",
+    "lastName": "Collins",
+    "dateOfBirth": "2015-05-15",
+    "schoolingLevel": "Grade 2",
+    "parentGuardian": "Susan Collins",
+    "contactNumber": "123-456-7890"
+  },
+  {
+    "firstName": "Emily",
+    "lastName": "Smith",
+    "dateOfBirth": "2016-11-20",
+    "schoolingLevel": "Grade 1",
+    "parentGuardian": "Paul Smith",
+    "contactNumber": "987-654-3210"
+  }
+]
