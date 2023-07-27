@@ -13,7 +13,9 @@ import Navbar from './components/navbar/Navbar';
 
 import QuizCreator from './pages/QuizCreator';
 import Quizzes from './pages/Quizzes';
-import Quiz from './pages/Quiz'
+import Quiz from './pages/Quiz';
+import Login from './pages/login';
+import Signup from './pages/signup'; 
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -23,7 +25,7 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
-    <Router>
+              <Router>
       <div className='app'>
           <header>
             <h1>TUTORIFFIC</h1>    
@@ -40,6 +42,9 @@ const App = () => {
           <Route path="/quizzes/add" element={<QuizCreator />} />
           <Route path="/students" element={<Students />} />
           <Route path="/students/grades" element={<Grades />} />
+          <Route path="/" element={<QuizCreator />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
         </main>
       </div>  
@@ -49,3 +54,5 @@ const App = () => {
 };
 
 export default App;
+
+
