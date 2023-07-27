@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-// import '../';
+import { useMutation } from '@apollo/client';
+import { SAVE_QUIZ } from '../utils/mutations';
+import './QuizCreator.css'
 const generateUniqueId = require('generate-unique-id');
 
 const QuizCreator = () => {
   const [quizTitle, setQuizTitle] = useState('');
   const [quizDescription, setQuizDescription] = useState('');
   const [questions, setQuestions] = useState([{ question: '', answers: ['', '', '', ''] }]);
+  const [dueDate, setDueDate] = useState('');
+
+  const [saveQuiz, { error }] = useMutation(SAVE_QUIZ);
 
   const handleTitleChange = (e) => {
     setQuizTitle(e.target.value);
@@ -15,14 +20,15 @@ const QuizCreator = () => {
     setQuizDescription(e.target.value);
   };
 
+  const handleDueDateChange = (e) => {
+    setDueDate(e.target.value);
+  };
+
   const handleQuestionChange = (e, index) => {
     const newQuestions = [...questions];
     newQuestions[index].question = e.target.value;
     setQuestions(newQuestions);
   };
-  // console.log(quizTitle)
-  // console.log(quizDescription)
-  // console.log(questions)
 
   const handleAnswerChange = (e, questionIndex, answerIndex) => {
     const newQuestions = [...questions];
@@ -34,10 +40,18 @@ const QuizCreator = () => {
     setQuestions([...questions, { question: '', answers: ['', '', '', ''] }]);
   };
 
-  const saveQuiz = () => {
-    const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, questions: questions };
-    // Send the quiz data to the server or perform other actions
-    console.log(dataToSend);
+  const handleQuizSave = async () => {
+    const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, dueDate: dueDate, questions: questions };
+    // console.log(dataToSend);   
+    
+    const { data } = await saveQuiz({
+      variables: { quizData: dataToSend }
+    })
+
+    setQuizTitle('');
+    setQuizDescription('');
+    setQuestions([{ question: '', answers: ['', '', '', ''] }]);
+    setDueDate('');
   };
 
   
@@ -51,6 +65,9 @@ const QuizCreator = () => {
 
       <label htmlFor="quiz_description">Quiz Description:</label>
       <textarea id="quiz_description" value={quizDescription} onChange={handleDescriptionChange} />
+
+      <label htmlFor="due_date">Due Date:</label>
+      <input type="date" id="due_date" value={dueDate} onChange={handleDueDateChange} />
 
       <div id="questions_section">
         {questions.map((question, index) => (
@@ -67,7 +84,7 @@ const QuizCreator = () => {
       </div>
 
       <button onClick={addQuestion}>Add Question</button>
-      <button onClick={saveQuiz}>Save Quiz</button>
+      <button onClick={handleQuizSave}>Save Quiz</button>
     </div>
   );
 };
