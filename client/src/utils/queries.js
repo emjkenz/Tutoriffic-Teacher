@@ -24,7 +24,6 @@ export const QUERY_QUIZ = gql`
 }
 `;
 
-
 export const QUERY_STUDENTS = gql`
   query GetStudents {
     students {
@@ -34,8 +33,8 @@ export const QUERY_STUDENTS = gql`
       dateOfBirth
       schoolingLevel
       parentGuardian
-      contactNumber
-      additionalComments
+      contact
+      additionalInfo
     }
   }
 `;

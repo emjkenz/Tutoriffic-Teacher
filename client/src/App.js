@@ -4,14 +4,14 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import './App.css'
 import Dashboard from './components/dashboard/Dashboard';
 import Modules from './components/modules/Modules';
-import Quizzes from './components/quizzes/Quizzes';
+// import Quizzes from './components/quizzes/Quizzes';
 import QuizCreator from './components/quizzes/QuizCreator';
 import Students from './components/students/Students';
 import ModuleCreator from './components/modules/ModuleCreator';
 import Grades from './components/students/Grades';
 import Navbar from './components/navbar/Navbar';
 
-import QuizCreator from './pages/QuizCreator';
+// import QuizCreator from './pages/QuizCreator';
 import Quizzes from './pages/Quizzes';
 import Quiz from './pages/Quiz'
 

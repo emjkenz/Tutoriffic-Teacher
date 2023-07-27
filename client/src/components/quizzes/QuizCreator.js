@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { SAVE_QUIZ } from '../utils/mutations';
 import './QuizCreator.css'
+import { useMutation } from '@apollo/client';
+import { SAVE_QUIZ } from '../../utils/mutations';
 const generateUniqueId = require('generate-unique-id');
 
 const QuizCreator = () => {
