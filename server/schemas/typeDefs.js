@@ -5,6 +5,7 @@ const typeDefs = gql`
     id: String!
     title: String!
     description: String
+    dueDate: String!
     questions: [Questions]!
   }
 
@@ -17,6 +18,7 @@ const typeDefs = gql`
     id: String!
     title: String!
     description: String
+    dueDate: String!
     questions: [QuestionInput!]!
   }
 

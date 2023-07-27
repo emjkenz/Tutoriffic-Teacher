@@ -19,12 +19,13 @@ const resolvers = {
   },
   Mutation: {
     saveQuiz: async (parent, {quizData}) => {
-      const { id, title, description, questions } = quizData;
+      const { id, title, description, dueDate, questions } = quizData;
 
       return await Quiz.create({
         id,
         title,
         description,
+        dueDate,
         questions
       })
     },
@@ -35,11 +36,11 @@ const resolvers = {
         throw new Error('Cannot find a quiz with this id!');
       }
       
-      const { title, questions } = foundQuiz;
+      const { title, questions, dueDate } = foundQuiz;
 
       await Quiz.deleteOne({ id });
 
-      return { id, title, description: foundQuiz.description, questions };
+      return { id, title, description: foundQuiz.description, dueDate, questions };
     }
   },
 };

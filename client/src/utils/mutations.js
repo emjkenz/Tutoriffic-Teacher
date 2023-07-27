@@ -6,6 +6,7 @@ export const SAVE_QUIZ = gql`
       id
       title
       description
+      dueDate
       questions {
         question
         answers
@@ -20,6 +21,7 @@ export const DELETE_QUIZ = gql`
       id
       title
       description
+      dueDate
       questions {
         question
         answers
