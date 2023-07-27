@@ -13,3 +13,17 @@ export const SAVE_QUIZ = gql`
     }
   }
 `;
+
+export const DELETE_QUIZ = gql`
+  mutation removeQuiz($removeQuizId: String!) {
+    removeQuiz(id: $removeQuizId) {
+      id
+      title
+      description
+      questions {
+        question
+        answers
+      }
+    }
+  }
+`;
