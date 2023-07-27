@@ -1,6 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const studentSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+  },
   firstName: {
     type: String,
     required: true,
@@ -21,11 +25,11 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
-  contactNumber: {
+  contact: {
     type: String,
     required: true,
   },
-  additionalComments: {
+  additionalInformation: {
     type: String,
   }
 });
