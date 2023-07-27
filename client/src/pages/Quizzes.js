@@ -9,8 +9,6 @@ const Quizzes = () => {
     const { loading, data } = useQuery(QUERY_ALLQUIZZES);
     const quizzes = data?.quizzes || [];
 
-    console.log(quizzes);
-
     return (
         <div>
             {loading ? (

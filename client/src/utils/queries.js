@@ -15,6 +15,7 @@ export const QUERY_QUIZ = gql`
     id
     title
     description
+    dueDate
     questions {
       question
       answers

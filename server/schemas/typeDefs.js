@@ -4,7 +4,8 @@ const typeDefs = gql`
   type Quiz {
     id: String!
     title: String!
-    description: String!
+    description: String
+    dueDate: String!
     questions: [Questions]!
   }
 
@@ -16,7 +17,8 @@ const typeDefs = gql`
   input QuizInput {
     id: String!
     title: String!
-    description: String!
+    description: String
+    dueDate: String!
     questions: [QuestionInput!]!
   }
 
@@ -32,6 +34,7 @@ const typeDefs = gql`
 
   type Mutation {
     saveQuiz(quizData: QuizInput!): Quiz
+    removeQuiz(id: String!): Quiz
   }
 `;
 

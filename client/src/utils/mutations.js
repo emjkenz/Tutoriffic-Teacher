@@ -6,6 +6,22 @@ export const SAVE_QUIZ = gql`
       id
       title
       description
+      dueDate
+      questions {
+        question
+        answers
+      }
+    }
+  }
+`;
+
+export const DELETE_QUIZ = gql`
+  mutation removeQuiz($removeQuizId: String!) {
+    removeQuiz(id: $removeQuizId) {
+      id
+      title
+      description
+      dueDate
       questions {
         question
         answers
