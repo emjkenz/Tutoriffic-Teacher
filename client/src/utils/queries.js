@@ -20,3 +20,19 @@ export const QUERY_MATCHUPS = gql`
     }
   }
 `;
+
+
+export const QUERY_STUDENTS = gql`
+  query GetStudents {
+    students {
+      id
+      firstName
+      lastName
+      dateOfBirth
+      schoolingLevel
+      parentGuardian
+      contactNumber
+      additionalComments
+    }
+  }
+`;

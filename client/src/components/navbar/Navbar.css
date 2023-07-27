@@ -1,0 +1,89 @@
+nav {
+  background-color: rgb(93, 90, 149);
+  padding: 0;
+  text-align: start;
+  padding-left: 1em;
+  color: #fff;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mainNav:hover {
+  background-color: #555;
+}
+
+.mainNav a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+li {
+  display: inline-block;
+  position: relative;
+  margin-right: 0.8em;
+  padding: 10px;
+}
+
+.subList {
+  margin: 0;
+  padding: 0;
+}
+
+li:hover {
+  color: #fff;
+}
+
+li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+}
+
+li ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  background-color: #555;
+  padding: 0;
+  margin: 0;
+}
+
+li:hover ul {
+  display: block;
+}
+
+li ul li {
+  display: block;
+  margin: 0;
+}
+
+li ul li a {
+  padding: 8px 15px;
+  color: #fff;
+}
+li ul li a:hover {
+  /* padding: 8px 15px; */
+  color: #fff;
+  text-decoration: none;
+  background-color: #b7acac;
+  margin: 0;
+}
+
+/* Styling for selected options */
+/* li.active > a {
+  background-color: #969696;
+} */
+
+li.active ul {
+  display: block;
+}
+
+.subList {
+  margin: 0;
+  padding: 0;
+}

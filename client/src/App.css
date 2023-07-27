@@ -1,0 +1,19 @@
+.app {
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  flex: 1;
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+header {
+  text-align: start;
+  background-color: rgb(93, 90, 149);
+  font-size: 2em;
+  color: rgb(215, 223, 225);
+  padding: 0.3em;
+  padding-left: 1.5em;
+  text-shadow: 3px 3px rgb(72, 70, 115);
+  border-bottom: 2px solid rgb(72, 70, 115);
+}
