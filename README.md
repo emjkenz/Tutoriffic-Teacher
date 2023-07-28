@@ -32,4 +32,3 @@ If you have any questions or suggestions please [contact][github/emjkenz](https:
 ## Repository
 HTTP: https://github.com/emjkenz/Tutoriffic-Teacher.git
 SSH: git@github.com:emjkenz/Tutoriffic-Teacher.git 
-## Images
