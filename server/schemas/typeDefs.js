@@ -62,6 +62,7 @@ const typeDefs = gql`
     saveQuiz(quizData: QuizInput!): Quiz
     removeQuiz(id: String!): Quiz
     saveLesson(lessonData: LessonInput!): Lesson
+    removeLesson(id: String!): Lesson
   }
 `;
 

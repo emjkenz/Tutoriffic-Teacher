@@ -15,8 +15,6 @@ const Quiz = () => {
 
     const quiz = data?.quiz || {};
 
-    console.log(quiz)
-
     if (loading) {
         return <div>Loading...</div>;
     }

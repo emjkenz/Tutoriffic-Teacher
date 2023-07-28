@@ -65,6 +65,19 @@ const resolvers = {
         sections
       })
     },
+    removeLesson: async (parent, { id }) => {
+      const foundLesson = await Lesson.findOne({ id: id });
+
+      if (!foundLesson) {
+        throw new Error('Cannot find a lesson with this id!');
+      }
+
+      const { title, sections } = foundLesson;
+
+      await Lesson.deleteOne({ id });
+
+      return { id, title, sections };
+    },
   },
 };
 

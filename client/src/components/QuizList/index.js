@@ -29,7 +29,6 @@ const QuizList = ({ quizzes, title }) => {
     }
 
     const handleDelete = async (id) => {
-        console.log("delete: ", id);
         try {
             const { data } = await deleteQuiz({
                 variables: {removeQuizId: id},

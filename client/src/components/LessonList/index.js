@@ -3,45 +3,44 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { QUERY_ALL_LESSONS } from '../../utils/queries'
-// import { DELETE_QUIZ } from '../../utils/mutations'
+import { DELETE_LESSON } from '../../utils/mutations'
 
 
-const QuizList = ({ lessons, title }) => {
-    // const [deleteQuiz, { error }] = useMutation(DELETE_QUIZ, {
-    //     update(cache, { data: { removeQuiz } }) {
-    //         try {
-    //             const { quizzes } = cache.readQuery({ query: QUERY_ALL_QUIZZES });
+const LessonList = ({ lessons, title }) => {
+    const [deleteLesson, { error }] = useMutation(DELETE_LESSON, {
+        update(cache, { data: { removeLesson } }) {
+            try {
+                const { lessons } = cache.readQuery({ query: QUERY_ALL_LESSONS });
 
-    //             const updatedQuizzes = quizzes.filter(quiz => quiz.id !== removeQuiz.id);
+                const updatedLessons = lessons.filter(lesson => lesson.id !== removeLesson.id);
 
-    //             cache.writeQuery({
-    //                 query: QUERY_ALL_QUIZZES,
-    //                 data: { quizzes: updatedQuizzes },
-    //             });
-    //         } catch (e) {
-    //             console.error(e);
-    //         }
-    //     },
-    // });
+                cache.writeQuery({
+                    query: QUERY_ALL_LESSONS,
+                    data: { lessons: updatedLessons },
+                });
+            } catch (e) {
+                console.error(e);
+            }
+        },
+    });
 
     if (!lessons.length) {
         return <h3>No lessons Yet</h3>;
     }
 
-    // const handleDelete = async (id) => {
-    //     console.log("delete: ", id);
-    //     try {
-    //         const { data } = await deleteQuiz({
-    //             variables: { removeQuizId: id },
-    //         });
+    const handleDelete = async (id) => {
+        try {
+            const { data } = await deleteLesson({
+                variables: { removeLessonId: id },
+            });
 
-    //         if (!data.removeQuiz) {
-    //             throw new Error('Something went wrong!');
-    //         }
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // }
+            if (!data.removeLesson) {
+                throw new Error('Something went wrong!');
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     return (
         <div>
@@ -57,7 +56,7 @@ const QuizList = ({ lessons, title }) => {
                                 >
                                     {lesson.title}
                                 </Link>
-                                {/* <button onClick={() => handleDelete(lesson.id)}>Delete</button> */}
+                                <button onClick={() => handleDelete(lesson.id)}>Delete</button>
                             </div>
                         </div>
                     ))}
@@ -66,4 +65,4 @@ const QuizList = ({ lessons, title }) => {
     );
 };
 
-export default QuizList;
+export default LessonList;

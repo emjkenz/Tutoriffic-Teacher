@@ -75,3 +75,17 @@ export const SAVE_LESSON = gql `
     }
   }
 `;
+
+export const DELETE_LESSON = gql `
+  mutation removeLesson($removeLessonId: String!) {
+    removeLesson(id: $removeLessonId) {
+      id
+      title
+      sections {
+        heading
+        subheading
+        text
+      }
+    }
+  }
+`;

@@ -38,8 +38,6 @@ const LessonCreator = () => {
     const handleLessonSave = async () => {
         const dataToSend = { id: generateUniqueId(), title: lessonTitle, sections: sections };
 
-        console.log(dataToSend);
-
         const { data } = await saveLesson({
             variables: { lessonData: dataToSend }
         })

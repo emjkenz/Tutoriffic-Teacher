@@ -14,8 +14,6 @@ const Lesson = () => {
 
     const lesson = data?.lesson || {};
 
-    console.log(lesson)
-
     if (loading) {
         return <div>Loading...</div>;
     }

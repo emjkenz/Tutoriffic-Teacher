@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Questions = ({questions}) => {
-    console.log(questions);
     return(
         <div>
             { questions &&

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const LessonSections = ({sections}) => {
-    console.log(sections)
     return (
         <div>
             {sections &&

@@ -25,6 +25,14 @@ const Navbar = () => {
             {/* Add more dashboard options */}
           </ul>
         </li>
+           <li className='mainNav'>
+          Lessons
+          <ul className='subList'>
+            <li><Link to="/lessons">View Lessons</Link></li>
+            <li><Link to="/lesson/add">Add Lesson</Link></li>
+            {/* Add more dashboard options */}
+          </ul>
+        </li>
         <li className='mainNav'>
           Students
           <ul className='subList'>
@@ -35,17 +43,6 @@ const Navbar = () => {
         </li>
         <li className='mainNav'>
           <Link to="/calendar">Calendar</Link>
-        </li>
-        {/* <li className='mainNav'>
-          <Link to="/lessons">Lesson</Link>
-        </li> */}
-        <li className='mainNav'>
-          Lessons
-          <ul className='subList'>
-            <li><Link to="/lessons">View Lessons</Link></li>
-            <li><Link to="/lesson/add">Add Lesson</Link></li>
-            {/* Add more dashboard options */}
-          </ul>
         </li>
       </ul>
     </nav>
