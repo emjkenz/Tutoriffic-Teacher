@@ -42,8 +42,7 @@ const QuizCreator = () => {
   };
 
   const handleQuizSave = async () => {
-    const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, dueDate: dueDate, questions: questions };
-    // console.log(dataToSend);   
+    const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, dueDate: dueDate, questions: questions }; 
     
     const { data } = await saveQuiz({
       variables: { quizData: dataToSend }

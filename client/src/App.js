@@ -14,6 +14,7 @@ import Quiz from './pages/Quiz';
 import LoginPage from './pages/login'; 
 import SignupPage from './pages/signup'; 
 import Calendar from './pages/Calendar'
+import LessonCreator from './pages/LessonCreator';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/calendar" element={<Calendar />} />
+              <Route path="/lesson/add" element={<LessonCreator />} />
         </Routes>
           </main>
         </div>
