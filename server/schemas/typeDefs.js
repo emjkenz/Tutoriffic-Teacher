@@ -54,6 +54,8 @@ const typeDefs = gql`
   type Query {
     quizzes: [Quiz]
     quiz(id: String!): Quiz
+    lessons: [Lesson]
+    lesson(id: String!): Lesson
   }
 
   type Mutation {

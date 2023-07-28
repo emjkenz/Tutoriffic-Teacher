@@ -15,6 +15,8 @@ import LoginPage from './pages/login';
 import SignupPage from './pages/signup'; 
 import Calendar from './pages/Calendar'
 import LessonCreator from './pages/LessonCreator';
+import Lessons from './pages/Lessons';
+import Lesson from './pages/Lesson';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -34,19 +36,21 @@ const App = () => {
           </nav>
           <main>
             <Routes>
-          <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route path="/modules" element={<Modules/>} />
-          <Route path="/modules/add" element={<ModuleCreator />} />
-          <Route path="/quizzes" element={<Quizzes/>} />
-          <Route path="/quizzes/:quizId" element={<Quiz />} />
-          <Route path="/quizzes/add" element={<QuizCreator />} />
-          <Route path="/students" element={<Students />} />
-          <Route path="/students/grades" element={<Grades />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/calendar" element={<Calendar />} />
+              <Route exact path="/dashboard" element={<Dashboard />} />
+              <Route path="/modules" element={<Modules/>} />
+              <Route path="/modules/add" element={<ModuleCreator />} />
+              <Route path="/quizzes" element={<Quizzes/>} />
+              <Route path="/quizzes/:quizId" element={<Quiz />} />
+              <Route path="/quizzes/add" element={<QuizCreator />} />
+              <Route path="/students" element={<Students />} />
+              <Route path="/students/grades" element={<Grades />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/calendar" element={<Calendar />} />
               <Route path="/lesson/add" element={<LessonCreator />} />
-        </Routes>
+              <Route path="/lessons" element={<Lessons />} />
+              <Route path="/lessons/:lessonId" element={<Lesson />} />
+            </Routes>
           </main>
         </div>
       </Router>

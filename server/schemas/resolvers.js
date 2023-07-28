@@ -15,7 +15,21 @@ const resolvers = {
       }
 
       return foundQuiz;
-    }
+    },
+    lessons: async () => {
+
+      return await Lesson.find();
+    },
+    lesson: async (parent, { id }) => {
+
+      const foundLesson = await Lesson.findOne({ id: id });
+
+      if (!foundLesson) {
+        throw new Error('Cannot find a lesson with this id!');
+      }
+
+      return foundLesson;
+    },
   },
   Mutation: {
     saveQuiz: async (parent, {quizData}) => {
