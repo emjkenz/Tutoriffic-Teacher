@@ -1,4 +1,4 @@
-const { Quiz, Questions } = require('../models');
+const { Quiz, Lesson } = require('../models');
 
 const resolvers = {
   Query: {
@@ -41,7 +41,16 @@ const resolvers = {
       await Quiz.deleteOne({ id });
 
       return { id, title, description: foundQuiz.description, dueDate, questions };
-    }
+    },
+    saveLesson: async (parent, { lessonData }) => {
+      const { id, title, sections } = lessonData;
+
+      return await Lesson.create({
+        id,
+        title,
+        sections
+      })
+    },
   },
 };
 

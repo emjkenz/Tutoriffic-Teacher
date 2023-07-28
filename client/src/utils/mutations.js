@@ -61,3 +61,17 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const SAVE_LESSON = gql `
+  mutation saveLesson($lessonData: LessonInput!) {
+    saveLesson(lessonData: $lessonData) {
+      id
+      title
+      sections {
+        heading
+        subheading
+        text
+      }
+    }
+  }
+`;

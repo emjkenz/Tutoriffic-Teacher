@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { SAVE_LESSON } from '../utils/mutations';
 const generateUniqueId = require('generate-unique-id');
 
 const LessonCreator = () => {
     const [lessonTitle, setLessonTitle] = useState('');
     const [sections, setSections] = useState([{ heading: '', subheading: '', text: '' }]);
+
+    const [saveLesson, {error}] = useMutation(SAVE_LESSON);
 
     const handleTitleChange = (e) => {
         setLessonTitle(e.target.value);
@@ -21,7 +24,7 @@ const LessonCreator = () => {
         newSections[headingIndex].subheading = e.target.value;
         setSections(newSections);
     };
-    
+
     const handleTextChange = (e, headingIndex) => {
         const newSections = [...sections];
         newSections[headingIndex].text = e.target.value;
@@ -36,6 +39,10 @@ const LessonCreator = () => {
         const dataToSend = { id: generateUniqueId(), title: lessonTitle, sections: sections };
 
         console.log(dataToSend);
+
+        const { data } = await saveLesson({
+            variables: { lessonData: dataToSend }
+        })
 
         setLessonTitle('');
         setSections([{ heading: '', subheading: '', text: '' }]);

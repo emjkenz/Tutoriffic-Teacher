@@ -1,4 +1,4 @@
 const Quiz = require('./Quiz');
-const Question = require('./Question');
+const Lesson = require('./Lesson')
 
-module.exports = { Quiz, Question };
+module.exports = { Quiz, Lesson };
