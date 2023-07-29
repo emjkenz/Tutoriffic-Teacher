@@ -75,3 +75,23 @@ export const QUERY_LESSON = gql `
     }
   }
 `;
+
+export const QUERY_ALL_POSTS = gql `
+  query posts {
+    posts {
+      id
+      title
+      text
+    }
+  } 
+`;
+
+export const QUERY_POST = gql `
+  query post($postId: String!) {
+    post(id: $postId) {
+      id
+      title
+      text
+    }
+  }
+`;

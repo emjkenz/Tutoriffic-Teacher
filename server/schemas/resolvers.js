@@ -1,4 +1,4 @@
-const { Quiz, Lesson } = require('../models');
+const { Quiz, Lesson, Post } = require('../models');
 
 const resolvers = {
   Query: {
@@ -29,6 +29,20 @@ const resolvers = {
       }
 
       return foundLesson;
+    },
+    posts: async () => {
+
+      return await Post.find();
+    },
+    post: async (parent, { id }) => {
+
+      const foundPost = await Post.findOne({ id: id });
+
+      if (!foundPost) {
+        throw new Error('Cannot find a post with this id!');
+      }
+
+      return foundPost;
     },
   },
   Mutation: {
@@ -77,6 +91,28 @@ const resolvers = {
       await Lesson.deleteOne({ id });
 
       return { id, title, sections };
+    },
+    savePost: async (parent, { postData }) => {
+      const { id, title, text } = postData;
+
+      return await Post.create({
+        id,
+        title,
+        text
+      })
+    },
+    removePost: async (parent, { id }) => {
+      const foundPost = await Post.findOne({ id: id });
+
+      if (!foundPost) {
+        throw new Error('Cannot find a post with this id!');
+      }
+
+      const { title, text } = foundPost;
+
+      await Post.deleteOne({ id });
+
+      return { id, title, text };
     },
   },
 };

@@ -89,3 +89,23 @@ export const DELETE_LESSON = gql `
     }
   }
 `;
+
+export const SAVE_POST = gql `
+  mutation savePost($postData: PostInput!) {
+    savePost(postData: $postData) {
+      id
+      text
+      title
+    }
+  }
+`;
+
+export const DELETE_POST = gql `
+  mutation removePost($removePostId: String!) {
+    removePost(id: $removePostId) {
+      id
+      title
+      text
+    }
+  }
+`;

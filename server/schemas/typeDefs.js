@@ -51,11 +51,25 @@ const typeDefs = gql`
     text: String!
   }
 
+  type Post {
+    id: String!
+    title: String!
+    text: String!
+  }
+
+  input PostInput {
+    id: String!
+    title: String!
+    text: String!
+  }
+
   type Query {
     quizzes: [Quiz]
     quiz(id: String!): Quiz
     lessons: [Lesson]
     lesson(id: String!): Lesson
+    posts: [Post]
+    post(id: String!): Post
   }
 
   type Mutation {
@@ -63,6 +77,8 @@ const typeDefs = gql`
     removeQuiz(id: String!): Quiz
     saveLesson(lessonData: LessonInput!): Lesson
     removeLesson(id: String!): Lesson
+    savePost(postData: PostInput!): Post 
+    removePost(id: String!): Post
   }
 `;
 
