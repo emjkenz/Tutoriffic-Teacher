@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-
 import { QUERY_ALL_POSTS } from '../../utils/queries'
 import { DELETE_POST } from '../../utils/mutations'
 
@@ -44,23 +43,26 @@ const PostList = ({ posts, title }) => {
 
     return (
         <div>
-            <h3 className="text-primary">{title}</h3>
-            <div className="flex-row justify-space-between my-4">
-                {posts &&
-                    posts.map((post) => (
-                        <div key={post.id} className="col-12 col-xl-6">
-                            <div className="card mb-3">
-                                <Link
-                                    className="btn btn-block btn-squared bg-dark text-light"
-                                    to={`/posts/${post.id}`}
-                                >
-                                    {post.title}
-                                </Link>
-                                <button onClick={() => handleDelete(post.id)}>Delete</button>
+            <div>
+                <h3 className="text-primary">{title}</h3>
+                <div className="flex-row justify-space-between my-4">
+                    {posts &&
+                        posts.map((post) => (
+                            <div key={post.id} className="col-12 col-xl-6">
+                                <div className="card mb-3">
+                                    <Link
+                                        className="btn btn-block btn-squared bg-dark text-light"
+                                        to={`/posts/${post.id}`}
+                                    >
+                                        {post.title}
+                                    </Link>
+                                    <button onClick={() => handleDelete(post.id)}>Delete</button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                </div>
             </div>
+            
         </div>
     );
 };

@@ -109,3 +109,17 @@ export const DELETE_POST = gql `
     }
   }
 `;
+
+export const ADD_COMMENT = gql `
+  mutation addCommentToPost($postId: String!, $comment: CommentInput!) {
+    addCommentToPost(postId: $postId, comment: $comment) {
+      id
+      title
+      text
+      comments {
+        _id
+        text
+      }
+    }
+  }
+`;

@@ -51,9 +51,15 @@ const typeDefs = gql`
     text: String!
   }
 
-  type Post {
+   type Post {
     id: String!
     title: String!
+    text: String!
+    comments: [Comments]
+  }
+
+  type Comments {
+    _id: ID!
     text: String!
   }
 
@@ -61,7 +67,13 @@ const typeDefs = gql`
     id: String!
     title: String!
     text: String!
+    comments: [CommentInput]
   }
+
+  input CommentInput {
+    text: String!
+  }
+
 
   type Query {
     quizzes: [Quiz]
@@ -70,6 +82,7 @@ const typeDefs = gql`
     lesson(id: String!): Lesson
     posts: [Post]
     post(id: String!): Post
+    commentsByPostId(postId: String!): [Comments!]!
   }
 
   type Mutation {
@@ -79,6 +92,7 @@ const typeDefs = gql`
     removeLesson(id: String!): Lesson
     savePost(postData: PostInput!): Post 
     removePost(id: String!): Post
+    addCommentToPost(postId: String!, comment: CommentInput!): Post
   }
 `;
 

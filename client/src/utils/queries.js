@@ -95,3 +95,14 @@ export const QUERY_POST = gql `
     }
   }
 `;
+
+export const QUERY_COMMENTS_BY_POST = gql`
+  query post($postId: String!) {
+    post(id: $postId) {
+      comments {
+        _id
+        text
+      }
+    }
+  }
+`;

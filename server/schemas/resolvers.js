@@ -1,4 +1,4 @@
-const { Quiz, Lesson, Post } = require('../models');
+const { Quiz, Lesson, Post, commentSchema } = require('../models');
 
 const resolvers = {
   Query: {
@@ -43,6 +43,9 @@ const resolvers = {
       }
 
       return foundPost;
+    },
+    commentsByPostId: async (parent, { postId }) => {
+        return await Comments.find({ postId });
     },
   },
   Mutation: {
@@ -93,12 +96,13 @@ const resolvers = {
       return { id, title, sections };
     },
     savePost: async (parent, { postData }) => {
-      const { id, title, text } = postData;
+      const { id, title, text, comments } = postData;
 
       return await Post.create({
         id,
         title,
-        text
+        text,
+        comments
       })
     },
     removePost: async (parent, { id }) => {
@@ -108,11 +112,63 @@ const resolvers = {
         throw new Error('Cannot find a post with this id!');
       }
 
-      const { title, text } = foundPost;
+      const { title, text, comments } = foundPost;
 
       await Post.deleteOne({ id });
 
-      return { id, title, text };
+      return { id, title, text, comments };
+    },
+    // saveComment: async (parent, { commentData }) => {
+    //   console.log("commentData: ", commentData)
+    //   const { id, title, text, postId } = commentData;
+
+    //   return await Comments.create({
+    //     id,
+    //     title,
+    //     text,
+    //     postId
+    //   })
+    // },
+    // addCommentToPost: async (parent, { postId, comment }) => {
+    //   try {
+    //     const post = await Post.findOne({ id: postId });
+
+    //     if (!post) {
+    //       throw new Error('Post not found');
+    //     }
+
+    //     const newComment = {
+    //       text: comment.text,
+    //       postId: postId,
+    //     };
+
+    //     post.comments.push(newComment);
+
+    //     await post.save();
+
+    //     return post;
+    //   } catch (error) {
+    //     throw new Error(error.message);
+    //   }
+    // },
+    addCommentToPost: async (parent, { postId, comment }) => {
+      try {
+        const post = await Post.findOne({ id: postId });
+        if (!post) {
+          throw new Error('Post not found');
+        }
+
+        const newComment = {
+          text: comment.text,
+        };
+
+        post.comments.push(newComment);
+        await post.save();
+
+        return post;
+      } catch (error) {
+        throw new Error(error.message);
+      }
     },
   },
 };
