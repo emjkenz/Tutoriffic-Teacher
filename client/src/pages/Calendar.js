@@ -16,13 +16,8 @@ const  ReactBigCalendar = () => {
     const { loading: lessonDatesLoading, data: lessonDatesData, error: lessonDatesError } = useQuery(GET_LESSON_DATES);
     const lessons = lessonDatesData?.lessons || [];
 
-    console.log("lessons: ", lessons)
-    console.log("quizzes: ", quizzes);
-
     const mergedArray = [...quizzes, ...lessons];
-    console.log("arrauy: ", mergedArray);
 
-    
     const createCalendarObject = (mergedArray) => {
         return {
             id: 0,
