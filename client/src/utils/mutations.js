@@ -123,3 +123,17 @@ export const ADD_COMMENT = gql `
     }
   }
 `;
+
+export const DELETE_COMMENT = gql `
+  mutation removeCommentFromPost($postId: String!, $commentId: ID!) {
+    removeCommentFromPost(postId: $postId, commentId: $commentId) {
+      id
+      title
+      text
+      comments {
+        _id
+        text
+      }
+    }
+  }
+`;

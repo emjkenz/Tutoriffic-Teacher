@@ -76,7 +76,6 @@ const typeDefs = gql`
     text: String!
   }
 
-
   type Query {
     quizzes: [Quiz]
     quiz(id: String!): Quiz
@@ -95,6 +94,7 @@ const typeDefs = gql`
     savePost(postData: PostInput!): Post 
     removePost(id: String!): Post
     addCommentToPost(postId: String!, comment: CommentInput!): Post
+    removeCommentFromPost(postId: String!, commentId: ID!): Post
   }
 `;
 

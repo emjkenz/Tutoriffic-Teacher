@@ -14,8 +14,6 @@ const Post = () => {
 
     const post = data?.post || {};
 
-    console.log(post.comments)
-
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -29,6 +27,7 @@ const Post = () => {
                 <div>Loading...</div>
             ) : (
                 <CommentList
+                        postId={postId}
                         comments={post.comments}
                         title="Here's the current list of avilable comments..."
                 />

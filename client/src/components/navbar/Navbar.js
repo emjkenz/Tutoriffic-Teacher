@@ -42,6 +42,13 @@ const Navbar = () => {
           </ul>
         </li>
         <li className='mainNav'>
+          Forum
+          <ul className='subList'>
+            <li><Link to="/posts">View Posts</Link></li>
+            {/* Add more dashboard options */}
+          </ul>
+        </li>
+        <li className='mainNav'>
           <Link to="/calendar">Calendar</Link>
         </li>
       </ul>

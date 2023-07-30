@@ -97,13 +97,12 @@ const resolvers = {
       return { id, title, sections };
     },
     savePost: async (parent, { postData }) => {
-      const { id, title, text, comments } = postData;
+      const { id, title, text } = postData;
 
       return await Post.create({
         id,
         title,
         text,
-        comments
       })
     },
     removePost: async (parent, { id }) => {
@@ -138,6 +137,19 @@ const resolvers = {
         throw new Error(error.message);
       }
     },
+    removeCommentFromPost: async(parent, {postId, commentId}) => {
+        const updatedPost = await Post.findOneAndUpdate(
+        { id: postId },
+        { $pull: { comments: { _id: commentId } } },
+        { new: true }
+      );
+
+      if (!updatedPost) {
+        throw new AuthenticationError("Couldn't find comment with this id!");
+      }
+
+      return updatedPost;
+    }
   },
 };
 
