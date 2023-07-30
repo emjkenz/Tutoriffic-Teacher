@@ -1,4 +1,4 @@
-const { Quiz, Questions } = require('../models');
+const { Quiz, Question, Student, Grade } = require('../models');
 
 const resolvers = {
   Query: {
@@ -15,6 +15,13 @@ const resolvers = {
       }
 
       return foundQuiz;
+    },
+    students: async () => {
+      return await Student.find();
+    },
+
+    grades: async () => {
+      return await Grade.find();
     }
   },
   Mutation: {

@@ -14,6 +14,17 @@ const typeDefs = gql`
     answers: [String]!
   }
 
+  type Student {
+    id: String!
+    firstName: String!
+    lastName: String!
+    dateOfBirth: String!
+    schoolingLevel: String!
+    parentGuardian: String!
+    contact: String!
+    additionalInformation: String
+  }
+
   input QuizInput {
     id: String!
     title: String!
@@ -21,6 +32,13 @@ const typeDefs = gql`
     dueDate: String!
     questions: [QuestionInput!]!
   }
+
+  type Grade {
+    id: String!
+    student: Student!    
+    quiz: Quiz!         
+    grade: Float!        
+}
 
   input QuestionInput {
     question: String!
@@ -30,6 +48,8 @@ const typeDefs = gql`
   type Query {
     quizzes: [Quiz]
     quiz(id: String!): Quiz
+    students: [Student]
+    grades: [Grade]
   }
 
   type Mutation {
