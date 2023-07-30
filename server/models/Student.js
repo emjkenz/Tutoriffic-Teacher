@@ -14,7 +14,7 @@ const studentSchema = new Schema({
     required: true,
   },
   dateOfBirth: {
-    type: Date,
+    type: String,
     required: true,
   },
   schoolingLevel: {
@@ -30,10 +30,10 @@ const studentSchema = new Schema({
     required: true,
   },
   additionalInformation: {
-    type: String,
+    type: String
   }
 });
 
-const Student = model("Student", studentSchema);
+const Student = model('Student', studentSchema);
 
-module.exports = Student;
+module.exports =  Student ;

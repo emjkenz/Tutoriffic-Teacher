@@ -34,9 +34,27 @@ export const QUERY_STUDENTS = gql`
       schoolingLevel
       parentGuardian
       contact
-      additionalInfo
+      additionalInformation
     }
   }
+`;
+
+export const QUERY_GRADES = gql`
+query GetGrades {
+  grades {
+    id
+    student {
+      id
+      firstName
+      lastName
+    }
+    quiz {
+      id
+      title
+    }
+    grade
+  }
+}
 `;
 
 export const GET_DUE_DATES = gql`
