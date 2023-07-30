@@ -8,6 +8,8 @@ const Posts = () => {
     const { loading, data } = useQuery(QUERY_ALL_POSTS);
     const posts = data?.posts || [];
 
+    console.log(posts)
+
     return (
         <div>
             <Link

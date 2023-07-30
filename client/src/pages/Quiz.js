@@ -23,7 +23,7 @@ const Quiz = () => {
         <div>
             <h2>{quiz.title}</h2>
             <h4>{quiz.description}</h4>
-            <h4>Due: {quiz.dueDate}</h4>
+            <h4>Due: {quiz.date}</h4>
 
             {quiz.questions?.length > 0 && <Questions questions={quiz.questions} />}
         </div>

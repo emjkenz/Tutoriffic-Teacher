@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-// const Comments = require('./Comments')
 const commentSchema = require('./Comments')
 
 const postSchema = new Schema({
@@ -15,12 +14,6 @@ const postSchema = new Schema({
         type: String,
         required: true,
     },
-    // comments: [
-    //     {
-    //         type: Schema.Types.ObjectId, 
-    //         ref: 'Comments',
-    //     },
-    // ],
     comments: [commentSchema]
 });
 

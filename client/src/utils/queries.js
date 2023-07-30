@@ -15,7 +15,7 @@ export const QUERY_QUIZ = gql`
     id
     title
     description
-    dueDate
+    date
     questions {
       question
       answers
@@ -43,7 +43,7 @@ export const GET_DUE_DATES = gql`
   query {
     quizzes {
       title
-      dueDate
+      date
     }
   }
 `;
@@ -76,6 +76,15 @@ export const QUERY_LESSON = gql `
   }
 `;
 
+export const GET_LESSON_DATES = gql `
+  query lessons {
+    lessons {
+      title
+      date
+    }
+  }
+`;
+
 export const QUERY_ALL_POSTS = gql `
   query posts {
     posts {
@@ -92,6 +101,10 @@ export const QUERY_POST = gql `
       id
       title
       text
+      comments {
+        _id
+        text
+      }
     }
   }
 `;

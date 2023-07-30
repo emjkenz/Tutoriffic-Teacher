@@ -1,29 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useQuery } from '@apollo/client';
 
-import { GET_DUE_DATES  } from '../utils/queries';
+import { GET_DUE_DATES, GET_LESSON_DATES  } from '../utils/queries';
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
 
 const  ReactBigCalendar = () => {
-    const { loading, data } = useQuery(GET_DUE_DATES);
-    const quizzes = data?.quizzes || [];
+    const { loading: dueDatesLoading, data: dueDatesData, error: dueDatesError } = useQuery(GET_DUE_DATES);
+    const quizzes = dueDatesData?.quizzes || [];
+
+    const { loading: lessonDatesLoading, data: lessonDatesData, error: lessonDatesError } = useQuery(GET_LESSON_DATES);
+    const lessons = lessonDatesData?.lessons || [];
+
+    console.log("lessons: ", lessons)
+    console.log("quizzes: ", quizzes);
+
+    const mergedArray = [...quizzes, ...lessons];
+    console.log("arrauy: ", mergedArray);
+
     
-    const createCalendarObject = (quizzes) => {
+    const createCalendarObject = (mergedArray) => {
         return {
             id: 0,
-            title: quizzes.title,
+            title: mergedArray.title,
             allDay: true,
-            start: quizzes.dueDate,
-            end: quizzes.dueDate,
+            start: mergedArray.date,
+            end: mergedArray.date,
         };
     };
 
-    const eventsData = quizzes.map((quizData) => createCalendarObject(quizData));
+    const eventsData = mergedArray.map((calendarData) => createCalendarObject(calendarData));
+
+    console.log(eventsData);
 
 
     return (

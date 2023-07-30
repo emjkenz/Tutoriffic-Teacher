@@ -13,7 +13,7 @@ const quizSchema = new Schema({
   description: {
     type: String,
   },
-  dueDate: {
+  date: {
     type: String,
     required: true,
   },

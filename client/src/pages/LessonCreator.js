@@ -6,11 +6,16 @@ const generateUniqueId = require('generate-unique-id');
 const LessonCreator = () => {
     const [lessonTitle, setLessonTitle] = useState('');
     const [sections, setSections] = useState([{ heading: '', subheading: '', text: '' }]);
+    const [date, setDate] = useState('');
 
     const [saveLesson, {error}] = useMutation(SAVE_LESSON);
 
     const handleTitleChange = (e) => {
         setLessonTitle(e.target.value);
+    };
+
+    const handleDateChange = (e) => {
+        setDate(e.target.value);
     };
 
     const handleHeadingChange = (e, index) => {
@@ -36,13 +41,16 @@ const LessonCreator = () => {
     };
 
     const handleLessonSave = async () => {
-        const dataToSend = { id: generateUniqueId(), title: lessonTitle, sections: sections };
+        const dataToSend = { id: generateUniqueId(), title: lessonTitle, date: date, sections: sections };
+
+        console.log(dataToSend)
 
         const { data } = await saveLesson({
             variables: { lessonData: dataToSend }
         })
 
         setLessonTitle('');
+        setDate('');
         setSections([{ heading: '', subheading: '', text: '' }]);
     };
 
@@ -50,6 +58,9 @@ const LessonCreator = () => {
         <div className='lesson-creator'>
             <label htmlFor="lessontitle">Lesson Title:</label>
             <input type="text" id="lesson_title" value={lessonTitle} onChange={handleTitleChange} />
+
+            <label htmlFor="leeson_date">When will this lesson be held?:</label>
+            <input type="date" id="lesson_date" value={date} onChange={handleDateChange} />
 
             <div id="sections_section">
                 {sections.map((section, index) => (

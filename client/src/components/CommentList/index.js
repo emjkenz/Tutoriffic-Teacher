@@ -44,13 +44,11 @@ const CommentList = ({ comments, title }) => {
     return (
         <div>
             <div>
-                <h3 className="text-primary">{title}</h3>
                 <div className="flex-row justify-space-between my-4">
                     {comments &&
-                        comments.map((comment) => (
-                            <div key={comment.id} className="col-12 col-xl-6">
+                        comments.map((comment, index) => (
+                            <div key={index} className="col-12 col-xl-6">
                                 <div className="card mb-3">
-                                    <h2>{comment.title}</h2>
                                     <h4>{comment.text}</h4>
                                     {/* <button onClick={() => handleDelete(post.id)}>Delete</button> */}
                                 </div>

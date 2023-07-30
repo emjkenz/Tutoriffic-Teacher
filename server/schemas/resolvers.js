@@ -1,4 +1,4 @@
-const { Quiz, Lesson, Post, commentSchema } = require('../models');
+const { Quiz, Lesson, Post } = require('../models');
 
 const resolvers = {
   Query: {
@@ -50,13 +50,13 @@ const resolvers = {
   },
   Mutation: {
     saveQuiz: async (parent, {quizData}) => {
-      const { id, title, description, dueDate, questions } = quizData;
+      const { id, title, description, date, questions } = quizData;
 
       return await Quiz.create({
         id,
         title,
         description,
-        dueDate,
+        date,
         questions
       })
     },
@@ -67,18 +67,19 @@ const resolvers = {
         throw new Error('Cannot find a quiz with this id!');
       }
       
-      const { title, questions, dueDate } = foundQuiz;
+      const { title, questions, date } = foundQuiz;
 
       await Quiz.deleteOne({ id });
 
-      return { id, title, description: foundQuiz.description, dueDate, questions };
+      return { id, title, description: foundQuiz.description, date, questions };
     },
     saveLesson: async (parent, { lessonData }) => {
-      const { id, title, sections } = lessonData;
+      const { id, title, date, sections } = lessonData;
 
       return await Lesson.create({
         id,
         title,
+        date,
         sections
       })
     },
@@ -118,39 +119,6 @@ const resolvers = {
 
       return { id, title, text, comments };
     },
-    // saveComment: async (parent, { commentData }) => {
-    //   console.log("commentData: ", commentData)
-    //   const { id, title, text, postId } = commentData;
-
-    //   return await Comments.create({
-    //     id,
-    //     title,
-    //     text,
-    //     postId
-    //   })
-    // },
-    // addCommentToPost: async (parent, { postId, comment }) => {
-    //   try {
-    //     const post = await Post.findOne({ id: postId });
-
-    //     if (!post) {
-    //       throw new Error('Post not found');
-    //     }
-
-    //     const newComment = {
-    //       text: comment.text,
-    //       postId: postId,
-    //     };
-
-    //     post.comments.push(newComment);
-
-    //     await post.save();
-
-    //     return post;
-    //   } catch (error) {
-    //     throw new Error(error.message);
-    //   }
-    // },
     addCommentToPost: async (parent, { postId, comment }) => {
       try {
         const post = await Post.findOne({ id: postId });

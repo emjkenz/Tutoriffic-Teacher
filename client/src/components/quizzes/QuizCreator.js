@@ -9,7 +9,7 @@ const QuizCreator = () => {
   const [quizTitle, setQuizTitle] = useState('');
   const [quizDescription, setQuizDescription] = useState('');
   const [questions, setQuestions] = useState([{ question: '', answers: ['', '', '', ''] }]);
-  const [dueDate, setDueDate] = useState('');
+  const [date, setDate] = useState('');
 
   const [saveQuiz, { error }] = useMutation(SAVE_QUIZ);
 
@@ -21,8 +21,8 @@ const QuizCreator = () => {
     setQuizDescription(e.target.value);
   };
 
-  const handleDueDateChange = (e) => {
-    setDueDate(e.target.value);
+  const handleDateChange = (e) => {
+    setDate(e.target.value);
   };
 
   const handleQuestionChange = (e, index) => {
@@ -42,7 +42,7 @@ const QuizCreator = () => {
   };
 
   const handleQuizSave = async () => {
-    const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, dueDate: dueDate, questions: questions }; 
+    const dataToSend = { id: generateUniqueId(), title: quizTitle, description: quizDescription, date: date, questions: questions }; 
     
     const { data } = await saveQuiz({
       variables: { quizData: dataToSend }
@@ -51,7 +51,7 @@ const QuizCreator = () => {
     setQuizTitle('');
     setQuizDescription('');
     setQuestions([{ question: '', answers: ['', '', '', ''] }]);
-    setDueDate('');
+    setDate('');
   };
 
   
@@ -67,7 +67,7 @@ const QuizCreator = () => {
       <textarea id="quiz_description" value={quizDescription} onChange={handleDescriptionChange} />
 
       <label htmlFor="due_date">Due Date:</label>
-      <input type="date" id="due_date" value={dueDate} onChange={handleDueDateChange} />
+      <input type="date" id="due_date" value={date} onChange={handleDateChange} />
 
       <div id="questions_section">
         {questions.map((question, index) => (

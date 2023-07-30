@@ -5,16 +5,7 @@ const commentSchema = new Schema({
         type: String,
         required: true,
     },
-    // postId: {
-    //     type: String,
-    //     required: true,
-    // },
 });
 
 
 module.exports = commentSchema;
-
-
-// const Comments = model('Comments', commentSchema);
-
-// module.exports = Comments;

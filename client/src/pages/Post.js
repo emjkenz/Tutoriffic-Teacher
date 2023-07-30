@@ -14,14 +14,7 @@ const Post = () => {
 
     const post = data?.post || {};
 
-    const { loadingComment, dataComment } = useQuery(QUERY_COMMENTS_BY_POST, {
-        variables: { postId: postId },
-    });
-
-    const comments = dataComment?.comments || {};
-
-    console.log(postId)
-    console.log(comments)
+    console.log(post.comments)
 
     if (loading) {
         return <div>Loading...</div>;
@@ -32,11 +25,11 @@ const Post = () => {
             <h2>{post.title}</h2>
             <h4>{post.text}</h4>
 
-            {loadingComment ? (
+            {loading ? (
                 <div>Loading...</div>
             ) : (
                 <CommentList
-                        comments={comments}
+                        comments={post.comments}
                         title="Here's the current list of avilable comments..."
                 />
             )}

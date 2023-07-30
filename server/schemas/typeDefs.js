@@ -5,7 +5,7 @@ const typeDefs = gql`
     id: String!
     title: String!
     description: String
-    dueDate: String!
+    date: String!
     questions: [Questions]!
   }
 
@@ -18,7 +18,7 @@ const typeDefs = gql`
     id: String!
     title: String!
     description: String
-    dueDate: String!
+    date: String!
     questions: [QuestionInput!]!
   }
 
@@ -30,6 +30,7 @@ const typeDefs = gql`
   type Lesson {
     id: String!
     title: String!
+    date: String!
     sections: [Sections]!
   }
 
@@ -42,6 +43,7 @@ const typeDefs = gql`
   input LessonInput {
     id: String!
     title: String!
+    date: String!
     sections: [SectionInput]!
   }
 
