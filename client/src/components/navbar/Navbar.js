@@ -1,44 +1,47 @@
-// Navbar.js
+
 import React from 'react';
-import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
-import './Navbar.css'
+import { Link } from 'react-router-dom';
+import { Menu } from 'antd';
+import { UserOutlined , BookOutlined, CalendarOutlined, TeamOutlined, ReadOutlined } from '@ant-design/icons';
+import './Navbar.css';
+
+const { SubMenu } = Menu;
 
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
-        <li className='mainNav'>
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
-        <li className='mainNav'>
-          Modules
-          <ul className='subList'>
-            <li><Link to="/modules">View Modules</Link></li>
-            <li><Link to="/modules/add">Add Module</Link></li>
-            {/* Add more module options */}
-          </ul>
-        </li>
-        <li className='mainNav'>
-          Quizzes
-          <ul className='subList'>
-            <li><Link to="/quizzes">View Quizzes</Link></li>
-            <li><Link to="/quizzes/add">Add Quiz</Link></li>
-            {/* Add more dashboard options */}
-          </ul>
-        </li>
-        <li className='mainNav'>
-          Students
-          <ul className='subList'>
-            <li><Link to="/students">View Students</Link></li>
-            <li><Link to="/students/grades">View Grades</Link></li>
-            {/* Add more dashboard options */}
-          </ul>
-        </li>
-        <li className='mainNav'>
-          <Link to="/calendar">Calendar</Link>
-        </li>
-      </ul>
-    </nav>
+    <Menu theme="light" mode="horizontal" style={{ lineHeight: '64px' }}>
+      <Menu.Item key="/dashboard" icon={<UserOutlined />}>
+        <Link to="/dashboard">Dashboard</Link>
+      </Menu.Item>
+      <SubMenu key="modules" icon={<ReadOutlined />} title="Modules">
+        <Menu.Item key="/modules">
+          <Link to="/modules">View Modules</Link>
+        </Menu.Item>
+        <Menu.Item key="/modules/add">
+          <Link to="/modules/add">Add Module</Link>
+        </Menu.Item>
+      </SubMenu>
+      <SubMenu key="quizzes" icon={<BookOutlined />} title="Quizzes">
+        <Menu.Item key="/quizzes">
+          <Link to="/quizzes">View Quizzes</Link>
+        </Menu.Item>
+        <Menu.Item key="/quizzes/add">
+          <Link to="/quizzes/add">Add Quiz</Link>
+        </Menu.Item>
+      </SubMenu>
+      <SubMenu key="students" icon={<TeamOutlined />} title="Students">
+        <Menu.Item key="/students">
+          <Link to="/students">View Students</Link>
+        </Menu.Item>
+        <Menu.Item key="/students/grades">
+          <Link to="/students/grades">View Grades</Link>
+        </Menu.Item>
+
+      </SubMenu>
+      <Menu.Item key="/calendar" icon={<CalendarOutlined />}>
+        <Link to="/calendar">Calendar</Link>
+      </Menu.Item>
+    </Menu>
   );
 };
 
