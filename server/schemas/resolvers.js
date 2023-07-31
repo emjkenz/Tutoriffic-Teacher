@@ -1,6 +1,8 @@
+
 const { Quiz, Questions, User} = require('../models');
 console.log(User); 
 const { signToken } = require('../utils/auth');
+const { Quiz, Question, Student, Grade } = require('../models');
 
 
 const resolvers = {
@@ -15,6 +17,14 @@ const resolvers = {
       }
       return foundQuiz;
     },
+
+    students: async () => {
+      return await Student.find();
+    },
+
+    grades: async () => {
+      return await Grade.find();
+    }
   },
   Mutation: {
     saveQuiz: async (parent, { quizData }) => {
