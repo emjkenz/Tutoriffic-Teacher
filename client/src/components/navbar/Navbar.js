@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
@@ -37,11 +38,30 @@ const Navbar = () => {
           <Link to="/students/grades">View Grades</Link>
         </Menu.Item>
 
+      </li>
+           <li className='mainNav'>
+          Lessons
+          <ul className='subList'>
+            <li><Link to="/lessons">View Lessons</Link></li>
+            <li><Link to="/lesson/add">Add Lesson</Link></li>
+            {/* Add more dashboard options */}
+          </ul>
+        </li>
+
+      <li className='mainNav'>
+          Forum
+          <ul className='subList'>
+            <li><Link to="/posts">View Posts</Link></li>
+            {/* Add more dashboard options */}
+          </ul>
+        </li>
+
       </SubMenu>
       <Menu.Item key="/calendar" icon={<CalendarOutlined />}>
         <Link to="/calendar">Calendar</Link>
       </Menu.Item>
     </Menu>
+
   );
 };
 

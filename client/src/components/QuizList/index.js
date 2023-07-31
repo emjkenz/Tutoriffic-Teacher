@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { QUERY_ALLQUIZZES } from '../../utils/queries'
+import { QUERY_ALL_QUIZZES } from '../../utils/queries'
 import { DELETE_QUIZ } from '../../utils/mutations'
 
 
@@ -10,12 +10,12 @@ const QuizList = ({ quizzes, title }) => {
     const [deleteQuiz, { error }] = useMutation(DELETE_QUIZ, {
         update(cache, { data: { removeQuiz } }) {
             try {
-                const { quizzes } = cache.readQuery({ query: QUERY_ALLQUIZZES });
+                const { quizzes } = cache.readQuery({ query: QUERY_ALL_QUIZZES });
 
                 const updatedQuizzes = quizzes.filter(quiz => quiz.id !== removeQuiz.id);
 
                 cache.writeQuery({
-                    query: QUERY_ALLQUIZZES,
+                    query: QUERY_ALL_QUIZZES,
                     data: { quizzes: updatedQuizzes },
                 });
             } catch (e) {
@@ -29,7 +29,6 @@ const QuizList = ({ quizzes, title }) => {
     }
 
     const handleDelete = async (id) => {
-        console.log("delete: ", id);
         try {
             const { data } = await deleteQuiz({
                 variables: {removeQuizId: id},
@@ -51,10 +50,6 @@ const QuizList = ({ quizzes, title }) => {
                     quizzes.map((quizz) => (
                         <div key={quizz.id} className="col-12 col-xl-6">
                             <div className="card mb-3">
-                                {/* <h4 className="card-header bg-dark text-light p-2 m-0">
-                                    {quizz.title}
-                                </h4> */}
-
                                 <Link
                                     className="btn btn-block btn-squared bg-dark text-light"
                                     to={`/quizzes/${quizz.id}`}

@@ -6,7 +6,7 @@ export const SAVE_QUIZ = gql`
       id
       title
       description
-      dueDate
+      date
       questions {
         question
         answers
@@ -21,7 +21,7 @@ export const DELETE_QUIZ = gql`
       id
       title
       description
-      dueDate
+      date
       questions {
         question
         answers
@@ -65,4 +65,82 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+
+export const SAVE_LESSON = gql `
+  mutation saveLesson($lessonData: LessonInput!) {
+    saveLesson(lessonData: $lessonData) {
+      id
+      title
+      sections {
+        heading
+        subheading
+        text
+      }
+    }
+  }
+`;
+
+export const DELETE_LESSON = gql `
+  mutation removeLesson($removeLessonId: String!) {
+    removeLesson(id: $removeLessonId) {
+      id
+      title
+      sections {
+        heading
+        subheading
+        text
+      }
+    }
+  }
+`;
+
+export const SAVE_POST = gql `
+  mutation savePost($postData: PostInput!) {
+    savePost(postData: $postData) {
+      id
+      text
+      title
+    }
+  }
+`;
+
+export const DELETE_POST = gql `
+  mutation removePost($removePostId: String!) {
+    removePost(id: $removePostId) {
+      id
+      title
+      text
+    }
+  }
+`;
+
+export const ADD_COMMENT = gql `
+  mutation addCommentToPost($postId: String!, $comment: CommentInput!) {
+    addCommentToPost(postId: $postId, comment: $comment) {
+      id
+      title
+      text
+      comments {
+        _id
+        text
+      }
+    }
+  }
+`;
+
+export const DELETE_COMMENT = gql `
+  mutation removeCommentFromPost($postId: String!, $commentId: ID!) {
+    removeCommentFromPost(postId: $postId, commentId: $commentId) {
+      id
+      title
+      text
+      comments {
+        _id
+        text
+      }
+    }
+  }
+`;
+
 

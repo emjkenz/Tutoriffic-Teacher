@@ -26,7 +26,7 @@ const typeDefs = gql`
     id: String!
     title: String!
     description: String
-    dueDate: String!
+    date: String!
     questions: [Questions]!
   }
 
@@ -50,7 +50,7 @@ const typeDefs = gql`
     id: String!
     title: String!
     description: String
-    dueDate: String!
+    date: String!
     questions: [QuestionInput!]!
   }
 
@@ -66,9 +66,64 @@ const typeDefs = gql`
     answers: [String!]!
   }
 
+  type Lesson {
+    id: String!
+    title: String!
+    date: String!
+    sections: [Sections]!
+  }
+
+  type Sections {
+    heading: String!
+    subheading: String
+    text: String!
+  }
+
+  input LessonInput {
+    id: String!
+    title: String!
+    date: String!
+    sections: [SectionInput]!
+  }
+
+  input SectionInput {
+    heading: String!
+    subheading: String
+    text: String!
+  }
+
+   type Post {
+    id: String!
+    title: String!
+    text: String!
+    comments: [Comments]
+  }
+
+  type Comments {
+    _id: ID!
+    text: String!
+  }
+
+  input PostInput {
+    id: String!
+    title: String!
+    text: String!
+    comments: [CommentInput]
+  }
+
+  input CommentInput {
+    text: String!
+  }
+
   type Query {
     quizzes: [Quiz]
     quiz(id: String!): Quiz
+
+    lessons: [Lesson]
+    lesson(id: String!): Lesson
+    posts: [Post]
+    post(id: String!): Post
+    commentsByPostId(postId: String!): [Comments!]!
     students: [Student]
     grades: [Grade]
   }
@@ -76,6 +131,12 @@ const typeDefs = gql`
   type Mutation {
     saveQuiz(quizData: QuizInput!): Quiz
     removeQuiz(id: String!): Quiz
+    saveLesson(lessonData: LessonInput!): Lesson
+    removeLesson(id: String!): Lesson
+    savePost(postData: PostInput!): Post 
+    removePost(id: String!): Post
+    addCommentToPost(postId: String!, comment: CommentInput!): Post
+    removeCommentFromPost(postId: String!, commentId: ID!): Post
     addUser(userData: UserInput!): AuthPayload
   
   }

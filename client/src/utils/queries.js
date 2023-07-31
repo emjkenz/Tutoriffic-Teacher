@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_ALLQUIZZES = gql`
+export const QUERY_ALL_QUIZZES = gql`
   query quizzes {
     quizzes {
       id
@@ -15,7 +15,7 @@ export const QUERY_QUIZ = gql`
     id
     title
     description
-    dueDate
+    date
     questions {
       question
       answers
@@ -61,7 +61,79 @@ export const GET_DUE_DATES = gql`
   query {
     quizzes {
       title
-      dueDate
+      date
+    }
+  }
+`;
+
+export const QUERY_ALL_LESSONS = gql `
+  query lessons {
+    lessons {
+      id
+      title
+      sections {
+        heading
+        subheading
+        text
+      }
+    }
+  }
+`;
+
+export const QUERY_LESSON = gql `
+  query lesson($lessonId: String!) {
+    lesson(id: $lessonId) {
+      id
+      title
+      sections {
+        heading
+        subheading
+        text
+      }
+    }
+  }
+`;
+
+export const GET_LESSON_DATES = gql `
+  query lessons {
+    lessons {
+      title
+      date
+    }
+  }
+`;
+
+export const QUERY_ALL_POSTS = gql `
+  query posts {
+    posts {
+      id
+      title
+      text
+    }
+  } 
+`;
+
+export const QUERY_POST = gql `
+  query post($postId: String!) {
+    post(id: $postId) {
+      id
+      title
+      text
+      comments {
+        _id
+        text
+      }
+    }
+  }
+`;
+
+export const QUERY_COMMENTS_BY_POST = gql`
+  query post($postId: String!) {
+    post(id: $postId) {
+      comments {
+        _id
+        text
+      }
     }
   }
 `;

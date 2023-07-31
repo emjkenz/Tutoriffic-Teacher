@@ -41,6 +41,7 @@ const Students = () => {
       </div>
     </div>
   );
+
 };
 
 export default Students;
