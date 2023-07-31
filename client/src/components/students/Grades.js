@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import {
   QUERY_STUDENTS,
-  QUERY_ALLQUIZZES,
+  QUERY_ALL_QUIZZES,
   QUERY_GRADES,
 } from "../../utils/queries";
 import { Collapse } from "antd";
@@ -13,7 +13,7 @@ const Grades = () => {
   const { loading: loadingStudents, data: studentData } =
     useQuery(QUERY_STUDENTS);
   const { loading: loadingQuizzes, data: quizData } =
-    useQuery(QUERY_ALLQUIZZES);
+    useQuery(QUERY_ALL_QUIZZES);
   const { loading: loadingGrades, data: gradeData } = useQuery(QUERY_GRADES);
 
   const findGrade = (studentId, quizId) => {

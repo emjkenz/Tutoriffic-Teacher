@@ -39,7 +39,7 @@ const App = () => {
           </nav>
           <main>
             <Routes>
-              <Route exact path="/dashboard" element={<Dashboard />} />
+              <Route exact path="/" element={<Dashboard />} />
               <Route path="/modules" element={<Modules/>} />
               <Route path="/modules/add" element={<ModuleCreator />} />
               <Route path="/quizzes" element={<Quizzes/>} />
