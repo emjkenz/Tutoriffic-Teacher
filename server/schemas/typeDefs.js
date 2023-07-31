@@ -1,4 +1,5 @@
 const { gql } = require('apollo-server-express');
+const { userData } =require('./resolvers');
 
 const typeDefs = gql`
   type User {
@@ -51,12 +52,14 @@ const typeDefs = gql`
     quizzes: [Quiz]
     quiz(id: String!): Quiz
   }
-
+  
   type Mutation {
     saveQuiz(quizData: QuizInput!): Quiz
     removeQuiz(id: String!): Quiz
     addUser(userData: UserInput!): AuthPayload
+  
   }
+
 `;
 
 module.exports = typeDefs;

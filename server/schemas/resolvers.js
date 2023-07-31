@@ -2,6 +2,7 @@ const { Quiz, Questions, User} = require('../models');
 console.log(User); 
 const { signToken } = require('../utils/auth');
 
+
 const resolvers = {
   Query: {
     quizzes: async () => {
