@@ -57,10 +57,15 @@ export const ADD_USER = gql`
       token
       user {
         _id
+        firstName
+        lastName
+        email
+
       }
     }
   }
 `;
+
 
 export const SAVE_LESSON = gql `
   mutation saveLesson($lessonData: LessonInput!) {
@@ -137,3 +142,5 @@ export const DELETE_COMMENT = gql `
     }
   }
 `;
+
+

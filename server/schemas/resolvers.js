@@ -1,21 +1,21 @@
-const { Quiz, Lesson, Post } = require('../models');
+
+const { Quiz, Questions, User, Lesson, Post,Student, Grade } = require('../models');
+console.log(User); 
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     quizzes: async () => {
-
       return await Quiz.find();
     },
     quiz: async (parent, { id }) => {
-
-      const foundQuiz = await Quiz.findOne({id: id});
-
+      const foundQuiz = await Quiz.findOne({ id: id });
       if (!foundQuiz) {
         throw new Error('Cannot find a quiz with this id!');
       }
-
       return foundQuiz;
     },
+
     lessons: async () => {
 
       return await Lesson.find();
@@ -47,10 +47,24 @@ const resolvers = {
     commentsByPostId: async (parent, { postId }) => {
         return await Comments.find({ postId });
     },
+      
+    students: async () => {
+      return await Student.find();
+    },
+
+    grades: async () => {
+      return await Grade.find();
+    }
+      
+      
   },
+    
+    
+    
   Mutation: {
     saveQuiz: async (parent, {quizData}) => {
       const { id, title, description, date, questions } = quizData;
+
 
       return await Quiz.create({
         id,
@@ -59,10 +73,10 @@ const resolvers = {
         date,
         questions
       })
-    },
+    },  
+
     removeQuiz: async (parent, { id }) => {
       const foundQuiz = await Quiz.findOne({ id: id });
-
       if (!foundQuiz) {
         throw new Error('Cannot find a quiz with this id!');
       }
@@ -72,6 +86,7 @@ const resolvers = {
       await Quiz.deleteOne({ id });
 
       return { id, title, description: foundQuiz.description, date, questions };
+
     },
     saveLesson: async (parent, { lessonData }) => {
       const { id, title, date, sections } = lessonData;
@@ -149,8 +164,24 @@ const resolvers = {
       }
 
       return updatedPost;
-    }
+    },
+      
+    addUser: async (parent, { userData }) => {
+      console.log('Received User Data:', userData);
+      const { firstName, lastName, email, password } = userData;
+      const user = await User.create({
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+      const token = signToken(user);
+      return { token, user };
+    },
+
   },
 };
 
 module.exports = resolvers;
+
+
