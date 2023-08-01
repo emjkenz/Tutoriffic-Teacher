@@ -137,3 +137,12 @@ export const QUERY_COMMENTS_BY_POST = gql`
     }
   }
 `;
+
+export const QUERY_LOGEDIN = gql `
+  query loggedInUser {
+    loggedInUser {
+      firstName
+      lastName
+    }
+  }
+`;

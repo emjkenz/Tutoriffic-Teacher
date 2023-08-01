@@ -2,7 +2,7 @@ import React from "react";
 import "./dashboard.css";
 import "./contentDivider.css";
 import { Card } from "antd";
-// import {  } from "@ant-design/icons";
+import onlineClassroomContent from '../../assets/content-image.jpg'
 
 const ContentDivider = () => {
   return (
@@ -12,7 +12,7 @@ const ContentDivider = () => {
         cover={
           <img
             alt="online classroom"
-            src="../../../assets/content-image"
+            src={onlineClassroomContent}
             style={{ opacity: 0.7 }}></img>
         }></Card>
       <Card className="heading-card">
