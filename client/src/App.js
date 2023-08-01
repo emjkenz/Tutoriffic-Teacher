@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import './App.css'
 import Dashboard from './components/dashboard/Dashboard';
 import Modules from './components/modules/Modules';
@@ -11,8 +12,8 @@ import Grades from './components/students/Grades';
 import Navbar from './components/navbar/Navbar';
 import Quizzes from './pages/QuizDashboard';
 import Quiz from './pages/Quiz';
-import LoginPage from './pages/login'; 
-import SignupPage from './pages/signup'; 
+import LoginPage from './pages/Login'; 
+import SignupPage from './pages/Signup'; 
 import Calendar from './pages/Calendar'
 import LessonCreator from './pages/LessonCreator';
 import Lessons from './pages/LessonsDashboard';
@@ -21,8 +22,27 @@ import PostCreator from './pages/PostCreator';
 import Posts from './pages/PostDashboard';
 import Post from './pages/Post';
 
-const client = new ApolloClient({
+// Construct our main GraphQL API endpoint
+const httpLink = createHttpLink({
   uri: '/graphql',
+});
+
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

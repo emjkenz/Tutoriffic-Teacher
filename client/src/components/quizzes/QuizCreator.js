@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './QuizCreator.css'
 import { useMutation } from '@apollo/client';
 import { SAVE_QUIZ } from '../../utils/mutations';
+import { DatePicker } from 'antd';
 import './QuizCreator.css'
 const generateUniqueId = require('generate-unique-id');
 
@@ -21,9 +22,9 @@ const QuizCreator = () => {
     setQuizDescription(e.target.value);
   };
 
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
-  };
+  const handleDateChange = (date) => {
+        setDate(date);
+    };
 
   const handleQuestionChange = (e, index) => {
     const newQuestions = [...questions];
@@ -66,8 +67,8 @@ const QuizCreator = () => {
       <label htmlFor="quiz_description">Quiz Description:</label>
       <textarea id="quiz_description" value={quizDescription} onChange={handleDescriptionChange} />
 
-      <label htmlFor="due_date">Due Date:</label>
-      <input type="date" id="due_date" value={date} onChange={handleDateChange} />
+      <DatePicker onChange={(date) => handleDateChange((date))} />,
+    
 
       <div id="questions_section">
         {questions.map((question, index) => (

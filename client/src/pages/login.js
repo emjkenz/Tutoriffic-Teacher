@@ -1,44 +1,58 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import { LOGIN } from '../utils/mutations';
+import { useMutation } from '@apollo/client'
+
 import Auth from '../utils/auth';
+import { LOGIN_USER } from '../utils/mutations'
 
+const LoginForm = () => {
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
-function Login(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error }] = useMutation(LOGIN);
+  const [loginUser, { error, data }] = useMutation(LOGIN_USER);
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const mutationResponse = await login({
-        variables: { email: formState.email, password: formState.password },
-      });
-      const token = mutationResponse.data.login.token;
-      Auth.login(token);
-    } catch (e) {
-      console.log(e);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
-  };
 
+    try {
+      const { data } = await loginUser({
+        variables: { ...userFormData }
+      });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
+      if (!data.loginUser) {
+        throw new Error('something went wrong!');
+      }
+
+      const { token, user } = await data.loginUser;
+      console.log(user);
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
     });
   };
 
-
   return (
     <div className="container my-1">
-      <Link to="/signup">← Go to Signup</Link>
-
-
-      <h2>Login</h2>
+       <Link to="/signup">← Go to Signup</Link>
+       <h2>Login</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
           <label htmlFor="email">Email address:</label>
@@ -47,7 +61,7 @@ function Login(props) {
             name="email"
             type="email"
             id="email"
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
         </div>
         <div className="flex-row space-between my-2">
@@ -57,7 +71,7 @@ function Login(props) {
             name="password"
             type="password"
             id="pwd"
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
         </div>
         {error ? (
@@ -71,7 +85,6 @@ function Login(props) {
       </form>
     </div>
   );
-}
+};
 
-
-export default Login;
+export default LoginForm;
