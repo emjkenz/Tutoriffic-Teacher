@@ -5,9 +5,9 @@ import './App.css'
 import Dashboard from './components/dashboard/Dashboard';
 import Modules from './components/modules/Modules';
 import QuizCreator from './components/quizzes/QuizCreator';
-import Students from './components/students/Students';
+import Students from './pages/Students';
 import ModuleCreator from './components/modules/ModuleCreator';
-import Grades from './components/students/Grades';
+import Grades from './pages/Grades';
 import Navbar from './components/navbar/Navbar';
 import Quizzes from './pages/QuizDashboard';
 import Quiz from './pages/Quiz';
@@ -32,8 +32,15 @@ const App = () => {
       <Router>
         <div className="app">
           <header>
-            <h1>TUTORIFFIC</h1>
-          </header>
+        <div class="header-image">
+            <div class="overlay">
+                <div class="heading">
+                    <a href="/">T U T O R I F F I C</a>
+                </div>
+                <p>teacher</p>
+            </div>
+        </div>
+      </header>
           <nav>
             <Navbar />
           </nav>

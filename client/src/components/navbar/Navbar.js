@@ -7,6 +7,8 @@ import {
   CalendarOutlined,
   TeamOutlined,
   ReadOutlined,
+  AppstoreOutlined,
+  MessageOutlined 
 } from "@ant-design/icons";
 import "./Navbar.css";
 
@@ -14,11 +16,11 @@ const { SubMenu } = Menu;
 
 const Navbar = () => {
   return (
-    <Menu theme="light" mode="horizontal" style={{ lineHeight: "64px" }}>
+    <Menu theme="light" mode="horizontal" style={{ lineHeight: "64px"}}>
       <Menu.Item key="/" icon={<UserOutlined />}>
         <Link to="/">Dashboard</Link>
       </Menu.Item>
-      <SubMenu key="modules" icon={<ReadOutlined />} title="Modules">
+      <SubMenu key="modules" icon={<AppstoreOutlined />} title="Modules">
         <Menu.Item key="/modules">
           <Link to="/modules">View Modules</Link>
         </Menu.Item>
@@ -31,7 +33,7 @@ const Navbar = () => {
           <Link to="/lessons">View Lessons</Link>
         </Menu.Item>
         <Menu.Item key="/lessons/add">
-          <Link to="/lessons/add">Add Lesson</Link>
+          <Link to="/lesson/add">Add Lesson</Link>
         </Menu.Item>
       </SubMenu>
       <SubMenu key="quizzes" icon={<BookOutlined />} title="Quizzes">
@@ -50,7 +52,7 @@ const Navbar = () => {
           <Link to="/students/grades">View Grades</Link>
         </Menu.Item>
       </SubMenu>
-      <Menu.Item key="forum" icon={<BookOutlined />} title="Forum">
+      <Menu.Item key="forum" icon={<MessageOutlined />} title="Forum">
           <Menu.Item key="/posts">
             <Link to="/posts">Forum</Link>
           </Menu.Item>
