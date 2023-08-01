@@ -5,6 +5,7 @@ import UserAvatar from "./Avatar";
 import { Card } from "antd";
 import { CalendarOutlined, MessageOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import onlineClassroomProfile from '../../assets/profile-image.jpg'
 import "./dashboard.css";
 import "./profileDivider.css"
 
@@ -40,7 +41,7 @@ const ProfileDivider = () => {
             cover={
               <img
                 alt="online classroom"
-                src="../../../assets/profile-image"
+                src={onlineClassroomProfile}
                 style={{ opacity: 0.7, height: "100%" }}
               />
             }
