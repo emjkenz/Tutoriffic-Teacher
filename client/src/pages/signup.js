@@ -1,33 +1,59 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { Row, Col } from 'antd';
 import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
+import { CREATE_USER } from '../utils/mutations'
+import { Row, Col } from 'antd';
 
-function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '', firstName: '', lastName: '' });
-  const [addUser] = useMutation(ADD_USER);
+const SignupForm = () => {
+  // set initial form state
+  const [userFormData, setUserFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
+  // set state for form validation
+  const [validated] = useState(false);
+  // set state for alert
+  const [showAlert, setShowAlert] = useState(false);
+
+  const [createUser, { error, data }] = useMutation(CREATE_USER);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+    console.log(userFormData);
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
-  };
+    console.log("entered form submit");
+    console.log(userFormData);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      const { data } = await createUser({
+        variables: { ...userFormData }
+      });
+      if (!data.createUser) {
+        throw new Error('something went wrong!');
+      }
+
+      const { token, user } = await data.createUser;
+      console.log(user);
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
     });
   };
 
@@ -45,7 +71,7 @@ function Signup(props) {
                 name="firstName"
                 type="text"
                 id="firstName"
-                onChange={handleChange}
+                onChange={handleInputChange}
                 style={styles.input}
               />
             </div>
@@ -56,7 +82,7 @@ function Signup(props) {
                 name="lastName"
                 type="text"
                 id="lastName"
-                onChange={handleChange}
+                onChange={handleInputChange}
                 style={styles.input}
               />
             </div>
@@ -67,7 +93,7 @@ function Signup(props) {
                 name="email"
                 type="email"
                 id="email"
-                onChange={handleChange}
+                onChange={handleInputChange}
                 style={styles.input}
               />
             </div>
@@ -78,7 +104,7 @@ function Signup(props) {
                 name="password"
                 type="password"
                 id="pwd"
-                onChange={handleChange}
+                onChange={handleInputChange}
                 style={styles.input}
               />
             </div>
@@ -122,6 +148,4 @@ const styles = {
   },
 };
 
-export default Signup;
-
-
+export default SignupForm;

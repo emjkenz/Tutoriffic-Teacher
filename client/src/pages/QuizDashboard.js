@@ -8,7 +8,7 @@ import { QUERY_ALL_QUIZZES } from '../utils/queries'
 const Quizzes = () => {
     const { loading, data } = useQuery(QUERY_ALL_QUIZZES);
     const quizzes = data?.quizzes || [];
-
+    console.log("blah");
     return (
         <div>
             {loading ? (

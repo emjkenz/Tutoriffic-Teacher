@@ -1,32 +1,51 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'antd';
+import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { LOGIN } from '../utils/mutations';
+import { Row, Col } from 'antd';
 
-function Login(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error }] = useMutation(LOGIN);
+
+const LoginForm = () => {
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [loginUser, { error, data }] = useMutation(LOGIN_USER);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const mutationResponse = await login({
-        variables: { email: formState.email, password: formState.password },
-      });
-      const token = mutationResponse.data.login.token;
-      Auth.login(token);
-    } catch (e) {
-      console.log(e);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
-  };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
+    try {
+      const { data } = await loginUser({
+        variables: { ...userFormData }
+      });
+
+      if (!data.loginUser) {
+        throw new Error('something went wrong!');
+      }
+
+      const { token, user } = await data.loginUser;
+      console.log(user);
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+
+  setUserFormData({
+    username: '',
+    email: '',
+    password: '',
     });
   };
 
@@ -44,7 +63,7 @@ function Login(props) {
                 name="email"
                 type="email"
                 id="email"
-                onChange={handleChange}
+                onChange={handleInputChange}
                 style={styles.input}
               />
             </div>
@@ -55,7 +74,7 @@ function Login(props) {
                 name="password"
                 type="password"
                 id="pwd"
-                onChange={handleChange}
+                onChange={handleInputChange}
                 style={styles.input}
               />
             </div>
@@ -74,7 +93,7 @@ function Login(props) {
       </Col>
     </Row>
   );
-}
+} 
 
 const styles = {
   loginSignupBox: {
@@ -104,5 +123,4 @@ const styles = {
   },
 };
 
-export default Login;
-
+export default LoginForm;

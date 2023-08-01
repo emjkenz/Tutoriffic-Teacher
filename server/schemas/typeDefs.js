@@ -3,23 +3,16 @@ const { userData } =require('./resolvers');
 
 const typeDefs = gql`
   type User {
-    _id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
-    password: String!
+      _id: ID!
+      firstName: String!
+      lastName: String!
+      email: String!
+      password: String!
   }
 
-  input UserInput {
-    firstName: String!
-    lastName: String!
-    email: String!
-    password: String!
-  }
-
-  type AuthPayload {
-    token: String!
-    user: User!
+  type Auth {
+      token: ID!
+      user: User
   }
 
   type Quiz {
@@ -118,7 +111,6 @@ const typeDefs = gql`
   type Query {
     quizzes: [Quiz]
     quiz(id: String!): Quiz
-
     lessons: [Lesson]
     lesson(id: String!): Lesson
     posts: [Post]
@@ -137,8 +129,8 @@ const typeDefs = gql`
     removePost(id: String!): Post
     addCommentToPost(postId: String!, comment: CommentInput!): Post
     removeCommentFromPost(postId: String!, commentId: ID!): Post
-    addUser(userData: UserInput!): AuthPayload
-  
+    createUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    loginUser(email: String!, password: String!): Auth
   }
 
 `;
