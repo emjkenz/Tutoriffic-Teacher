@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import './QuizCreator.css'
 import { useMutation } from '@apollo/client';
 import { SAVE_QUIZ } from '../../utils/mutations';
-import { DatePicker } from 'antd';
+import { DatePicker, Form, Input, Button } from 'antd';
 import './QuizCreator.css'
 const generateUniqueId = require('generate-unique-id');
 
@@ -58,35 +57,102 @@ const QuizCreator = () => {
   
 
   return (
-    <div className="quiz-creator">
-      <h1>Create Quiz</h1>
+    <>
+      <h1>Create A Quiz</h1>
+      <Form>
+          <Form.Item
+              label="Quiz Title"
+              rules={[
+                  {
+                      type: 'text',
+                  },
+                  {
+                      required: true,
+                      message: 'Please input a Quiz Title!',
+                  },
+              ]}
+          >
+              <Input
+                value={quizTitle}
+                onChange={handleTitleChange}
+              />
+          </Form.Item>
 
-      <label htmlFor="quiz_title">Quiz Title:</label>
-      <input type="text" id="quiz_title" value={quizTitle} onChange={handleTitleChange} />
+        <Form.Item
+              label="Quiz Description"
+              rules={[
+                  {
+                      type: 'text',
+                  },
+              ]}
+          >
+              <Input 
+              value={quizDescription}
+              onChange={handleDescriptionChange}
+              />
+          </Form.Item>
 
-      <label htmlFor="quiz_description">Quiz Description:</label>
-      <textarea id="quiz_description" value={quizDescription} onChange={handleDescriptionChange} />
+          <Form.Item
+              label="Due Date:"
+              rules={[
+                  {
+                      required: true,
+                  },
+              ]}
+          >
+              <DatePicker onChange={(date) => handleDateChange(date)} />
+          </Form.Item>
+      
 
-      <DatePicker onChange={(date) => handleDateChange((date))} />,
-    
+        <div id="questions_section">
+          {questions.map((question, index) => (
+            <div key={index} className="question">
+              <h3>Question {index + 1}:</h3>
+            <Form.Item
+              label="Question"
+              rules={[
+                {
+                    type: 'text',
+                },
+                {
+                  required: true,
+                  message: 'Please input a Heading!',
+                },
+              ]}
+            >
+              <Input
+                  value={question.question}
+                  onChange={(e) => handleQuestionChange(e, index)}
+              />
+            </Form.Item>
+              <div className="answers">
+                {question.answers.map((answer, answerIndex) => (
+                  <Form.Item
+                    key={answerIndex}
+                    label={`Answer ${answerIndex + 1}`}
+                    rules={[
+                        {
+                            type: 'text',
+                        },
+                    ]}
+                  >
+                    <Input 
+                      value={answer}
+                      onChange={(e) => handleAnswerChange(e, index, answerIndex)}
+                    />
+                  </Form.Item>
 
-      <div id="questions_section">
-        {questions.map((question, index) => (
-          <div key={index} className="question">
-            <h3>Question {index + 1}:</h3>
-            <input type="text" className="question_input" placeholder="Enter your question here" value={question.question} onChange={(e) => handleQuestionChange(e, index)} />
-            <div className="answers">
-              {question.answers.map((answer, answerIndex) => (
-                <input key={answerIndex} type="text" className="answer" placeholder={`Enter answer ${answerIndex + 1}`} value={answer} onChange={(e) => handleAnswerChange(e, index, answerIndex)} />
-              ))}
+                  
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <button onClick={addQuestion}>Add Question</button>
-      <button onClick={handleQuizSave}>Save Quiz</button>
-    </div>
+        <Button onClick={addQuestion}>Add Question</Button>
+        <Button onClick={handleQuizSave}>Save Quiz</Button>
+      </Form>
+    </>
   );
 };
 

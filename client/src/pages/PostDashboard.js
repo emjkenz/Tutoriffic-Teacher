@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import PostList from '../components/PostList';
 import { QUERY_ALL_POSTS } from '../utils/queries'
+import { Button } from 'antd';
 
 const Posts = () => {
-    const { loading, data } = useQuery(QUERY_ALL_POSTS);
+    const { data, loading, error, refetch } = useQuery(QUERY_ALL_POSTS);
+
     const posts = data?.posts || [];
 
-    console.log(posts)
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
         <div>
+            <Button>
             <Link
-                className="btn btn-block btn-squared bg-dark text-light"
                 to={`/posts/add`}
             >
                 Add Post
             </Link>
+            </Button>
             {loading ? (
                 <div>Loading...</div>
             ) : (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SAVE_POST } from '../utils/mutations';
+import { Form, Input, Button } from 'antd';
 const generateUniqueId = require('generate-unique-id');
 
 const PostCreator = () => {
@@ -52,25 +53,51 @@ const PostCreator = () => {
             console.error(error);
         }
     };
-
+    console.log("blah: ", postText);
     return (
+        <>
+            <Form>
         <div>
-            <label htmlFor="posttitle">Title:</label>
-            <input type="text" id="post_title" value={postTitle} onChange={handleTitleChange} />
-            {errors.postTitle && <span className="error-message">{errors.postTitle}</span>}
 
-            <div className="text">
-                <textarea
-                    className="text"
-                    placeholder="Enter text"
-                    value={postText}
-                    onChange={handleTextChange}
+            <Form.Item
+                    label="Post Title"
+                    rules={[
+                        {
+                            type: 'text',
+                        },
+                        {
+                            required: true,
+                            message: 'Please input a Post Title!',
+                        },
+                    ]}
+                    
+                >
+                        <Input 
+                            value={postTitle}
+                            onChange={handleTitleChange} 
+                        />
+                </Form.Item>
+{errors.postTitle && <span className="error-message">{errors.postTitle}</span>}
+
+            <Form.Item
+                label="Text"
+                rules={[{ required: true, message: 'Please input Intro' }]}
+            >
+                <Input.TextArea 
+                    value={postText} 
+                    onChange={handleTextChange} 
+                    showCount maxLength={1000} 
                 />
-                {errors.postText && <span className="error-message">{errors.postText}</span>}
-            </div>
+            </Form.Item>
+ {errors.postText && <span className="error-message">{errors.postText}</span>}
 
-            <button onClick={handlePostSave}>Create Post</button>
+
+
+
+            <Button onClick={handlePostSave}>Create Post</Button>
         </div>
+            </Form>
+        </>
     )
 };
 

@@ -15,6 +15,10 @@ const lessonSchema = new Schema({
         required: true,
     },
     sections: [sectionSchema],
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 const Lesson = model('Lesson', lessonSchema);

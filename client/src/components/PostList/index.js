@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+import { Button } from 'antd';
 import { QUERY_ALL_POSTS } from '../../utils/queries'
 import { DELETE_POST } from '../../utils/mutations'
 
@@ -55,7 +56,7 @@ const PostList = ({ posts, title }) => {
                                     >
                                         {post.title}
                                     </Link>
-                                    <button onClick={() => handleDelete(post.id)}>Delete</button>
+                                    <Button onClick={() => handleDelete(post.id)}>Delete</Button>
                                 </div>
                             </div>
                         ))}

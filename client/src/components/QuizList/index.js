@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-
+import { Button } from 'antd';
 import { QUERY_ALL_QUIZZES } from '../../utils/queries'
 import { DELETE_QUIZ } from '../../utils/mutations'
 
@@ -56,7 +56,7 @@ const QuizList = ({ quizzes, title }) => {
                                 >
                                     {quizz.title}
                                 </Link>
-                                <button onClick={() => handleDelete(quizz.id)}>Delete</button>
+                                <Button onClick={() => handleDelete(quizz.id)}>Delete</Button>
                             </div>
                         </div>
                     ))}

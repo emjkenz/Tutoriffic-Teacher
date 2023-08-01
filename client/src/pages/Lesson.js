@@ -20,6 +20,8 @@ const Lesson = () => {
 
     const lesson = data?.lesson || {};
 
+    console.log(lesson);
+
     const carouselData = lesson.sections.map((section, index) => {
         return {
             id: index,

@@ -21,6 +21,7 @@ const typeDefs = gql`
     description: String
     date: String!
     questions: [Questions]!
+    createdBy: ID!
   }
 
   type Questions {
@@ -64,6 +65,7 @@ const typeDefs = gql`
     title: String!
     date: String!
     sections: [Sections]!
+    createdBy: ID!
   }
 
   type Sections {
@@ -90,6 +92,7 @@ const typeDefs = gql`
     title: String!
     text: String!
     comments: [Comments]
+    createdBy: ID!
   }
 
   type Comments {
@@ -118,6 +121,7 @@ const typeDefs = gql`
     commentsByPostId(postId: String!): [Comments!]!
     students: [Student]
     grades: [Grade]
+    users: [User]
   }
   
   type Mutation {
