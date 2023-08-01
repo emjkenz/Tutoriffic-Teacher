@@ -8,8 +8,9 @@ const LessonCreator = () => {
     const [lessonTitle, setLessonTitle] = useState('');
     const [sections, setSections] = useState([{ heading: '', subheading: '', text: '' }]);
     const [date, setDate] = useState('');
+    const [errors, setErrors] = useState({});
 
-    const [saveLesson, {error}] = useMutation(SAVE_LESSON);
+    const [saveLesson] = useMutation(SAVE_LESSON);
 
     const handleTitleChange = (e) => {
         setLessonTitle(e.target.value);
@@ -42,40 +43,81 @@ const LessonCreator = () => {
     };
 
     const handleLessonSave = async () => {
+        // Perform form validation before saving the lesson
+        const validationErrors = {};
+        if (!lessonTitle.trim()) {
+            validationErrors.lessonTitle = 'Lesson title is required.';
+        }
+        if (!date) {
+            validationErrors.date = 'Lesson date is required.';
+        }
+        sections.forEach((section, index) => {
+            if (!section.heading.trim()) {
+                validationErrors[`heading_${index}`] = 'Section heading is required.';
+            }
+        });
+
+        // If there are validation errors, display them and prevent saving the lesson
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
+        // Proceed with saving the lesson if there are no validation errors
         const dataToSend = { id: generateUniqueId(), title: lessonTitle, date: date, sections: sections };
+        console.log(dataToSend);
 
-        console.log(dataToSend)
+        try {
+          const { data } = await saveLesson({
+                variables: { lessonData: dataToSend }
+            });
 
-        const { data } = await saveLesson({
-            variables: { lessonData: dataToSend }
-        })
-
-        setLessonTitle('');
-        setDate('');
-        setSections([{ heading: '', subheading: '', text: '' }]);
+            // Clear form data after successful save
+            setLessonTitle('');
+            setDate('');
+            setSections([{ heading: '', subheading: '', text: '' }]);
+            setErrors({});
+        } catch (error) {
+            // Handle error here if needed
+            console.error(error);
+        }
     };
 
     return (
         <div className='lesson-creator'>
             <label htmlFor="lessontitle">Lesson Title:</label>
             <input type="text" id="lesson_title" value={lessonTitle} onChange={handleTitleChange} />
+            {errors.lessonTitle && <span className="error-message">{errors.lessonTitle}</span>}
 
             <DatePicker onChange={(date) => handleDateChange((date))} />,
-    
+            {errors.date && <span className="error-message">{errors.date}</span>}
 
             <div id="sections_section">
                 {sections.map((section, index) => (
                     <div key={index} className="heading">
-                        <input type="text" className="heading_input" placeholder="Enter your heading here" value={section.heading} onChange={(e) => handleHeadingChange(e, index)} />
-                        <input type="text" className="subheading_input" placeholder="Enter your subheading here" value={section.subheading} onChange={(e) => handleSubheadingChange(e, index)} />
+                        <input
+                            type="text"
+                            className="heading_input"
+                            placeholder="Enter your heading here"
+                            value={section.heading}
+                            onChange={(e) => handleHeadingChange(e, index)}
+                        />
+                        {errors[`heading_${index}`] && <span className="error-message">{errors[`heading_${index}`]}</span>}
+                        <input
+                            type="text"
+                            className="subheading_input"
+                            placeholder="Enter your subheading here"
+                            value={section.subheading}
+                            onChange={(e) => handleSubheadingChange(e, index)}
+                        />
                         <div className="text">
-                                <textarea
-                                    key={section.textIndex}
-                                    className="text"
-                                    placeholder="Enter text"
-                                    value={section.text}
-                                    onChange={(e) => handleTextChange(e, index)}
-                                />
+                            <textarea
+                                key={section.textIndex}
+                                className="text"
+                                placeholder="Enter text"
+                                value={section.text}
+                                onChange={(e) => handleTextChange(e, index)}
+                            />
                         </div>
                     </div>
                 ))}
@@ -84,7 +126,7 @@ const LessonCreator = () => {
             <button onClick={addSection}>Add Section</button>
             <button onClick={handleLessonSave}>Save Lesson</button>
         </div>
-    )
+    );
 };
 
-export default LessonCreator
+export default LessonCreator;

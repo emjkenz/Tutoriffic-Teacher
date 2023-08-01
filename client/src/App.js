@@ -5,7 +5,7 @@ import { setContext } from '@apollo/client/link/context';
 import './App.css'
 import Dashboard from './components/dashboard/Dashboard';
 import Modules from './components/modules/Modules';
-import QuizCreator from './components/quizzes/QuizCreator';
+import QuizCreator from './pages/QuizCreator';
 import Students from './components/students/Students';
 import ModuleCreator from './components/modules/ModuleCreator';
 import Grades from './components/students/Grades';
