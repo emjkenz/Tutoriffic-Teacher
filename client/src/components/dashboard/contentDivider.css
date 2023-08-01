@@ -1,0 +1,60 @@
+.card {
+  flex-grow: 1;
+  flex-basis: 200px; /* Default width for all cards */
+  margin: 10px;
+  text-align: center;
+}
+
+.content-card {
+  flex-basis: 200px;
+  width: 50%;
+  flex-direction: row;
+}
+
+.content-div {
+  display: inline-flex;
+}
+
+.heading-card {
+  padding: 0;
+  background-color: #9cb9ca;
+  border-color: rgb(216, 216, 216);
+  box-shadow: 2px 2px 10px rgb(216, 215, 215);
+}
+
+.heading-card h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+@media screen and (min-width: 767px) {
+  .card {
+    flex-basis: 100%;
+    flex-grow: 1;
+  }
+
+  .image-card {
+    width: 100%;
+  }
+  .heading-card {
+    width: 10%;
+    flex-grow: 0;
+  }
+
+  .content-card {
+    width: 100%;
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .card {
+    flex-basis: 150px;
+  }
+
+  .heading-card h2 {
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

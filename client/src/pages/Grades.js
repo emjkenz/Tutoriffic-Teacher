@@ -4,8 +4,9 @@ import {
   QUERY_STUDENTS,
   QUERY_ALL_QUIZZES,
   QUERY_GRADES,
-} from "../../utils/queries";
+} from "../utils/queries";
 import { Collapse } from "antd";
+import './students.css'
 
 const { Panel } = Collapse;
 
@@ -38,20 +39,21 @@ const Grades = () => {
   } else {
     return (
       <div>
-        <h2>Student Grades</h2>
-        <div>
-          <Collapse defaultActiveKey={openPanel} onChange={panelChange}>
+        <h1>STUDENT GRADES</h1>
+        <div className="student-list">
+          <Collapse className="collapse" defaultActiveKey={openPanel} onChange={panelChange}>
             {students.map((student) => (
               <Panel
+              className="panel"
                 key={student.id}
                 header={`${student.firstName} ${student.lastName}`}>
-                <ul className="studentInfo">
+                <ul className="student-info">
                   {quizzes.map((quiz) => {
                     const grade = findGrade(student.id, quiz.id);
                     return (
-                      <li key={quiz.id}>
-                        <p>{quiz.title}</p>
-                        <p>
+                      <li className='grade-list'key={quiz.id}>
+                        <p className="quiz-grade">{quiz.title}:</p>
+                        <p className="info">
                           {grade !== undefined
                             ? `${grade}/${quiz.length}`
                             : "N/A"}

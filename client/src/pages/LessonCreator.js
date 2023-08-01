@@ -8,8 +8,9 @@ const LessonCreator = () => {
     const [lessonTitle, setLessonTitle] = useState('');
     const [sections, setSections] = useState([{ heading: '', subheading: '', text: '' }]);
     const [date, setDate] = useState('');
+    const [errors, setErrors] = useState({});
 
-    const [saveLesson, {error}] = useMutation(SAVE_LESSON);
+    const [saveLesson] = useMutation(SAVE_LESSON);
 
     const handleTitleChange = (e) => {
         setLessonTitle(e.target.value);
@@ -42,20 +43,48 @@ const LessonCreator = () => {
     };
 
     const handleLessonSave = async () => {
+        // Perform form validation before saving the lesson
+        const validationErrors = {};
+        if (!lessonTitle.trim()) {
+            validationErrors.lessonTitle = 'Lesson title is required.';
+        }
+        if (!date) {
+            validationErrors.date = 'Lesson date is required.';
+        }
+        sections.forEach((section, index) => {
+            if (!section.heading.trim()) {
+                validationErrors[`heading_${index}`] = 'Section heading is required.';
+            }
+        });
+
+        // If there are validation errors, display them and prevent saving the lesson
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
+        // Proceed with saving the lesson if there are no validation errors
         const dataToSend = { id: generateUniqueId(), title: lessonTitle, date: date, sections: sections };
+        console.log(dataToSend);
 
-        console.log(dataToSend)
+        try {
+          const { data } = await saveLesson({
+                variables: { lessonData: dataToSend }
+            });
 
-        const { data } = await saveLesson({
-            variables: { lessonData: dataToSend }
-        })
-
-        setLessonTitle('');
-        setDate('');
-        setSections([{ heading: '', subheading: '', text: '' }]);
+            // Clear form data after successful save
+            setLessonTitle('');
+            setDate('');
+            setSections([{ heading: '', subheading: '', text: '' }]);
+            setErrors({});
+        } catch (error) {
+            // Handle error here if needed
+            console.error(error);
+        }
     };
 
     return (
+
     <>
        <h1>Create Quiz</h1>
             <Form>
@@ -76,6 +105,8 @@ const LessonCreator = () => {
                         onChange={handleTitleChange}
                     />
                 </Form.Item>
+                 {errors.lessonTitle && <span className="error-message">{errors.lessonTitle}</span>}
+
 
                 <Form.Item
                     label="Due Date:"
@@ -87,6 +118,7 @@ const LessonCreator = () => {
                 >
                     <DatePicker onChange={(date) => handleDateChange(date)} />
                 </Form.Item>
+                 {errors.date && <span className="error-message">{errors.date}</span>}
 
                 <div id="sections_section">
                     {sections.map((section, index) => (
@@ -109,6 +141,7 @@ const LessonCreator = () => {
                                         onChange={(e) => handleHeadingChange(e, index)}
                                     />
                                 </Form.Item>
+                               {errors[`heading_${index}`] && <span className="error-message">{errors[`heading_${index}`]}</span>}
                             </div>
 
                             <div className="subheading">
@@ -148,11 +181,13 @@ const LessonCreator = () => {
                     ))}
                 </div>
 
+
                 <Button onClick={addSection}>Add Section</Button>
                 <Button onClick={handleLessonSave}>Save Lesson</Button>
             </Form>
         </>
     )
+
 };
 
-export default LessonCreator
+export default LessonCreator;

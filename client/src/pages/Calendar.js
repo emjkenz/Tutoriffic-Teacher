@@ -42,7 +42,7 @@ const  ReactBigCalendar = () => {
                 defaultDate={new Date()}
                 defaultView="month"
                 events={eventsData}
-                style={{ height: "100vh" }}
+                style={{ height: "80vh", margin:'3em' }}
             />
         </div>
     );
