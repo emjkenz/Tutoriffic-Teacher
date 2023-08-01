@@ -122,6 +122,7 @@ const typeDefs = gql`
     students: [Student]
     grades: [Grade]
     users: [User]
+    loggedInUser: User
   }
   
   type Mutation {

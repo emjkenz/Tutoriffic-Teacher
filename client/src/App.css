@@ -19,7 +19,7 @@ header {
 }
 
 .header-image {
-  background-image: url("../assets/header_image.png");
+  background-image: url("../src/assets/header_image.png");
   height: 120px;
   background-size: contain;
   background-repeat: no-repeat;

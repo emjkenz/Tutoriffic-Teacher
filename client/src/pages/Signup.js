@@ -5,6 +5,7 @@ import Auth from '../utils/auth';
 import { CREATE_USER } from '../utils/mutations'
 import { Row, Col } from 'antd';
 
+
 const SignupForm = () => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
