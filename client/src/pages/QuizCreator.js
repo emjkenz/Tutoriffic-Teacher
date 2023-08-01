@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import './QuizCreator.css';
-import { useMutation } from '@apollo/client';
-import { SAVE_QUIZ } from '../utils/mutations';
-const generateUniqueId = require('generate-unique-id');
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { SAVE_QUIZ } from "../utils/mutations";
+import { DatePicker, Form, Input, Button } from "antd";
+const generateUniqueId = require("generate-unique-id");
 
 const QuizCreator = () => {
-  const [quizTitle, setQuizTitle] = useState('');
-  const [quizDescription, setQuizDescription] = useState('');
-  const [questions, setQuestions] = useState([{ question: '', answers: ['', '', '', ''] }]);
-  const [date, setDate] = useState('');
+  const [quizTitle, setQuizTitle] = useState("");
+  const [quizDescription, setQuizDescription] = useState("");
+  const [questions, setQuestions] = useState([
+    { question: "", answers: ["", "", "", ""] },
+  ]);
+  const [date, setDate] = useState("");
+  const [form] = Form.useForm();
   const [errors, setErrors] = useState({});
 
   const [saveQuiz] = useMutation(SAVE_QUIZ);
@@ -21,8 +24,8 @@ const QuizCreator = () => {
     setQuizDescription(e.target.value);
   };
 
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
+  const handleDateChange = (date) => {
+    setDate(date);
   };
 
   const handleQuestionChange = (e, index) => {
@@ -38,103 +41,126 @@ const QuizCreator = () => {
   };
 
   const addQuestion = () => {
-    setQuestions([...questions, { question: '', answers: ['', '', '', ''] }]);
+    setQuestions([...questions, { question: "", answers: ["", "", "", ""] }]);
   };
 
   const handleQuizSave = async () => {
-    // Perform form validation before saving the quiz
-    const validationErrors = {};
-    if (!quizTitle.trim()) {
-      validationErrors.quizTitle = 'Quiz title is required.';
-    }
-    if (!quizDescription.trim()) {
-      validationErrors.quizDescription = 'Quiz description is required.';
-    }
-    if (!date) {
-      validationErrors.date = 'Due date is required.';
-    }
-    questions.forEach((question, index) => {
-      if (!question.question.trim()) {
-        validationErrors[`question_${index}`] = 'Question is required.';
-      }
-      question.answers.forEach((answer, answerIndex) => {
-        if (!answer.trim()) {
-          validationErrors[`answer_${index}_${answerIndex}`] = `Answer ${answerIndex + 1} for question ${index + 1} is required.`;
-        }
-      });
-    });
-
-    // If there are validation errors, display them and prevent saving the quiz
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
-    // Proceed with saving the quiz if there are no validation errors
-    const dataToSend = {
-      id: generateUniqueId(),
-      title: quizTitle,
-      description: quizDescription,
-      date: date,
-      questions: questions,
-    };
-
-    console.log(dataToSend);
-
     try {
-      await saveQuiz({
+      // Validate the form
+      await form.validateFields();
+      // Proceed with saving the quiz if there are no validation errors
+      const dataToSend = {
+        id: generateUniqueId(),
+        title: quizTitle,
+        description: quizDescription,
+        date: date,
+        questions: questions,
+      };
+      const { data } = await saveQuiz({
         variables: { quizData: dataToSend },
       });
 
-      // Clear form data after successful save
-      setQuizTitle('');
-      setQuizDescription('');
-      setQuestions([{ question: '', answers: ['', '', '', ''] }]);
-      setDate('');
+      // Clear the form data after successful save
+      form.resetFields();
       setErrors({});
     } catch (error) {
-      // Handle error here if needed
-      console.error(error);
+      // Handle validation errors
+      const validationErrors = {};
+      error.errorFields.forEach((field) => {
+        validationErrors[field.name[0]] = field.errors[0];
+      });
+      setErrors(validationErrors);
     }
   };
 
   return (
-    <div className="quiz-creator">
-      <h1>Create Quiz</h1>
+    <>
+      <h1>Create A Quiz</h1>
+      <Form form={form}>
+        <Form.Item
+          label="Quiz Title"
+          name="quizTitle"
+          rules={[
+            {
+              required: true,
+              message: "Please input a Quiz Title!",
+            },
+          ]}
+        >
+          <Input value={quizTitle} onChange={handleTitleChange} />
+        </Form.Item>
 
-      <label htmlFor="quiz_title">Quiz Title:</label>
-      <input type="text" id="quiz_title" value={quizTitle} onChange={handleTitleChange} />
-      {errors.quizTitle && <span className="error-message">{errors.quizTitle}</span>}
+        <Form.Item label="Quiz Description" name="quizDescription">
+          <Input value={quizDescription} onChange={handleDescriptionChange} />
+        </Form.Item>
 
-      <label htmlFor="quiz_description">Quiz Description:</label>
-      <textarea id="quiz_description" value={quizDescription} onChange={handleDescriptionChange} />
-      {errors.quizDescription && <span className="error-message">{errors.quizDescription}</span>}
+        <Form.Item
+          label="Due Date:"
+          name="quizDueDate"
+          rules={[
+            {
+              required: true,
+              message: "Please select a Due Date!",
+            },
+          ]}
+        >
+          <DatePicker onChange={handleDateChange} />
+        </Form.Item>
 
-      <label htmlFor="due_date">Due Date:</label>
-      <input type="date" id="due_date" value={date} onChange={handleDateChange} />
-      {errors.date && <span className="error-message">{errors.date}</span>}
-
-      <div id="questions_section">
-        {questions.map((question, index) => (
-          <div key={index} className="question">
-            <h3>Question {index + 1}:</h3>
-            <input type="text" className="question_input" placeholder="Enter your question here" value={question.question} onChange={(e) => handleQuestionChange(e, index)} />
-            {errors[`question_${index}`] && <span className="error-message">{errors[`question_${index}`]}</span>}
-            <div className="answers">
-              {question.answers.map((answer, answerIndex) => (
-                <div key={answerIndex}>
-                  <input type="text" className="answer" placeholder={`Enter answer ${answerIndex + 1}`} value={answer} onChange={(e) => handleAnswerChange(e, index, answerIndex)} />
-                  {errors[`answer_${index}_${answerIndex}`] && <span className="error-message">{errors[`answer_${index}_${answerIndex}`]}</span>}
-                </div>
-              ))}
+        <div id="questions_section">
+          {questions.map((question, index) => (
+            <div key={index} className="question">
+              <h3>Question {index + 1}:</h3>
+              <Form.Item
+                label="Question"
+                name={["questions", index, "question"]}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input a Question!",
+                  },
+                ]}
+              >
+                <Input
+                  value={question.question}
+                  onChange={(e) => handleQuestionChange(e, index)}
+                />
+              </Form.Item>
+              <div className="answers">
+                {question.answers.map((answer, answerIndex) => (
+                  <Form.Item
+                    key={answerIndex}
+                    label={`Answer ${answerIndex + 1}`}
+                    name={["questions", index, "answers", answerIndex]}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input an Answer!",
+                      },
+                    ]}
+                  >
+                    <Input
+                      value={answer}
+                      onChange={(e) =>
+                        handleAnswerChange(e, index, answerIndex)
+                      }
+                    />
+                  </Form.Item>
+                ))}
+              </div>
             </div>
+          ))}
+        </div>
+
+        <Button onClick={addQuestion}>Add Question</Button>
+        <Button onClick={handleQuizSave}>Save Quiz</Button>
+        {Object.keys(errors).map((field) => (
+          <div key={field} className="error-message">
+            {errors[field]}
           </div>
         ))}
-      </div>
-
-      <button onClick={addQuestion}>Add Question</button>
-      <button onClick={handleQuizSave}>Save Quiz</button>
-    </div>
+      </Form>
+    </>
   );
 };
 
