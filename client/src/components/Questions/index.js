@@ -1,4 +1,5 @@
 import React from 'react';
+import { Radio } from 'antd';
 
 const Questions = ({questions}) => {
     return(
@@ -11,17 +12,19 @@ const Questions = ({questions}) => {
                             {question.question} <br />
                         </h4>
                         <div>
+                            <Radio.Group>
                             {question.answers &&
                                 question.answers.map((answer) => (
                                     <div key={answer} className="col-12 col-xl-6">
-                                        <div>
+                                        {/* <div>
                                             <input type="radio" value={answer} />
                                             <label htmlFor={answer}>{answer}</label>
-                                        </div>
+                                        </div> */}
+                                        <Radio value={answer}> {answer} </Radio>
                                     </div>
                                 ))}
+                            </Radio.Group>
                         </div>
-                        
                     </div>
                 </div>
             ))}

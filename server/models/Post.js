@@ -14,7 +14,11 @@ const postSchema = new Schema({
         type: String,
         required: true,
     },
-    comments: [commentSchema]
+    comments: [commentSchema],
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 const Post = model('Post', postSchema);

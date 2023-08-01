@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
 
 import QuizList from '../components/QuizList';
@@ -6,9 +6,21 @@ import QuizList from '../components/QuizList';
 import { QUERY_ALL_QUIZZES } from '../utils/queries'
 
 const Quizzes = () => {
-    const { loading, data } = useQuery(QUERY_ALL_QUIZZES);
+    const { data, loading, error, refetch } = useQuery(QUERY_ALL_QUIZZES);
+
     const quizzes = data?.quizzes || [];
-    console.log("blah");
+
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
     return (
         <div>
             {loading ? (

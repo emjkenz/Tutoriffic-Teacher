@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SAVE_POST } from '../utils/mutations';
+import { Form, Input, Button } from 'antd';
 const generateUniqueId = require('generate-unique-id');
 
 const PostCreator = () => {
@@ -19,6 +20,7 @@ const PostCreator = () => {
 
     const handlePostSave = async () => {
         const dataToSend = { id: generateUniqueId(), title: postTitle, text: postText };
+        console.log(dataToSend);
 
         const { data } = await savePost({
             variables: { postData: dataToSend }
@@ -27,22 +29,45 @@ const PostCreator = () => {
         setPostTitle('');
         setPostText('');
     };
-
+    console.log("blah: ", postText);
     return (
+        <>
+            <Form>
         <div>
-            <label htmlFor="posttitle">Title:</label>
-            <input type="text" id="post_title" value={postTitle} onChange={handleTitleChange} />
-            <div className="text">
-                <textarea
-                    className="text"
-                    placeholder="Enter text"
-                    value={postText}
-                    onChange={handleTextChange}
-                />
-            </div>
+            <Form.Item
+                    label="Post Title"
+                    rules={[
+                        {
+                            type: 'text',
+                        },
+                        {
+                            required: true,
+                            message: 'Please input a Post Title!',
+                        },
+                    ]}
+                    
+                >
+                        <Input 
+                            value={postTitle}
+                            onChange={handleTitleChange} 
+                        />
+                </Form.Item>
 
-            <button onClick={handlePostSave}>Create Post</button>
+            <Form.Item
+                label="Text"
+                rules={[{ required: true, message: 'Please input Intro' }]}
+            >
+                <Input.TextArea 
+                    value={postText} 
+                    onChange={handleTextChange} 
+                    showCount maxLength={1000} 
+                />
+            </Form.Item>
+
+            <Button onClick={handlePostSave}>Create Post</Button>
         </div>
+            </Form>
+        </>
     )
 };
 

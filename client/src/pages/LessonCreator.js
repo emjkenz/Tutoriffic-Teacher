@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SAVE_LESSON } from '../utils/mutations';
-import { DatePicker } from 'antd';
+import { DatePicker, Form, Input, Button } from 'antd';
 const generateUniqueId = require('generate-unique-id');
 
 const LessonCreator = () => {
@@ -56,34 +56,102 @@ const LessonCreator = () => {
     };
 
     return (
-        <div className='lesson-creator'>
-            <label htmlFor="lessontitle">Lesson Title:</label>
-            <input type="text" id="lesson_title" value={lessonTitle} onChange={handleTitleChange} />
+    <>
+       <h1>Create Quiz</h1>
+            <Form>
+                <Form.Item
+                    label="Lesson Title"
+                    rules={[
+                        {
+                            type: 'text',
+                        },
+                        {
+                            required: true,
+                            message: 'Please input a Lesson Title!',
+                        },
+                    ]}
+                >
+                    <Input 
+                        value={lessonTitle}
+                        onChange={handleTitleChange}
+                    />
+                </Form.Item>
 
-            <DatePicker onChange={(date) => handleDateChange((date))} />,
-    
+                <Form.Item
+                    label="Due Date:"
+                    rules={[
+                        {
+                            required: true,
+                        },
+                    ]}
+                >
+                    <DatePicker onChange={(date) => handleDateChange(date)} />
+                </Form.Item>
 
-            <div id="sections_section">
-                {sections.map((section, index) => (
-                    <div key={index} className="heading">
-                        <input type="text" className="heading_input" placeholder="Enter your heading here" value={section.heading} onChange={(e) => handleHeadingChange(e, index)} />
-                        <input type="text" className="subheading_input" placeholder="Enter your subheading here" value={section.subheading} onChange={(e) => handleSubheadingChange(e, index)} />
-                        <div className="text">
-                                <textarea
-                                    key={section.textIndex}
-                                    className="text"
-                                    placeholder="Enter text"
-                                    value={section.text}
-                                    onChange={(e) => handleTextChange(e, index)}
-                                />
+                <div id="sections_section">
+                    {sections.map((section, index) => (
+                        <div key={index}>
+                            <div className="heading">
+                                <Form.Item
+                                    label="Heading"
+                                    rules={[
+                                        {
+                                            type: 'text',
+                                        },
+                                        {
+                                            required: true,
+                                            message: 'Please input a Heading!',
+                                        },
+                                    ]}
+                                >
+                                    <Input 
+                                        value={section.heading}
+                                        onChange={(e) => handleHeadingChange(e, index)}
+                                    />
+                                </Form.Item>
+                            </div>
+
+                            <div className="subheading">
+                                <Form.Item
+                                    label="Subheading"
+                                    rules={[
+                                        {
+                                            type: 'text',
+                                        },
+                                        {
+                                            required: true,
+                                            message: 'Please input a Subheading!',
+                                        },
+                                    ]}
+                                >
+                                    <Input 
+                                        value={section.subheading}
+                                        onChange={(e) => handleSubheadingChange(e, index)}
+                                    />
+                                </Form.Item>
+                            </div>
+
+                            <div className="text">
+                                <Form.Item
+                                    key={`text_${index}`}
+                                    label="Text"
+                                    rules={[{ required: true, message: 'Please input Intro' }]}
+                                >
+                                    <Input.TextArea
+                                        value={section.text}
+                                        onChange={(e) => handleTextChange(e, index)}
+                                        showCount maxLength={1000} 
+                                    />
+                                </Form.Item>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
 
-            <button onClick={addSection}>Add Section</button>
-            <button onClick={handleLessonSave}>Save Lesson</button>
-        </div>
+                <Button onClick={addSection}>Add Section</Button>
+                <Button onClick={handleLessonSave}>Save Lesson</Button>
+            </Form>
+        </>
     )
 };
 

@@ -18,6 +18,10 @@ const quizSchema = new Schema({
     required: true,
   },
   questions: [questionSchema],
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 const Quiz = model('Quiz', quizSchema);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_COMMENT } from '../../utils/mutations';
+import { Form, Input, Button } from 'antd';
 
 const CommentForm = ( {postId} ) => {
     const [commentText, setCommentText] = useState('');
@@ -23,18 +24,22 @@ const CommentForm = ( {postId} ) => {
     };
 
     return (
-        <div>
-            <div className="text">
-                <textarea
-                    className="text"
-                    placeholder="Enter text"
+        <>
+            <Form>
+                <Form.Item
+                label="Text"
+                rules={[{ required: true, message: 'Please input Intro' }]}
+            >
+                <Input.TextArea
                     value={commentText}
                     onChange={handleTextChange}
+                    showCount maxLength={1000} 
                 />
-            </div>
+            </Form.Item>
+            </Form>
 
-            <button onClick={handleCommentSave}>Create Comment</button>
-        </div>
+            <Button onClick={handleCommentSave}>Create Comment</Button>
+        </>
     )
 };
 

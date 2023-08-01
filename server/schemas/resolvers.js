@@ -1,12 +1,17 @@
 
 const { Quiz, Questions, User, Lesson, Post,Student, Grade } = require('../models');
-console.log(User); 
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    quizzes: async () => {
-      return await Quiz.find();
+  quizzes: async (parent, args, { user }) => {
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to view your lessons.');
+      }
+
+      const userQuizzes = await Quiz.find({ createdBy: user._id });
+
+      return userQuizzes;
     },
     quiz: async (parent, { id }) => {
       const foundQuiz = await Quiz.findOne({ id: id });
@@ -15,10 +20,14 @@ const resolvers = {
       }
       return foundQuiz;
     },
+    lessons: async (parent, args, { user }) => {
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to view your lessons.');
+      }
 
-    lessons: async () => {
+      const userLessons = await Lesson.find({ createdBy: user._id });
 
-      return await Lesson.find();
+      return userLessons;
     },
     lesson: async (parent, { id }) => {
 
@@ -51,16 +60,22 @@ const resolvers = {
     students: async () => {
       return await Student.find();
     },
-
     grades: async () => {
       return await Grade.find();
-    }
+    },
+    users: async () => {
+      return User.find();
+    },
   },
     
     
     
   Mutation: {
-    saveQuiz: async (parent, {quizData}) => {
+    saveQuiz: async (parent, { quizData }, { user }) => {
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to create a quiz.');
+      }
+
       const { id, title, description, date, questions } = quizData;
 
       return await Quiz.create({
@@ -68,9 +83,10 @@ const resolvers = {
         title,
         description,
         date,
-        questions
+        questions,
+        createdBy: user._id
       })
-    },  
+    }, 
     removeQuiz: async (parent, { id }) => {
       const foundQuiz = await Quiz.findOne({ id: id });
       if (!foundQuiz) {
@@ -84,14 +100,15 @@ const resolvers = {
       return { id, title, description: foundQuiz.description, date, questions };
 
     },
-    saveLesson: async (parent, { lessonData }) => {
+    saveLesson: async (parent, { lessonData }, { user }) => {
       const { id, title, date, sections } = lessonData;
 
       return await Lesson.create({
         id,
         title,
         date,
-        sections
+        sections,
+        createdBy: user._id,
       })
     },
     removeLesson: async (parent, { id }) => {
@@ -107,14 +124,28 @@ const resolvers = {
 
       return { id, title, sections };
     },
-    savePost: async (parent, { postData }) => {
+    // savePost: async (parent, { postData }) => {
+    //   const { id, title, text } = postData;
+
+    //   return await Post.create({
+    //     id,
+    //     title,
+    //     text,
+    //   })
+    // },
+    savePost: async (parent, { postData }, { user }) => {
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to create a post.');
+      }
+
       const { id, title, text } = postData;
 
       return await Post.create({
         id,
         title,
         text,
-      })
+        createdBy: user._id
+      });
     },
     removePost: async (parent, { id }) => {
       const foundPost = await Post.findOne({ id: id });

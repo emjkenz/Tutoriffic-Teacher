@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { DELETE_COMMENT } from '../../utils/mutations'
+import { Card, Col, Row, Button } from 'antd';
 
 
 const CommentList = ({ postId, comments, title }) => {
@@ -31,17 +32,24 @@ const CommentList = ({ postId, comments, title }) => {
                 <div className="flex-row justify-space-between my-4">
                     {comments &&
                         comments.map((comment, index) => (
-                            <div key={index} className="col-12 col-xl-6">
-                                <div className="card mb-3">
-                                    <h4>{comment.text}</h4>
-                                    <button onClick={() => handleDelete(postId, comment._id)}>Delete</button>
-                                </div>
-                            </div>
+                            // <div key={index} className="col-12 col-xl-6">
+                            //     <div className="card mb-3">
+                            //         <h4>{comment.text}</h4>
+                            //         <button onClick={() => handleDelete(postId, comment._id)}>Delete</button>
+                            //     </div>
+                            // </div>
+                             <Row >
+                                <Col span={24}>
+                                <Card title={comment.text} bordered={false}>
+                                    <Button onClick={() => handleDelete(postId, comment._id)}>Delete</Button>
+                                </Card>
+                                </Col>
+                            </Row>
                         ))}
                 </div>
             </div>
-
         </div>
+       
     );
 };
 
