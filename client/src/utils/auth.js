@@ -93,3 +93,8 @@ class AuthService {
 }
 
 export default new AuthService();
+
+export function isLoggedIn() {
+  const token = localStorage.getItem('id_token');
+  return !!token;
+}

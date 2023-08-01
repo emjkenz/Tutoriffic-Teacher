@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SAVE_QUIZ } from '../../utils/mutations';
 import { DatePicker, Form, Input, Button } from 'antd';
-import './QuizCreator.css'
+// import './QuizCreator.css'
 const generateUniqueId = require('generate-unique-id');
 
 const QuizCreator = () => {
