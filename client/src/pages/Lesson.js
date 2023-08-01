@@ -13,6 +13,11 @@ const Lesson = () => {
         variables: { lessonId: lessonId },
     });
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+
     const lesson = data?.lesson || {};
 
     const carouselData = lesson.sections.map((section, index) => {
@@ -21,10 +26,6 @@ const Lesson = () => {
             title: section
         };
     });
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
 
     const responsive = {
         superLargeDesktop: {
