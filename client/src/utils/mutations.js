@@ -144,3 +144,26 @@ export const DELETE_COMMENT = gql `
 `;
 
 
+export const CREATE_USER = gql`
+  mutation createUser($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+    createUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+      token
+      user {
+        firstName
+        lastName
+      }
+    }
+  }
+`;
+
+export const LOGIN_USER = gql`
+    mutation loginUser($email: String!, $password: String!) {
+        loginUser(email: $email, password: $password) {
+            token
+            user {
+                _id
+                username
+            }
+        }
+    }
+`;

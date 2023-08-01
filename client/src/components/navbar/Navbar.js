@@ -12,6 +12,7 @@ import "./Navbar.css";
 
 const { SubMenu } = Menu;
 
+
 const Navbar = () => {
   return (
     <Menu theme="light" mode="horizontal" style={{ lineHeight: "64px" }}>
@@ -30,8 +31,8 @@ const Navbar = () => {
         <Menu.Item key="/lessons">
           <Link to="/lessons">View Lessons</Link>
         </Menu.Item>
-        <Menu.Item key="/lessons/add">
-          <Link to="/lessons/add">Add Lesson</Link>
+        <Menu.Item key="/lesson/add">
+          <Link to="/lesson/add">Add Lesson</Link>
         </Menu.Item>
       </SubMenu>
       <SubMenu key="quizzes" icon={<BookOutlined />} title="Quizzes">
@@ -51,14 +52,15 @@ const Navbar = () => {
         </Menu.Item>
       </SubMenu>
       <Menu.Item key="forum" icon={<BookOutlined />} title="Forum">
-          <Menu.Item key="/posts">
-            <Link to="/posts">Forum</Link>
-          </Menu.Item>
+        <Menu.Item key="/posts">
+          <Link to="/posts">Forum</Link>
+        </Menu.Item>
       </Menu.Item>
       <Menu.Item key="/calendar" icon={<CalendarOutlined />}>
         <Link to="/calendar">Calendar</Link>
       </Menu.Item>
     </Menu>
+
   );
 };
 

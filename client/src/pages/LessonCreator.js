@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SAVE_LESSON } from '../utils/mutations';
+import { DatePicker } from 'antd';
 const generateUniqueId = require('generate-unique-id');
 
 const LessonCreator = () => {
@@ -14,8 +15,8 @@ const LessonCreator = () => {
         setLessonTitle(e.target.value);
     };
 
-    const handleDateChange = (e) => {
-        setDate(e.target.value);
+    const handleDateChange = (date) => {
+        setDate(date);
     };
 
     const handleHeadingChange = (e, index) => {
@@ -59,8 +60,8 @@ const LessonCreator = () => {
             <label htmlFor="lessontitle">Lesson Title:</label>
             <input type="text" id="lesson_title" value={lessonTitle} onChange={handleTitleChange} />
 
-            <label htmlFor="leeson_date">When will this lesson be held?:</label>
-            <input type="date" id="lesson_date" value={date} onChange={handleDateChange} />
+            <DatePicker onChange={(date) => handleDateChange((date))} />,
+    
 
             <div id="sections_section">
                 {sections.map((section, index) => (

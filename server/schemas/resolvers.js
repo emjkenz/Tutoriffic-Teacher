@@ -55,8 +55,6 @@ const resolvers = {
     grades: async () => {
       return await Grade.find();
     }
-      
-      
   },
     
     
@@ -64,7 +62,6 @@ const resolvers = {
   Mutation: {
     saveQuiz: async (parent, {quizData}) => {
       const { id, title, description, date, questions } = quizData;
-
 
       return await Quiz.create({
         id,
@@ -74,7 +71,6 @@ const resolvers = {
         questions
       })
     },  
-
     removeQuiz: async (parent, { id }) => {
       const foundQuiz = await Quiz.findOne({ id: id });
       if (!foundQuiz) {
@@ -165,20 +161,30 @@ const resolvers = {
 
       return updatedPost;
     },
-      
-    addUser: async (parent, { userData }) => {
-      console.log('Received User Data:', userData);
-      const { firstName, lastName, email, password } = userData;
-      const user = await User.create({
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+    createUser: async (parent, { firstName, lastName, email, password }) => {
+
+      const user = await User.create({ firstName, lastName, email, password });
       const token = signToken(user);
+
       return { token, user };
     },
+    loginUser: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
 
+      if (!user) {
+        throw new AuthenticationError('No user found with this email address');
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
+    },
   },
 };
 
