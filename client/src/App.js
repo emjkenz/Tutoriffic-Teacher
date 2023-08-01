@@ -7,7 +7,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Modules from './components/modules/Modules';
 import QuizCreator from './components/quizzes/QuizCreator';
 import Students from './pages/Students';
-import QuizCreator from './pages/QuizCreator';
+// import QuizCreator from './pages/QuizCreator';
 import ModuleCreator from './components/modules/ModuleCreator';
 import Grades from './pages/Grades';
 import Navbar from './components/navbar/Navbar';

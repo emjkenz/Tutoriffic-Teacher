@@ -57,6 +57,7 @@ const Navbar = () => {
           <Menu.Item key="/posts">
             <Link to="/posts">Forum</Link>
           </Menu.Item>
+      </Menu.Item>
       <Menu.Item key="/calendar" icon={<CalendarOutlined />}>
         <Link to="/calendar">Calendar</Link>
       </Menu.Item>
