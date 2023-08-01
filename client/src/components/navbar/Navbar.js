@@ -30,8 +30,8 @@ const Navbar = () => {
         <Menu.Item key="/lessons">
           <Link to="/lessons">View Lessons</Link>
         </Menu.Item>
-        <Menu.Item key="/lessons/add">
-          <Link to="/lessons/add">Add Lesson</Link>
+        <Menu.Item key="/lesson/add">
+          <Link to="/lesson/add">Add Lesson</Link>
         </Menu.Item>
       </SubMenu>
       <SubMenu key="quizzes" icon={<BookOutlined />} title="Quizzes">
