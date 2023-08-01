@@ -66,10 +66,13 @@ const resolvers = {
     users: async () => {
       return User.find();
     },
+    loggedInUser: async (parent, args, { user }) => {
+      if (!user) {
+        return null;
+      }
+      return user;
+    },
   },
-    
-    
-    
   Mutation: {
     saveQuiz: async (parent, { quizData }, { user }) => {
       if (!user) {
@@ -124,15 +127,6 @@ const resolvers = {
 
       return { id, title, sections };
     },
-    // savePost: async (parent, { postData }) => {
-    //   const { id, title, text } = postData;
-
-    //   return await Post.create({
-    //     id,
-    //     title,
-    //     text,
-    //   })
-    // },
     savePost: async (parent, { postData }, { user }) => {
       if (!user) {
         throw new AuthenticationError('You must be logged in to create a post.');
