@@ -40,14 +40,17 @@ const CommentForm = ({ postId }) => {
         <>
             <Form style={{ position: 'relative', maxWidth: '800px', margin: 'auto', marginTop: '30px', boxShadow: '2px 2px 10px rgb(216, 215, 215)', }}>
                 <Form.Item
-                rules={[{ required: true, message: 'Please input Intro' }]}
-            >
-                <Input.TextArea
-                    value={commentText}
-                    onChange={handleTextChange}
-                    showCount maxLength={1000} 
-                />
-            </Form.Item>
+
+                    validateStatus={errors.commentText ? 'error' : ''}
+                    help={errors.commentText}
+                >
+                    <Input.TextArea
+                        value={commentText}
+                        onChange={handleTextChange}
+                        showCount maxLength={1000} 
+                    />
+                </Form.Item>
+
             </Form>
 
             <Button className='enlarge'style={styles.button} onClick={handleCommentSave}>Add Comment</Button>

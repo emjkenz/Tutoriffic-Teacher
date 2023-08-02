@@ -11,6 +11,7 @@ export const SAVE_QUIZ = gql`
         question
         answers
       }
+      moduleId
     }
   }
 `;
@@ -165,6 +166,17 @@ export const LOGIN_USER = gql`
         firstName
         lastName
       }
+    }
+  }
+`;
+
+export const CREATE_MODULE = gql `
+  mutation createModule($moduleData: ModuleInput!) {
+    createModule(moduleData: $moduleData) {
+      id
+      moduleName
+      selectedColor
+      createdBy
     }
   }
 `;

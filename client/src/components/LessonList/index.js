@@ -45,6 +45,7 @@ const LessonList = ({ lessons, title }) => {
     }
   };
 
+
   return (
     <div>
       <h3 className="text-primary">{title}</h3>
@@ -66,6 +67,7 @@ const LessonList = ({ lessons, title }) => {
       </div>
     </div>
   );
+
 };
 
 export default LessonList;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
 import { SAVE_QUIZ } from "../utils/mutations";
 import { DatePicker, Form, Input, Button } from "antd";
@@ -13,6 +14,11 @@ const QuizCreator = () => {
   const [date, setDate] = useState("");
   const [form] = Form.useForm();
   const [errors, setErrors] = useState({});
+
+  const location = useLocation();
+  const { moduleId } = location.state;
+
+  console.log(moduleId);
 
   const [saveQuiz] = useMutation(SAVE_QUIZ);
 
@@ -55,6 +61,7 @@ const QuizCreator = () => {
         description: quizDescription,
         date: date,
         questions: questions,
+        moduleId: moduleId
       };
       const { data } = await saveQuiz({
         variables: { quizData: dataToSend },
