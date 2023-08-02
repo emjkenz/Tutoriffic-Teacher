@@ -33,6 +33,8 @@ import PostCreator from "./pages/PostCreator";
 import Posts from "./pages/PostDashboard";
 import Post from "./pages/Post";
 import { isLoggedIn } from "./utils/auth";
+import { ArrowRightOutlined } from "@ant-design/icons";
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -108,6 +110,7 @@ const App = () => {
       <ApolloProvider client={client}>
         <div className="app">
           <header>
+            <div class="header-container">
             <div class="header-image">
               <div class="overlay">
                 <div class="heading">
@@ -116,7 +119,8 @@ const App = () => {
                 <p>teacher</p>
               </div>
             </div>
-            {loggedIn && <button style = {{color: "red"}}onClick={handleLogout}>Logout</button>}
+            {loggedIn && <button style = {{padding: "0"}}onClick={handleLogout}>Logout <ArrowRightOutlined /></button>}
+          </div>
           </header>
           <nav>
             <Navbar />
@@ -144,6 +148,7 @@ const App = () => {
             </Routes>
           </main>
         </div>
+
       </ApolloProvider>
     </Router>
   );
