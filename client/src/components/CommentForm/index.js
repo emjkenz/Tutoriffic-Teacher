@@ -39,15 +39,16 @@ const CommentForm = ({ postId }) => {
         <>
             <Form>
                 <Form.Item
-                label="Text"
-                rules={[{ required: true, message: 'Please input Intro' }]}
-            >
-                <Input.TextArea
-                    value={commentText}
-                    onChange={handleTextChange}
-                    showCount maxLength={1000} 
-                />
-            </Form.Item>
+                    label="Text"
+                    validateStatus={errors.commentText ? 'error' : ''}
+                    help={errors.commentText}
+                >
+                    <Input.TextArea
+                        value={commentText}
+                        onChange={handleTextChange}
+                        showCount maxLength={1000} 
+                    />
+                </Form.Item>
             </Form>
 
             <Button onClick={handleCommentSave}>Create Comment</Button>

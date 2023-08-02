@@ -53,52 +53,50 @@ const PostCreator = () => {
             console.error(error);
         }
     };
-    console.log("blah: ", postText);
+
     return (
         <>
             <Form>
-        <div>
-
-            <Form.Item
-                    label="Post Title"
-                    rules={[
-                        {
-                            type: 'text',
-                        },
-                        {
-                            required: true,
-                            message: 'Please input a Post Title!',
-                        },
-                    ]}
-                    
-                >
-                        <Input 
+                <div>
+                    <Form.Item
+                        label="Post Title"
+                        rules={[
+                            {
+                                type: 'text',
+                            },
+                            {
+                                required: true,
+                                message: 'Please input a Post Title!',
+                            },
+                        ]}
+                        validateStatus={errors.postTitle ? 'error' : ''}
+                        help={errors.postTitle}
+                    >
+                        <Input
                             value={postTitle}
-                            onChange={handleTitleChange} 
+                            onChange={handleTitleChange}
                         />
-                </Form.Item>
-{errors.postTitle && <span className="error-message">{errors.postTitle}</span>}
+                    </Form.Item>
 
-            <Form.Item
-                label="Text"
-                rules={[{ required: true, message: 'Please input Intro' }]}
-            >
-                <Input.TextArea 
-                    value={postText} 
-                    onChange={handleTextChange} 
-                    showCount maxLength={1000} 
-                />
-            </Form.Item>
- {errors.postText && <span className="error-message">{errors.postText}</span>}
+                    <Form.Item
+                        label="Text"
+                        rules={[{ required: true, message: 'Please input Intro' }]}
+                        validateStatus={errors.postText ? 'error' : ''}
+                        help={errors.postText}
+                    >
+                        <Input.TextArea
+                            value={postText}
+                            onChange={handleTextChange}
+                            showCount maxLength={1000}
+                        />
+                    </Form.Item>
 
-
-
-
-            <Button onClick={handlePostSave}>Create Post</Button>
-        </div>
+                    <Button onClick={handlePostSave}>Create Post</Button>
+                </div>
             </Form>
         </>
     )
 };
 
 export default PostCreator;
+
