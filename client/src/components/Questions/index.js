@@ -5,22 +5,22 @@ const Questions = ({questions}) => {
     return(
         <div>
             { questions &&
-            questions.map((question) => (
-                <div key={question} className="col-12 col-xl-6">
-                    <div className="card mb-3">
-                        <h4 className="card-header p-2 m-0">
-                            {question.question} <br />
-                        </h4>
+            questions.map((question, index) => (
+                <div key={question} style={styles.questionContainer}>
+                    <div>
+                        <h5 style={styles.question}>
+                            {index+1}. {question.question} <br />
+                        </h5>
                         <div>
                             <Radio.Group>
                             {question.answers &&
                                 question.answers.map((answer) => (
-                                    <div key={answer} className="col-12 col-xl-6">
+                                    <div key={answer} style={styles.answersContainer}>
                                         {/* <div>
                                             <input type="radio" value={answer} />
                                             <label htmlFor={answer}>{answer}</label>
                                         </div> */}
-                                        <Radio value={answer}> {answer} </Radio>
+                                        <Radio value={answer} style={{fonstSize: "30px"}}> {answer} </Radio>
                                     </div>
                                 ))}
                             </Radio.Group>
@@ -31,5 +31,21 @@ const Questions = ({questions}) => {
         </div>
     )
 };
+
+const styles = {
+    questionContainer: {
+        textAlign: "left",
+        
+    },
+    question: {
+        fontWeight: "400",
+        fontSize: "1.4rem",
+        paddingBottom: "0.2rem",
+        borderBottom: "1px solid"
+    },
+    answersContainer: {
+        paddingBottom: "0.5rem",
+    }
+}
 
 export default Questions;
