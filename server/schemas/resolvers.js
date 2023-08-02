@@ -1,5 +1,5 @@
 
-const { Quiz, Questions, User, Lesson, Post,Student, Grade } = require('../models');
+const { Quiz, User, Lesson, Post,Student, Grade, Module } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -20,6 +20,10 @@ const resolvers = {
       }
       return foundQuiz;
     },
+    quizzesByModuleId: async (parent, { moduleId }) => {
+      const quizzesByModule = await Quiz.find({ moduleId });
+      return quizzesByModule;
+    },
     lessons: async (parent, args, { user }) => {
       if (!user) {
         throw new AuthenticationError('You must be logged in to view your lessons.');
@@ -38,6 +42,10 @@ const resolvers = {
       }
 
       return foundLesson;
+    },
+    lessonsByModuleId: async (parent, { moduleId }) => {
+      const lessonsByModule = await Lesson.find({ moduleId });
+      return lessonsByModule;
     },
     posts: async () => {
 
@@ -72,6 +80,9 @@ const resolvers = {
       }
       return user;
     },
+    modules: async (parent, args) => {
+      return await Module.find();
+    }
   },
   Mutation: {
     saveQuiz: async (parent, { quizData }, { user }) => {
@@ -79,7 +90,7 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in to create a quiz.');
       }
 
-      const { id, title, description, date, questions } = quizData;
+      const { id, title, description, date, questions, moduleId } = quizData;
 
       return await Quiz.create({
         id,
@@ -87,7 +98,8 @@ const resolvers = {
         description,
         date,
         questions,
-        createdBy: user._id
+        createdBy: user._id,
+        moduleId
       })
     }, 
     removeQuiz: async (parent, { id }) => {
@@ -104,7 +116,11 @@ const resolvers = {
 
     },
     saveLesson: async (parent, { lessonData }, { user }) => {
-      const { id, title, date, sections } = lessonData;
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to create a quiz.');
+      }
+
+      const { id, title, date, sections, moduleId } = lessonData;
 
       return await Lesson.create({
         id,
@@ -112,6 +128,7 @@ const resolvers = {
         date,
         sections,
         createdBy: user._id,
+        moduleId
       })
     },
     removeLesson: async (parent, { id }) => {
@@ -210,6 +227,19 @@ const resolvers = {
 
       return { token, user };
     },
+    createModule: async (parent, { moduleData }) => {
+          // if (!user) {
+          //   throw new AuthenticationError('You must be logged in to create a quiz.');
+          // }
+
+          const { moduleName, selectedColor } = moduleData;
+
+          return await Module.create({
+            moduleName,
+            selectedColor,
+            // createdBy: user._id
+          })
+    }, 
   },
 };
 

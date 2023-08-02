@@ -18,6 +18,7 @@ import Modules from "./components/modules/Modules";
 import Students from "./pages/Students";
 import QuizCreator from './pages/QuizCreator';
 import ModuleCreator from "./components/modules/ModuleCreator";
+import Module from './pages/Module'
 import Grades from "./pages/Grades";
 import Navbar from "./components/navbar/Navbar";
 import Quizzes from "./pages/QuizDashboard";
@@ -125,6 +126,7 @@ const App = () => {
               <Route exact path="/" element={<Dashboard />} />
               <Route path="/modules" element={<Modules />} />
               <Route path="/modules/add" element={<ModuleCreator />} />
+              <Route path="/modules/:moduleId" element={<Module />} />
               <Route path="/quizzes" element={<Quizzes />} />
               <Route path="/quizzes/:quizId" element={<Quiz />} />
               <Route path="/quizzes/add" element={<QuizCreator />} />

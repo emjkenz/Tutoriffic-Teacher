@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
-
 import QuizList from '../components/QuizList';
-
 import { QUERY_ALL_QUIZZES } from '../utils/queries'
 
 const Quizzes = () => {

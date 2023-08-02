@@ -18,6 +18,7 @@
   "dependencies": {
     "moment": "^2.29.4",
     "react-big-calendar": "^1.8.1",
-    "react-bootstrap": "^2.8.0"
+    "react-bootstrap": "^2.8.0",
+    "react-color": "^2.19.3"
   }
 }

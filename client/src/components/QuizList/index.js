@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-
 import { QUERY_ALL_QUIZZES } from '../../utils/queries'
 import { DELETE_QUIZ } from '../../utils/mutations'
 
@@ -44,7 +43,6 @@ const QuizList = ({ quizzes, title }) => {
 
     return (
         <div>
-            <h3 className="text-primary">{title}</h3>
             <div className="flex-row justify-space-between my-4">
                 {quizzes &&
                     quizzes.map((quizz) => (

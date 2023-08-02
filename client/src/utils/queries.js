@@ -24,6 +24,19 @@ export const QUERY_QUIZ = gql`
 }
 `;
 
+export const QUIZ_BY_MODULE = gql`
+  query quizzesByModuleId($moduleId: ID!) {
+    quizzesByModuleId(moduleId: $moduleId) {
+      id
+      title
+      description
+      date
+      createdBy
+      moduleId
+    }
+  }
+`;
+
 export const QUERY_STUDENTS = gql`
   query GetStudents {
     students {
@@ -94,6 +107,23 @@ export const QUERY_LESSON = gql `
   }
 `;
 
+export const LESSON_BY_MODULE = gql `
+  query lessonsByModuleId($moduleId: ID!) {
+    lessonsByModuleId(moduleId: $moduleId) {
+      title
+      id
+      date
+      sections {
+        heading
+        subheading
+        text
+      }
+      createdBy
+      moduleId
+    }
+  }
+`;
+
 export const GET_LESSON_DATES = gql `
   query lessons {
     lessons {
@@ -143,6 +173,16 @@ export const QUERY_LOGEDIN = gql `
     loggedInUser {
       firstName
       lastName
+    }
+  }
+`;
+
+export const QUERY_MODULES = gql `
+  query modules {
+    modules {
+      id
+      moduleName
+      selectedColor
     }
   }
 `;

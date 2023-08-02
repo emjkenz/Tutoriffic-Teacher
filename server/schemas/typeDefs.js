@@ -22,6 +22,8 @@ const typeDefs = gql`
     date: String!
     questions: [Questions]!
     createdBy: ID!
+    moduleId: ID!
+
   }
 
   type Questions {
@@ -46,6 +48,8 @@ const typeDefs = gql`
     description: String
     date: String!
     questions: [QuestionInput!]!
+    moduleId: ID!
+
   }
 
   type Grade {
@@ -66,6 +70,7 @@ const typeDefs = gql`
     date: String!
     sections: [Sections]!
     createdBy: ID!
+    moduleId: ID!
   }
 
   type Sections {
@@ -79,6 +84,7 @@ const typeDefs = gql`
     title: String!
     date: String!
     sections: [SectionInput]!
+    moduleId: ID!
   }
 
   input SectionInput {
@@ -111,6 +117,17 @@ const typeDefs = gql`
     text: String!
   }
 
+  type Module {
+    id: ID!
+    moduleName: String!
+    selectedColor: String!
+  }
+
+   input ModuleInput {
+    moduleName: String!
+    selectedColor: String!
+  }
+
   type Query {
     quizzes: [Quiz]
     quiz(id: String!): Quiz
@@ -123,6 +140,9 @@ const typeDefs = gql`
     grades: [Grade]
     users: [User]
     loggedInUser: User
+    modules: [Module]
+    quizzesByModuleId(moduleId: ID!): [Quiz]
+    lessonsByModuleId(moduleId: ID!): [Lesson]
   }
   
   type Mutation {
@@ -136,6 +156,7 @@ const typeDefs = gql`
     removeCommentFromPost(postId: String!, commentId: ID!): Post
     createUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     loginUser(email: String!, password: String!): Auth
+    createModule(moduleData: ModuleInput!): Module
   }
 
 `;
