@@ -80,8 +80,14 @@ const resolvers = {
       }
       return user;
     },
-    modules: async (parent, args) => {
-      return await Module.find();
+    modules: async (parent, args, { user }) => {
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to view your modules.');
+      }
+
+      const userModules = await Module.find({ createdBy: user._id });
+
+      return userModules;
     },
     me: async (parent, args, context) => {
         if (context.user) {
