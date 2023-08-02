@@ -176,6 +176,7 @@ export const CREATE_MODULE = gql `
       id
       moduleName
       selectedColor
+      createdBy
     }
   }
 `;

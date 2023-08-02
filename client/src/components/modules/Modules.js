@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { SketchPicker } from 'react-color';
 import { Form, Input, Button } from 'antd';
 import { CREATE_MODULE } from '../../utils/mutations';
-import { QUERY_MODULES } from '../../utils/queries';
+import { QUERY_MODULES, QUERY_ME } from '../../utils/queries';
 import ModuleList from '../ModuleList';
 
 const Modules = () => {
   const[moduleName, setModuleName] = useState('');
   const [selectedColor, setSelectedColor] = useState('#FFFFFF');
- 
+
+  const { data: myData } = useQuery(QUERY_ME);
+
+  const meData = myData?.me; 
+  console.log(meData)
+
   const [createModule, { error }] = useMutation(CREATE_MODULE, {
     update(cache, { data: { createModule } }) {
       try {
@@ -34,7 +39,8 @@ const Modules = () => {
   };
   
   const handleSave = async () => {
-    const dataToSend = { moduleName: moduleName, selectedColor: selectedColor };
+    const dataToSend = { moduleName: moduleName, selectedColor: selectedColor, createdBy:meData._id};
+    console.log(dataToSend);
 
    try {
           const { data } = await createModule({

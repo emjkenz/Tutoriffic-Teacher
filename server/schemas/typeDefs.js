@@ -145,6 +145,7 @@ const typeDefs = gql`
     modules: [Module]
     quizzesByModuleId(moduleId: ID!): [Quiz]
     lessonsByModuleId(moduleId: ID!): [Lesson]
+    me: User
   }
   
   type Mutation {

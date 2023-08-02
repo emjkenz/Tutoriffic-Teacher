@@ -82,6 +82,12 @@ const resolvers = {
     },
     modules: async (parent, args) => {
       return await Module.find();
+    },
+    me: async (parent, args, context) => {
+        if (context.user) {
+            return User.findOne({ _id: context.user._id });
+        }
+        throw new AuthenticationError('You need to be logged in!');
     }
   },
   Mutation: {
@@ -228,17 +234,17 @@ const resolvers = {
       return { token, user };
     },
     createModule: async (parent, { moduleData }, { user }) => {
-          if (!user) {
-            throw new AuthenticationError('You must be logged in to create a quiz.');
-          }
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to create a module.');
+      }
+      console.log(user._id)
+      const { moduleName, selectedColor, createdBy } = moduleData;
 
-          const { moduleName, selectedColor } = moduleData;
-
-          return await Module.create({
-            moduleName,
-            selectedColor,
-            createdBy: user._id
-          })
+      return await Module.create({
+        moduleName,
+        selectedColor,
+        createdBy
+      })
     }, 
   },
 };

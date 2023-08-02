@@ -186,3 +186,11 @@ export const QUERY_MODULES = gql `
     }
   }
 `;
+
+export const QUERY_ME = gql `
+  query query {
+    me {
+      _id
+    }
+  }
+`;
