@@ -18,6 +18,10 @@ const lessonSchema = new Schema({
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    moduleId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Module'
     }
 });
 

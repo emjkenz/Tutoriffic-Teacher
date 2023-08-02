@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SAVE_LESSON } from '../utils/mutations';
 import { DatePicker, Form, Input, Button } from 'antd';
@@ -9,6 +10,11 @@ const LessonCreator = () => {
   const [sections, setSections] = useState([{ heading: '', subheading: '', text: '' }]);
   const [date, setDate] = useState('');
   const [errors, setErrors] = useState({});
+
+  const location = useLocation();
+  const { moduleId } = location.state;
+
+  console.log(moduleId);
 
   const [saveLesson] = useMutation(SAVE_LESSON);
 
@@ -67,7 +73,7 @@ const LessonCreator = () => {
     }
 
     // Proceed with saving the lesson if there are no validation errors
-    const dataToSend = { id: generateUniqueId(), title: lessonTitle, date: date, sections: sections };
+    const dataToSend = { id: generateUniqueId(), title: lessonTitle, date: date, sections: sections, moduleId: moduleId };
     console.log(dataToSend);
 
     try {

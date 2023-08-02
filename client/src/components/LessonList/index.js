@@ -44,7 +44,6 @@ const LessonList = ({ lessons, title }) => {
 
     return (
         <div>
-            <h3 className="text-primary">{title}</h3>
             <div className="flex-row justify-space-between my-4">
                 {lessons &&
                     lessons.map((lesson) => (
