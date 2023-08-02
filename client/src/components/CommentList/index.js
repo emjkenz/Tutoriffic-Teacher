@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { DELETE_COMMENT } from '../../utils/mutations'
-import { Card, Col, Row, Button } from 'antd';
+import { Card, Button } from 'antd';
+import { DeleteOutlined } from "@ant-design/icons";
 
 
 const CommentList = ({ postId, comments, title }) => {
@@ -27,9 +28,9 @@ const CommentList = ({ postId, comments, title }) => {
     }
 
     return (
-        <div>
+        <div style={styles.container}>
             <div>
-                <div className="flex-row justify-space-between my-4">
+                <div className="my-4">
                     {comments &&
                         comments.map((comment, index) => (
                             // <div key={index} className="col-12 col-xl-6">
@@ -38,13 +39,13 @@ const CommentList = ({ postId, comments, title }) => {
                             //         <button onClick={() => handleDelete(postId, comment._id)}>Delete</button>
                             //     </div>
                             // </div>
-                             <Row >
-                                <Col span={24}>
-                                <Card title={comment.text} bordered={false}>
-                                    <Button onClick={() => handleDelete(postId, comment._id)}>Delete</Button>
+                            //  <Row >
+                            //     <Col span={24}>
+                                <Card title={comment.text} bordered={false} style={styles.card} >
+                                    <Button styles={styles.button} onClick={() => handleDelete(postId, comment._id)}><DeleteOutlined /></Button>
                                 </Card>
-                                </Col>
-                            </Row>
+                            //     </Col>
+                            // </Row>
                         ))}
                 </div>
             </div>
@@ -52,5 +53,30 @@ const CommentList = ({ postId, comments, title }) => {
        
     );
 };
+
+const styles = {
+    container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    maxWidth: '1000px',
+    paddingLeft: '100px',
+    },
+    card: {
+    backgroundColor: '#d4e6f1',
+    borderRadius: '8px',
+    padding: '20px',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'black',
+    textAlign: 'center',
+    margin: '20px',
+    height: '80px',
+    boxShadow: '2px 2px 10px rgb(216, 215, 215',
+    },
+
+}
 
 export default CommentList;

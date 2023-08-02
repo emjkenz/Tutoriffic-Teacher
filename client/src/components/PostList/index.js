@@ -4,6 +4,8 @@ import { useMutation } from '@apollo/client';
 import { Button } from 'antd';
 import { QUERY_ALL_POSTS } from '../../utils/queries'
 import { DELETE_POST } from '../../utils/mutations'
+import { DeleteOutlined } from '@ant-design/icons';
+import '../card.css'
 
 
 const PostList = ({ posts, title }) => {
@@ -43,20 +45,20 @@ const PostList = ({ posts, title }) => {
     }
 
     return (
-        <div>
+        <div style={styles.container}>
             <div>
-                <div className="flex-row justify-space-between my-4">
+                <div className="flex-row justify-space-between" style={styles.container}>
                     {posts &&
                         posts.map((post) => (
-                            <div key={post.id} className="col-12 col-xl-6">
-                                <div className="card mb-3">
-                                    <Link
-                                        className="btn btn-block btn-squared bg-dark text-light"
+                            <div key={post.id} className="col-12 col-xl-6" >
+                                <div className="card mb-3 enlarge" style={styles.card}>
+                                    <Link  style={styles.titleLink}
+                                        className="btn btn-block btn-squared"
                                         to={`/posts/${post.id}`}
                                     >
                                         {post.title}
                                     </Link>
-                                    <Button onClick={() => handleDelete(post.id)}>Delete</Button>
+                                    <Button style={styles.deleteButton} onClick={() => handleDelete(post.id)}>  <DeleteOutlined />  Delete</Button>
                                 </div>
                             </div>
                         ))}
@@ -67,4 +69,46 @@ const PostList = ({ posts, title }) => {
     );
 };
 
+
+
+const styles = {
+container: {
+    padding: '10px 20px',
+    marginLeft: '0'
+},
+
+  card: {
+    borderRadius: '8px',
+    padding: '20px',
+    marginBottom: '10px',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '120px',
+    marginLeft: '0',
+    paddingLeft: '20px',
+    backgroundColor: '#fff'
+  },
+  titleLink: {
+    display: 'block',
+    width: '100%',
+    height: '80%',
+    backgroundColor: '#9cb9ca',
+    color: 'black',
+    fontWeight: '900',
+    textAlign: 'center',
+    textDecoration: 'none',
+    borderRadius: '4px',
+    padding: '20px',
+    fontSize: '25px'
+  },
+  deleteButton: {
+    width: '100%',
+    backgroundColor: '#f5f5f5',
+    color: 'black',
+    borderRadius: '4px',
+  },
+};
 export default PostList;

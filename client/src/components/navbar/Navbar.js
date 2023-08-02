@@ -17,7 +17,7 @@ const { SubMenu } = Menu;
 
 const Navbar = () => {
   return (
-    <Menu theme="light" mode="horizontal" style={{ lineHeight: "64px"}}>
+    <Menu theme="light" mode="horizontal" style={{ lineHeight: "64px", fontSize: '15px', justifyContent: 'center'}}>
       <Menu.Item key="/" icon={<UserOutlined />}>
         <Link to="/">Dashboard</Link>
       </Menu.Item>

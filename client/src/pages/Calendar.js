@@ -34,7 +34,7 @@ const  ReactBigCalendar = () => {
 
 
     return (
-        <div className="App">
+        <div className="App" style={{padding: '30px', backgroundColor: '#fff', margin: '50px', borderRadius: '10px', marginTop: '0'}}>
             <Calendar
                 views={["day", "agenda", "work_week", "month"]}
                 selectable
@@ -42,7 +42,7 @@ const  ReactBigCalendar = () => {
                 defaultDate={new Date()}
                 defaultView="month"
                 events={eventsData}
-                style={{ height: "80vh", margin:'3em' }}
+                style={{ height: "80vh" }}
             />
         </div>
     );

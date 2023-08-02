@@ -38,8 +38,8 @@ const Grades = () => {
     return <p>Loading...</p>;
   } else {
     return (
-      <div>
-        <h1>STUDENT GRADES</h1>
+      <div className="main-section">
+        <h1>Student Grades</h1>
         <div className="student-list">
           <Collapse className="collapse" defaultActiveKey={openPanel} onChange={panelChange}>
             {students.map((student) => (

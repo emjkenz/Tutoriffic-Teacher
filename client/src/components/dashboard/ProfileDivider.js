@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import onlineClassroomProfile from '../../assets/profile-image.jpg'
 import "./dashboard.css";
 import "./profileDivider.css"
+import '../card.css'
 
 const ProfileDivider = () => {
   const { data, loading, error } = useQuery(QUERY_LOGEDIN);
@@ -47,13 +48,13 @@ const ProfileDivider = () => {
             }
           ></Card>
             <Link to="/calendar">
-          <Card className="card date" href="/calendar" style={{ cursor: 'pointer' }}>
+          <Card className="card date enlarge" href="/calendar" style={{ cursor: 'pointer' }}>
             <CalendarOutlined style={{ fontSize: 20 }} />
             <p className="currentDate">{getCurrentDate()}</p>
           </Card>
           </Link>
              <Link to="/posts">
-          <Card className="card" href="/forum" style={{ cursor: 'pointer' }}>
+          <Card className="card enlarge" href="/forum" style={{ cursor: 'pointer' }}>
             <MessageOutlined style={{ fontSize: 50, color: "grey" }} />
             </Card>
            </Link>
