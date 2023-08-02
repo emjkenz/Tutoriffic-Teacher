@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_COMMENT } from '../../utils/mutations';
 import { Form, Input, Button } from 'antd';
+import '../card.css'
 
 const CommentForm = ({ postId }) => {
     const [commentText, setCommentText] = useState('');
@@ -37,9 +38,9 @@ const CommentForm = ({ postId }) => {
 
     return (
         <>
-            <Form>
+            <Form style={{ position: 'relative', maxWidth: '800px', margin: 'auto', marginTop: '30px', boxShadow: '2px 2px 10px rgb(216, 215, 215)', }}>
                 <Form.Item
-                    label="Text"
+
                     validateStatus={errors.commentText ? 'error' : ''}
                     help={errors.commentText}
                 >
@@ -49,12 +50,21 @@ const CommentForm = ({ postId }) => {
                         showCount maxLength={1000} 
                     />
                 </Form.Item>
+
             </Form>
 
-            <Button onClick={handleCommentSave}>Create Comment</Button>
+            <Button className='enlarge'style={styles.button} onClick={handleCommentSave}>Add Comment</Button>
         </>
     )
 
 };
+
+const styles = {
+    button: {
+    backgroundColor: "#e67e22",
+    color: "#fff",
+    boxShadow: '2px 2px 10px rgb(216, 215, 215)',
+    }
+}
 
 export default CommentForm;

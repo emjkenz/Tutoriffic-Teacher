@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+
+import { Button, Card } from 'antd';
+import { DeleteOutlined } from "@ant-design/icons"
+
 import { QUERY_ALL_QUIZZES } from '../../utils/queries'
 import { DELETE_QUIZ } from '../../utils/mutations'
+import '../../pages/cardDashboard.css'
+
 
 
 const QuizList = ({ quizzes, title }) => {
@@ -42,25 +48,31 @@ const QuizList = ({ quizzes, title }) => {
     }
 
     return (
-        <div>
-            <div className="flex-row justify-space-between my-4">
-                {quizzes &&
-                    quizzes.map((quizz) => (
-                        <div key={quizz.id} className="col-12 col-xl-6">
-                            <div className="card mb-3">
-                                <Link
-                                    className="btn btn-block btn-squared bg-dark text-light"
-                                    to={`/quizzes/${quizz.id}`}
-                                >
-                                    {quizz.title}
-                                </Link>
-                                <button onClick={() => handleDelete(quizz.id)}>Delete</button>
-                            </div>
-                        </div>
-                    ))}
-            </div>
-        </div>
-    );
+
+    <div>
+      <h3 className="text-primary">{title}</h3>
+      <div className="flex-row justify-space-between my-4">
+        {quizzes &&
+          quizzes.map((quizz) => (
+            <Card key={quizz.id} className="col-12 col-xl-6 card-dashboard enlarge">
+              <Link
+                to={`/quizzes/${quizz.id}`}
+                className="link"
+              >
+                {quizz.title}
+              </Link>
+              <Button
+                type="text"
+                icon={<DeleteOutlined />}
+                className="delete-button"
+                onClick={() => handleDelete(quizz.id)}
+              />
+            </Card>
+          ))}
+      </div>
+    </div>
+  );
+
 };
 
 export default QuizList;

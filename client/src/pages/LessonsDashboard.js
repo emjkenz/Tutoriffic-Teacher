@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
 import LesssonList from '../components/LessonList';
 import { QUERY_ALL_LESSONS } from '../utils/queries'
+import './cardDashboard.css'
 
 const Lessons = () => {
     const { data, loading, error, refetch } = useQuery(QUERY_ALL_LESSONS);
@@ -21,7 +22,7 @@ const Lessons = () => {
     }
 
     return (
-        <div>
+        <div className='main-section'>
             {loading ? (
                 <div>Loading...</div>
             ) : (

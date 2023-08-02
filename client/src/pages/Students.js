@@ -22,8 +22,8 @@ const Students = () => {
   };
 
   return (
-    <div>
-      <h1>STUDENT LIST</h1>
+    <div className="main-section">
+      <h1>Student List</h1>
       <div className="student-list">
         <Collapse
           className="collapse"
