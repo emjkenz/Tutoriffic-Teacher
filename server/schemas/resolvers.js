@@ -227,17 +227,17 @@ const resolvers = {
 
       return { token, user };
     },
-    createModule: async (parent, { moduleData }) => {
-          // if (!user) {
-          //   throw new AuthenticationError('You must be logged in to create a quiz.');
-          // }
+    createModule: async (parent, { moduleData }, { user }) => {
+          if (!user) {
+            throw new AuthenticationError('You must be logged in to create a quiz.');
+          }
 
           const { moduleName, selectedColor } = moduleData;
 
           return await Module.create({
             moduleName,
             selectedColor,
-            // createdBy: user._id
+            createdBy: user._id
           })
     }, 
   },

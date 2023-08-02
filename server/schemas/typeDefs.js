@@ -121,11 +121,13 @@ const typeDefs = gql`
     id: ID!
     moduleName: String!
     selectedColor: String!
+    createdBy: ID!
   }
 
    input ModuleInput {
     moduleName: String!
     selectedColor: String!
+    createdBy: ID!
   }
 
   type Query {

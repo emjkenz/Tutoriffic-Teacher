@@ -9,10 +9,10 @@ const moduleSchema = new Schema({
         type: String,
         required: true,
     },
-    // createdBy: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User'
-    // }
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 const Module = model('Module', moduleSchema);
