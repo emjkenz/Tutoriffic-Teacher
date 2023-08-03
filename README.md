@@ -1,34 +1,45 @@
 # Tutoriffic-Teacher
-![Github license](https://img.shields.io/badge/license--blue)
+
 ## Table of Contents
 * [Description](#description)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Contribute](#contribute)
 * [Contributors](#contributors)
-* [Testing](#tests)
 * [License](#license)
-* [Questions](#questions)
 * [Repository](#repository)
 * [Images](#images) 
+
 ## Description
-This Repo contains 1/2 of the project, this repo focuses on the Teacher side of the webpage that shows the creator/teacher there grade, Modules, Assigments, and also Calender which will also show the current date and when the Assigments are due. This allows the teacher to keep up with mutliple school subjects/modules and also to see attendace.
+
+This Repo contains 1/2 of the project for a virtual classroom application. This repo focuses on the Teacher side of the application that shows the teacher their Modules, Assignments, Lesson, and Calendar which will also show the current date and when the Assignments are due and when Lessons will be held. This allows the teacher to keep up with multiple school subjects/modules. There is also a forum that both students and teachers can use to ask/answer questions.
+
 ## Screenshots
-![Alt text]()
+
+![Dashboard](./client//src//assets/Dashboard.png)
+
+![Forum](./client/src/assets/Forum.png)
+
+![Calendar](./client//src/assets/Calendar.png)
+
 ## Installation
-once you clone the repo you can either write `npm start` or type/copy and paste this line of code in`npm install react react-dom react-router-dom react-scripts apollo-server-express express graphql mongoose`.Once it has finished installing in vscode you should be able to run the application with no problems
+
+No installation needed. The application can be found at https://tutoriffic-teacher-bc391b7a081b.herokuapp.com/.
+
 ## Usage
-`npm start` the application and it will take you to the homepage where you have to sign up/login. From there you can click on the dash board icon which will take you to the page that shows all the information on that studnet, from there you can check to see if you have any modules to see.
-## Tests
-we have run the repo on our local machines that seemed to work fine on our end.
+
+Upon opening the application the user will have to create an account. They will then be redirected to the dashboard. From there the user can click on 'Modules' in the navbar and create modules. The user can then click on the modules they have created and create a quiz or a lesson. All quizzes and lessons for the module can be found on this page. To view all quizzes or lessons created, irrespective of module, the user can go to the 'Quizzes' or 'Lessons' tab in the navbar. The user can go to the 'Forum' where they will be able to create a forum post as well as view any posts that have been created by all users. To leave a comment on a post, the user can click on a post card, where they will be redirected to the post, where they will see the post information, any comments the post has, and a form to leave a comment. The calendar will show the due dates of all assignments created and the dates that all lessons will be held.
+
 ## Contribute
+
 If you would like to contribute to this project in anyway you could try and fix the dashboard for it to be more user friendly.
+
 ## Contributors
-I would like to acknowladge Alexander Chrystall, Christopher Grace, Ellis Mcmillan, Emily Kennedy, Karra Ormsby and Micheal Hamoud for contribution to this massive project.
-## License
-Anyone can use the app 
-## Questions
-If you have any questions or suggestions please [contact][github/emjkenz](https://github.com/emjkenz)
+
+I would like to acknowledge Alexander Chrystall, Christopher Grace, Ellis Mcmillan, Emily Kennedy, Karra Ormsby and Micheal Hamoud for contribution to this massive project.
+
 ## Repository
+
+GitHub: https://github.com/emjkenz/Tutoriffic-Teacher
 HTTP: https://github.com/emjkenz/Tutoriffic-Teacher.git
-SSH: git@github.com:emjkenz/Tutoriffic-Teacher.git 
+SSH: git@github.com:emjkenz/Tutoriffic-Teacher.git
