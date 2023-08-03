@@ -10,7 +10,7 @@ import {
   AppstoreOutlined,
   MessageOutlined 
 } from "@ant-design/icons";
-import "./navbar.css";
+
 
 const { SubMenu } = Menu;
 
