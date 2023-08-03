@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import { Button, Card } from 'antd';
 import { DeleteOutlined } from "@ant-design/icons"
-
+import { Empty } from 'antd'
 import { QUERY_ALL_QUIZZES } from '../../utils/queries'
 import { DELETE_QUIZ } from '../../utils/mutations'
 import '../../pages/cardDashboard.css'
@@ -30,7 +30,7 @@ const QuizList = ({ quizzes, title }) => {
     });
 
     if (!quizzes.length) {
-        return <h3>No Quizzes Yet</h3>;
+        return <h3 style={{margin: "30px", marginBottom:'30px'}}>No Quizzes Yet <Empty/></h3>;
     }
 
     const handleDelete = async (id) => {
@@ -62,6 +62,7 @@ const QuizList = ({ quizzes, title }) => {
                 {quizz.title}
               </Link>
               <Button
+              style={{ marginBottom:'30px'}}
                 type="text"
                 icon={<DeleteOutlined />}
                 className="delete-button"
