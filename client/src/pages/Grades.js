@@ -55,7 +55,7 @@ const Grades = () => {
                         <p className="quiz-grade">{quiz.title}:</p>
                         <p className="info">
                           {grade !== undefined
-                            ? `${grade}/${quiz.length}`
+                            ? `${grade.gradePercentage}`
                             : "N/A"}
                         </p>
                       </li>
