@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-import { CREATE_USER } from '../utils/mutations'
+import { CREATE_USER } from '../utils/mutations';
 import { Row, Col } from 'antd';
-
 
 const SignupForm = () => {
   // set initial form state
@@ -32,7 +31,7 @@ const SignupForm = () => {
 
     try {
       const { data } = await createUser({
-        variables: { ...userFormData }
+        variables: { ...userFormData },
       });
       if (!data.createUser) {
         throw new Error('something went wrong!');
@@ -114,12 +113,13 @@ const SignupForm = () => {
       </Col>
     </Row>
   );
-}
+};
 
 const styles = {
   loginSignupBox: {
     backgroundColor: '#f5f5f5',
     border: '1px solid #ddd',
+    borderRadius: '8px', // Add border radius for rounded corners
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     padding: '20px',
     textAlign: 'center',
@@ -136,9 +136,10 @@ const styles = {
     padding: '10px',
   },
   submitButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#e67e22',
     color: '#fff',
     border: 'none',
+    borderRadius: '4px',
     padding: '10px 20px',
     cursor: 'pointer',
   },
