@@ -54,7 +54,7 @@ const QuizList = ({ quizzes, title }) => {
       <div className="flex-row justify-space-between my-4">
         {quizzes &&
           quizzes.map((quizz) => (
-            <Card key={quizz.id} className="col-12 col-xl-6 card-dashboard enlarge">
+            <Card key={quizz.id} className="col-10 col-xl-5 card-dashboard enlarge">
               <Link
                 to={`/quizzes/${quizz.id}`}
                 className="link"

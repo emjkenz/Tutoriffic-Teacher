@@ -12,6 +12,9 @@
   position: relative;
   border: 1px solid #e67e22;
   box-shadow: 2px 2px 10px rgb(216, 215, 215);
+  margin: 20px;
+  font-weight: 200;
+  text-align: center;
 }
 
 .link {

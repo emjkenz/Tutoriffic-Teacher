@@ -8,14 +8,10 @@
   font-style: none;
 }
 
-.date .user {
-  flex-basis: 200px;
-  width: 50%;
-  flex-direction: row;
-}
-
-.image-card {
-  position: relative;
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-card img {

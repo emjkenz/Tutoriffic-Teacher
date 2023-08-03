@@ -52,9 +52,9 @@ const LessonList = ({ lessons, title }) => {
       <div className="flex-row justify-space-between my-4">
         {lessons &&
           lessons.map((lesson) => (
-            <Card key={lesson.id} className="col-12 col-xl-6 card-dashboard enlarge">
+            <Card key={lesson.id} className="col-10 col-xl-5 card-dashboard enlarge">
               <Link className="link" to={`/lessons/${lesson.id}`}>
-                {lesson.title}
+                {lesson.title} 
               </Link>
               <Button
                 type="text"

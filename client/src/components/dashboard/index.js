@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Content style={{ margin: '0px' }}>
+      <Content style={{ margin: '20px' }}>
         <div className="site-layout-background" style={{ padding: 0 }}>
           <h1>Welcome to Your Dashboard</h1>
           <Divider className = "divider" orientation="centre">Profile</Divider>

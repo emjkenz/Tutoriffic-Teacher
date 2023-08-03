@@ -89,29 +89,44 @@ const LessonCreator = () => {
     }
   };
 
+  const styles = {
+    button: {
+      backgroundColor: "#e67e22",
+      color: "#fff",
+      boxShadow: '2px 2px 10px rgb(216, 215, 215)',
+    },
+    box: {
+      maxWidth: '800px',
+      margin: 'auto',
+      backgroundColor: '#f5f5f5',
+      border: '1px solid #ddd',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+      padding: '20px',
+      textAlign: 'center',
+      zIndex: 1,
+    },
+  };
+
   return (
-    <>
+    <div style={styles.box}>
       <h1>Create Lesson</h1>
       <Form>
         <Form.Item
           label="Lesson Title"
           rules={[
             {
-              type: 'text',
-            },
-            {
               required: true,
               message: 'Please input a Lesson Title!',
             },
           ]}
+          validateStatus={errors.lessonTitle ? 'error' : ''}
+          help={errors.lessonTitle}
         >
           <Input
             value={lessonTitle}
             onChange={handleTitleChange}
-            style={errors.lessonTitle ? { borderColor: 'red' } : {}}
           />
         </Form.Item>
-        {errors.lessonTitle && <span style={{ color: 'red' }}>{errors.lessonTitle}</span>}
 
         <Form.Item
           label="Due Date:"
@@ -120,13 +135,13 @@ const LessonCreator = () => {
               required: true,
             },
           ]}
+          validateStatus={errors.date ? 'error' : ''}
+          help={errors.date}
         >
           <DatePicker
             onChange={(date) => handleDateChange(date)}
-            style={errors.date ? { borderColor: 'red' } : {}}
           />
         </Form.Item>
-        {errors.date && <span style={{ color: 'red' }}>{errors.date}</span>}
 
         <div id="sections_section">
           {sections.map((section, index) => (
@@ -136,21 +151,18 @@ const LessonCreator = () => {
                   label="Heading"
                   rules={[
                     {
-                      type: 'text',
-                    },
-                    {
                       required: true,
                       message: 'Please input a Heading!',
                     },
                   ]}
+                  validateStatus={errors[`heading_${index}`] ? 'error' : ''}
+                  help={errors[`heading_${index}`]}
                 >
                   <Input
                     value={section.heading}
                     onChange={(e) => handleHeadingChange(e, index)}
-                    style={errors[`heading_${index}`] ? { borderColor: 'red' } : {}}
                   />
                 </Form.Item>
-                {errors[`heading_${index}`] && <span style={{ color: 'red' }}>{errors[`heading_${index}`]}</span>}
               </div>
 
               <div className="subheading">
@@ -158,18 +170,16 @@ const LessonCreator = () => {
                   label="Subheading"
                   rules={[
                     {
-                      type: 'text',
-                    },
-                    {
                       required: true,
                       message: 'Please input a Subheading!',
                     },
                   ]}
+                  validateStatus={errors[`heading_${index}`] ? 'error' : ''}
+                  help={errors[`heading_${index}`]}
                 >
                   <Input
                     value={section.subheading}
                     onChange={(e) => handleSubheadingChange(e, index)}
-                    style={errors[`heading_${index}`] ? { borderColor: 'red' } : {}}
                   />
                 </Form.Item>
               </div>
@@ -179,27 +189,28 @@ const LessonCreator = () => {
                   key={`text_${index}`}
                   label="Text"
                   rules={[{ required: true, message: 'Text is required.' }]}
+                  validateStatus={errors[`text_${index}`] ? 'error' : ''}
+                  help={errors[`text_${index}`]}
                 >
                   <Input.TextArea
                     value={section.text}
                     onChange={(e) => handleTextChange(e, index)}
                     showCount maxLength={1000}
-                    style={errors[`text_${index}`] ? { borderColor: 'red' } : {}}
                   />
                 </Form.Item>
-                {errors[`text_${index}`] && <span style={{ color: 'red' }}>{errors[`text_${index}`]}</span>}
               </div>
             </div>
           ))}
         </div>
 
-        <Button onClick={addSection}>Add Section</Button>
-        <Button onClick={handleLessonSave}>Save Lesson</Button>
+        <Button onClick={addSection} style={styles.button}>Add Section</Button>
+        <Button onClick={handleLessonSave} style={styles.button}>Save Lesson</Button>
       </Form>
-    </>
+    </div>
   );
 };
 
 export default LessonCreator;
+
 
 
