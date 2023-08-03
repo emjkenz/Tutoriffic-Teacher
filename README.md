@@ -3,12 +3,11 @@
 ## Table of Contents
 * [Description](#description)
 * [Installation](#installation)
+* [Screenshots](#screenshots)
 * [Usage](#usage)
 * [Contribute](#contribute)
 * [Contributors](#contributors)
-* [License](#license)
 * [Repository](#repository)
-* [Images](#images) 
 
 ## Description
 
