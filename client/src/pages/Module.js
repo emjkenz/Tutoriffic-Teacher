@@ -18,8 +18,6 @@ const Module = () => {
         quizRefetch();
     }, [quizRefetch]);
 
-    console.log(quizData);
-
     const { data: lessonData, loading: lessonLoading, error: lessonError, refetch: lessonRefetch } = useQuery(LESSON_BY_MODULE, {
         variables: { moduleId: moduleId },
     });

@@ -14,8 +14,6 @@ const LessonCreator = () => {
   const location = useLocation();
   const { moduleId } = location.state;
 
-  console.log(moduleId);
-
   const [saveLesson] = useMutation(SAVE_LESSON);
 
   const handleTitleChange = (e) => {
@@ -74,7 +72,6 @@ const LessonCreator = () => {
 
     // Proceed with saving the lesson if there are no validation errors
     const dataToSend = { id: generateUniqueId(), title: lessonTitle, date: date, sections: sections, moduleId: moduleId };
-    console.log(dataToSend);
 
     try {
       const { data } = await saveLesson({

@@ -30,9 +30,6 @@ const  ReactBigCalendar = () => {
 
     const eventsData = mergedArray.map((calendarData) => createCalendarObject(calendarData));
 
-    console.log(eventsData);
-
-
     return (
         <div className="App" style={{padding: '30px', backgroundColor: '#fff', margin: '50px', borderRadius: '10px', marginTop: '0'}}>
             <Calendar

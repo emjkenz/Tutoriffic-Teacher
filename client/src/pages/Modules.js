@@ -14,7 +14,6 @@ const Modules = () => {
 
   const { data: myData } = useQuery(QUERY_ME);
   const meData = myData?.me;
-  console.log(meData);
 
   const [createModule, { error }] = useMutation(CREATE_MODULE, {
     update(cache, { data: { createModule } }) {
@@ -55,7 +54,6 @@ const Modules = () => {
     }
 
     const dataToSend = { moduleName: moduleName, selectedColor: selectedColor, createdBy: meData._id };
-    console.log(dataToSend);
 
     try {
       const { data } = await createModule({

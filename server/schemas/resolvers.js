@@ -243,7 +243,7 @@ const resolvers = {
       if (!user) {
         throw new AuthenticationError('You must be logged in to create a module.');
       }
-      console.log(user._id)
+
       const { moduleName, selectedColor, createdBy } = moduleData;
 
       return await Module.create({
