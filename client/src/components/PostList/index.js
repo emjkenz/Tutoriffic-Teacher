@@ -5,6 +5,7 @@ import { Button } from 'antd';
 import { QUERY_ALL_POSTS } from '../../utils/queries'
 import { DELETE_POST } from '../../utils/mutations'
 import { DeleteOutlined } from '@ant-design/icons';
+import { Empty } from 'antd'
 import '../card.css'
 
 
@@ -27,7 +28,7 @@ const PostList = ({ posts, title }) => {
     });
 
     if (!posts.length) {
-        return <h3>No Posts Yet</h3>;
+        return <h3>No Posts Yet <Empty/></h3>;
     }
 
     const handleDelete = async (id) => {

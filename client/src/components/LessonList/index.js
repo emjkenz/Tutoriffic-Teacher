@@ -6,6 +6,7 @@ import { QUERY_ALL_LESSONS } from "../../utils/queries";
 import { DELETE_LESSON } from "../../utils/mutations";
 import "../../pages/cardDashboard.css";
 import { DeleteOutlined } from "@ant-design/icons";
+import { Empty } from 'antd'
 
 const LessonList = ({ lessons, title }) => {
   const [deleteLesson, { error }] = useMutation(DELETE_LESSON, {
@@ -28,7 +29,7 @@ const LessonList = ({ lessons, title }) => {
   });
 
   if (!lessons.length) {
-    return <h3>No lessons Yet</h3>;
+    return <h3 style={{margin: "30px"}}>No lessons Yet <Empty/> </h3>;
   }
 
   const handleDelete = async (id) => {
