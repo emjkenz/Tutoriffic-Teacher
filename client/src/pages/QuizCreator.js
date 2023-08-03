@@ -80,8 +80,26 @@ const QuizCreator = () => {
     }
   };
 
+  const styles = {
+    button: {
+      backgroundColor: "#e67e22",
+      color: "#fff",
+      boxShadow: '2px 2px 10px rgb(216, 215, 215)',
+    },
+    box: {
+      maxWidth: '800px',
+      margin: 'auto',
+      backgroundColor: '#f5f5f5',
+      border: '1px solid #ddd',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+      padding: '20px',
+      textAlign: 'center',
+      zIndex: 1,
+    },
+  };
+
   return (
-    <>
+    <div style={styles.box}>
       <h1>Create A Quiz</h1>
       <Form form={form}>
         <Form.Item
@@ -159,15 +177,15 @@ const QuizCreator = () => {
           ))}
         </div>
 
-        <Button onClick={addQuestion}>Add Question</Button>
-        <Button onClick={handleQuizSave}>Save Quiz</Button>
+        <Button onClick={addQuestion} style={styles.button}>Add Question</Button>
+        <Button onClick={handleQuizSave} style={styles.button}>Save Quiz</Button>
         {Object.keys(errors).map((field) => (
           <div key={field} className="error-message">
             {errors[field]}
           </div>
         ))}
       </Form>
-    </>
+    </div>
   );
 };
 

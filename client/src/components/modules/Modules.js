@@ -88,6 +88,12 @@ const Modules = () => {
       textAlign: 'center',
       zIndex: 1, // Add a higher z-index value
     },
+    button: {
+      backgroundColor: "#e67e22",
+      color: "#fff",
+      boxShadow: '2px 2px 10px rgb(216, 215, 215)',
+      marginTop: '10px',
+    },
   };
 
   return (
@@ -115,7 +121,7 @@ const Modules = () => {
               <SketchPicker color={selectedColor} onChange={handleColorChange} />
               {errors.selectedColor && <span style={{ color: 'red' }}>{errors.selectedColor}</span>}
             </div>
-            <Button onClick={handleSave}>Create Module</Button>
+            <Button onClick={handleSave} style={styles.button}>Create Module</Button>
           </Form>
 
           <div>
@@ -132,5 +138,6 @@ const Modules = () => {
 };
 
 export default Modules;
+
 
 
