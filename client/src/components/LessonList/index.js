@@ -49,12 +49,12 @@ const LessonList = ({ lessons, title }) => {
   return (
     <div>
       <h3 className="text-primary">{title}</h3>
-      <div className="flex-row justify-space-between my-4">
+      <div className="flex-row my-4" style={{justifyContent: 'center'}}>
         {lessons &&
           lessons.map((lesson) => (
-            <Card key={lesson.id} className="col-12 col-xl-6 card-dashboard enlarge">
+            <Card key={lesson.id} className="col-10 col-xl-5 card-dashboard enlarge">
               <Link className="link" to={`/lessons/${lesson.id}`}>
-                {lesson.title}
+                {lesson.title} 
               </Link>
               <Button
                 type="text"
