@@ -91,15 +91,14 @@ const Modules = () => {
   };
 
   return (
-    <>
-      <h2 styles={{marginTop: "2rem"}}>Modules</h2>
     <Row justify="center" align="middle" style={{ minHeight: '100vh', marginTop: '64px' }}>
       {/* Add a margin-top to create space between the navbar and the module content */}
       <Col xs={24} sm={20} md={16} lg={12} xl={16}>
         <div style={styles.moduleBox}>
+          <h2>Modules</h2>
           <Form>
             <Form.Item
-              label={<span style={{ fontSize: '1.15rem', fontStyle: 'italic', marginBottom: '0.8rem' }}>Module Name:</span>}
+              label={<span style={{ fontSize: '1.15rem', fontStyle: 'italic' }}>Module Name</span>}
               rules={[
                 {
                   required: true,
@@ -132,7 +131,6 @@ const Modules = () => {
         </div>
       </Col>
     </Row>
-    </>
   );
 };
 
