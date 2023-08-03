@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Card } from "antd";
 
 const ModuleList = ({ modules, title }) => {
     return (
@@ -8,15 +9,18 @@ const ModuleList = ({ modules, title }) => {
             <div className="flex-row justify-space-between my-4">
                 { modules &&
                     modules.map((module) => (
-                        <div key={module.id} className="col-12 col-xl-6"style={{ backgroundColor: module.selectedColor, margin: '0.5rem', border: "1.5px solid black" }}>
-                            <div style={{padding: "1rem 0"}}>
-                                <Link
-                                    to={`/modules/${module.id}`}
-                                    style={{color: "black"}}
-                                >
-                                    {module.moduleName}
-                                </Link>
-                            </div>
+                        <div key={module.id} >
+                                <div className="content-div">
+                                    <Card className="card content-card enlarge" style={{ backgroundColor: module.selectedColor, boxShadow: 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px'}}>
+                                    <Link
+                                        to={`/modules/${module.id}`}
+                                        style={{color: "#fff", fontSize: "1.5rem  "}}
+                                    >
+                                        {module.moduleName}
+                                    </Link>
+                                    </Card>
+                                </div>
+                            {/* </div> */}
                         </div>
                     ))}
             </div>
