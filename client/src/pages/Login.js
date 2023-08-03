@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { Row, Col } from "antd";
@@ -91,7 +91,7 @@ const LoginForm = () => {
               <div style={styles.formRow}>
                 <button type="submit" style={styles.submitButton}>
                   Submit
-                </button>
+                </button >
               </div>
             </form>
           </div>
