@@ -18,8 +18,6 @@ const QuizCreator = () => {
   const location = useLocation();
   const { moduleId } = location.state;
 
-  console.log(moduleId);
-
   const [saveQuiz] = useMutation(SAVE_QUIZ);
 
   const handleTitleChange = (e) => {

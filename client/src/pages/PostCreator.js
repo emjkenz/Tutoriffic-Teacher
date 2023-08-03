@@ -37,7 +37,6 @@ const PostCreator = () => {
 
         // Proceed with saving the post if there are no validation errors
         const dataToSend = { id: generateUniqueId(), title: postTitle, text: postText };
-        console.log(dataToSend);
 
         try {
             await savePost({

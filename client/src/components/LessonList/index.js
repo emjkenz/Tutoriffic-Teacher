@@ -48,8 +48,8 @@ const LessonList = ({ lessons, title }) => {
 
   return (
     <div>
-      <h3 className="text-primary">{title}</h3>
-      <div className="flex-row my-4" style={{justifyContent: 'center'}}>
+      <h3>Your Lessons</h3>
+      <div className="flex-row justify-space-between my-4">
         {lessons &&
           lessons.map((lesson) => (
             <Card key={lesson.id} className="col-10 col-xl-5 card-dashboard enlarge">

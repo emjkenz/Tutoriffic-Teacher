@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_LOGEDIN } from '../../utils/queries';
-import UserAvatar from "./Avatar";
+import UserAvatar from "../Avatar";
 import { Card, Row, Col  } from "antd";
 import { CalendarOutlined, MessageOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
