@@ -14,6 +14,7 @@
 This Repo contains 1/2 of the project for a virtual classroom application. This repo focuses on the Teacher side of the application that shows the teacher their Modules, Assignments, Lesson, and Calendar which will also show the current date and when the Assignments are due and when Lessons will be held. This allows the teacher to keep up with multiple school subjects/modules. There is also a forum that both students and teachers can use to ask/answer questions.
 
 ## Screenshots
+![Homepage](./client/src/assets/screenshot-Homepage.png)
 
 ![Dashboard](./client//src//assets/Dashboard.png)
 
