@@ -119,6 +119,7 @@ const styles = {
   loginSignupBox: {
     backgroundColor: '#f5f5f5',
     border: '1px solid #ddd',
+    borderRadius: '8px', // Add border radius for rounded corners
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     padding: '20px',
     textAlign: 'center',
@@ -138,11 +139,10 @@ const styles = {
     backgroundColor: '#e67e22',
     color: '#fff',
     border: 'none',
-    borderRadius: '4px', // Add border-radius for curves
+    borderRadius: '4px',
     padding: '10px 20px',
     cursor: 'pointer',
   },
 };
 
 export default SignupForm;
-

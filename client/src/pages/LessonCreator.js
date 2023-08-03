@@ -94,6 +94,7 @@ const LessonCreator = () => {
       backgroundColor: "#e67e22",
       color: "#fff",
       boxShadow: '2px 2px 10px rgb(216, 215, 215)',
+      borderRadius: '4px', // Add border-radius for curves
     },
     box: {
       maxWidth: '800px',
@@ -103,6 +104,7 @@ const LessonCreator = () => {
       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       padding: '20px',
       textAlign: 'center',
+      borderRadius: '8px', // Add border radius for rounded corners
       zIndex: 1,
     },
   };
@@ -211,6 +213,7 @@ const LessonCreator = () => {
 };
 
 export default LessonCreator;
+
 
 
 

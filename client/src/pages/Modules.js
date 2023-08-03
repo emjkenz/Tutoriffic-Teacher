@@ -85,6 +85,7 @@ const Modules = () => {
       padding: '2rem',
       textAlign: 'center',
       zIndex: 1, // Add a higher z-index value
+      borderRadius: '5px', // Add border-radius for rounded corners
     },
   };
 
@@ -116,7 +117,7 @@ const Modules = () => {
               <SketchPicker color={selectedColor} onChange={handleColorChange} />
             </div>
 
-            <Button className='enlarge' style={{backgroundColor: "#e67e22", color: "#fff", boxShadow: '2px 2px 10px rgb(216, 215, 215)', marginBottom: "2rem", fontSize: "1.15rem", paddingBottom: "2rem"}} onClick={handleSave}>Create Module</Button>
+            <Button className='enlarge' style={{backgroundColor: "#e67e22", color: "#fff", boxShadow: '2px 2px 10px rgb(216, 215, 215)', marginBottom: "2rem", fontSize: "1.15rem", paddingBottom: "2rem", borderRadius: '5px'}} onClick={handleSave}>Create Module</Button>
           </Form>
 
           <div>
