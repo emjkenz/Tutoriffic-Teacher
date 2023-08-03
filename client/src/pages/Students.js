@@ -49,7 +49,7 @@ const Students = () => {
                 </li>
                 <li>
                   Parent/Guardian Contact Details:{" "}
-                  <span className="info">{student.contactNumber}</span>
+                  <span className="info">{student.contact}</span>
                 </li>
               </ul>
             </Panel>
