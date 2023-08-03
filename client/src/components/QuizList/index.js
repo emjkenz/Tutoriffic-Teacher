@@ -50,8 +50,8 @@ const QuizList = ({ quizzes, title }) => {
     return (
 
     <div>
-      <h3 className="text-primary">{title}</h3>
-      <div className="flex-row  my-4" style={{justifyContent: 'center'}}>
+      <h3>Your Quizzes</h3>
+      <div className="flex-row justify-space-between my-4">
         {quizzes &&
           quizzes.map((quizz) => (
             <Card key={quizz.id} className="col-10 col-xl-5 card-dashboard enlarge">

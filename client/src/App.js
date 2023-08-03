@@ -13,14 +13,13 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import "./App.css";
-import Dashboard from "./components/dashboard/Dashboard";
-import Modules from "./components/modules/Modules";
+import Dashboard from "./components/Dashboard";
+import Modules from "./pages/Modules";
 import Students from "./pages/Students";
 import QuizCreator from './pages/QuizCreator';
-import ModuleCreator from "./components/modules/ModuleCreator";
 import Module from './pages/Module'
 import Grades from "./pages/Grades";
-import Navbar from "./components/navbar/Navbar";
+import Navbar from "./components/Navbar";
 import Quizzes from "./pages/QuizDashboard";
 import Quiz from "./pages/Quiz";
 import LoginPage from "./pages/Login";
@@ -128,7 +127,6 @@ const App = () => {
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
               <Route path="/modules" element={<Modules />} />
-              <Route path="/modules/add" element={<ModuleCreator />} />
               <Route path="/modules/:moduleId" element={<Module />} />
               <Route path="/quizzes" element={<Quizzes />} />
               <Route path="/quizzes/:quizId" element={<Quiz />} />

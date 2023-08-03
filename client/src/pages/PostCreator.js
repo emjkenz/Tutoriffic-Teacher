@@ -37,7 +37,6 @@ const PostCreator = () => {
 
         // Proceed with saving the post if there are no validation errors
         const dataToSend = { id: generateUniqueId(), title: postTitle, text: postText };
-        console.log(dataToSend);
 
         try {
             await savePost({
@@ -54,8 +53,26 @@ const PostCreator = () => {
         }
     };
 
+    const styles = {
+        button: {
+            backgroundColor: "#e67e22",
+            color: "#fff",
+            boxShadow: '2px 2px 10px rgb(216, 215, 215)',
+        },
+        box: {
+            maxWidth: '800px',
+            margin: 'auto',
+            backgroundColor: '#f5f5f5',
+            border: '1px solid #ddd',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+            padding: '20px',
+            textAlign: 'center',
+            zIndex: 1,
+        },
+    };
+
     return (
-        <>
+        <div style={styles.box}>
             <Form>
                 <div>
                     <Form.Item
@@ -91,12 +108,13 @@ const PostCreator = () => {
                         />
                     </Form.Item>
 
-                    <Button onClick={handlePostSave}>Create Post</Button>
+                    <Button onClick={handlePostSave} style={styles.button}>Create Post</Button>
                 </div>
             </Form>
-        </>
+        </div>
     )
 };
 
 export default PostCreator;
+
 

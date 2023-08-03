@@ -14,16 +14,24 @@ const Module = () => {
 
     const quizzesByModuleId = quizData?.quizzesByModuleId || [];
 
+    useEffect(() => {
+        quizRefetch();
+    }, [quizRefetch]);
+
     const { data: lessonData, loading: lessonLoading, error: lessonError, refetch: lessonRefetch } = useQuery(LESSON_BY_MODULE, {
         variables: { moduleId: moduleId },
     });
 
     const lessonsByModuleId = lessonData?.lessonsByModuleId || [];
 
-    console.log(lessonData);
+    useEffect(() => {
+        lessonRefetch();
+    }, [lessonRefetch]);
+
+
 
     return (
-        <>
+        <div className='main-section'>
             <div>
                 {quizLoading ? (
                     <div>Loading...</div>
@@ -32,6 +40,9 @@ const Module = () => {
                         quizzes={quizzesByModuleId}
                     />
                 )}
+                <Link to='/quizzes/add' state={{moduleId}} className='enlarge'style={styles.button}>
+                Add Quiz
+            </Link>
             </div>
 
             <div>
@@ -42,15 +53,22 @@ const Module = () => {
                     lessons={lessonsByModuleId}
                 />
                 )}
-            </div>
-            <Link to='/quizzes/add' state={{moduleId}}>
-                Add Quiz
-            </Link>
-            <Link to='/lesson/add' state={{moduleId}}>
+                <Link to='/lesson/add' state={{moduleId}} className='enlarge'style={styles.button}>
                 Add Lesson
             </Link>
-        </>
+            </div>
+        </div>
     );
 };
+
+const styles = {
+    button: {
+    backgroundColor: "#e67e22",
+    color: "#fff",
+    boxShadow: '2px 2px 10px rgb(216, 215, 215)',
+    padding: '0.5rem',
+    borderRadius: '5px',
+    }
+}
 
 export default Module;
