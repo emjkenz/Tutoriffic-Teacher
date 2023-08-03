@@ -27,12 +27,14 @@ const Posts = () => {
   return (
     <div style={styles.container}>
       <div style={styles.addSection}>
+        <Link style={styles.addLink}to={`/posts/add`}> 
         <Button className = 'enlarge' style={styles.addButton}>
           <PlusOutlined style={styles.plusIcon} />
           <div style={styles.buttonText}>
-            <Link style={styles.addLink}to={`/posts/add`}>Create Your Own Post</Link>
+           Create Your Own Post
           </div>
         </Button>
+        </Link>
       </div>
       <Divider>Forum</Divider>
       {loading ? (

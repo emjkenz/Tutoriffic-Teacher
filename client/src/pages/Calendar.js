@@ -5,6 +5,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useQuery } from '@apollo/client';
 
 import { GET_DUE_DATES, GET_LESSON_DATES  } from '../utils/queries';
+import { Col } from "antd";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
@@ -34,7 +35,7 @@ const  ReactBigCalendar = () => {
 
 
     return (
-        <div className="App" style={{padding: '30px', backgroundColor: '#fff', margin: '50px', borderRadius: '10px', marginTop: '0'}}>
+        <div className="App" style={{padding: '50px', backgroundColor: '#fff', margin: '50px', borderRadius: '10px', marginTop: '20px'}}>
             <Calendar
                 views={["day", "agenda", "work_week", "month"]}
                 selectable
@@ -42,7 +43,7 @@ const  ReactBigCalendar = () => {
                 defaultDate={new Date()}
                 defaultView="month"
                 events={eventsData}
-                style={{ height: "80vh" }}
+                style={{ height: "80vh", backgroundColor:'#fff' }}
             />
         </div>
     );

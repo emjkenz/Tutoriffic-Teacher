@@ -1,10 +1,11 @@
 .container {
   max-width: 1000px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 30px auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
-/* CSS for speech bubble card */
 .bubble {
   position: relative;
   background-color: #f5f5f5;
