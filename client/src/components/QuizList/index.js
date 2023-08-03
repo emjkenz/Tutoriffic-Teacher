@@ -50,7 +50,7 @@ const QuizList = ({ quizzes, title }) => {
     return (
 
     <div>
-      <h3 className="text-primary">{title}</h3>
+      <h3>Your Quizzes</h3>
       <div className="flex-row justify-space-between my-4">
         {quizzes &&
           quizzes.map((quizz) => (

@@ -35,7 +35,6 @@ const Module = () => {
     return (
         <div className='main-section'>
             <div>
-                <h3>Your Quizzes</h3>
                 {quizLoading ? (
                     <div>Loading...</div>
                 ) : (
@@ -49,7 +48,6 @@ const Module = () => {
             </div>
 
             <div>
-                <h3>Your Lessons</h3>
             {lessonLoading ? (
                 <div>Loading...</div>
             ) : (

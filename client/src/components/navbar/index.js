@@ -10,7 +10,7 @@ import {
   AppstoreOutlined,
   MessageOutlined 
 } from "@ant-design/icons";
-import "./Navbar.css";
+import "./navbar.css";
 
 const { SubMenu } = Menu;
 
@@ -25,25 +25,16 @@ const Navbar = () => {
         <Menu.Item key="/modules">
           <Link to="/modules">View Modules</Link>
         </Menu.Item>
-        {/* <Menu.Item key="/modules/add">
-          <Link to="/modules/add">Add Module</Link>
-        </Menu.Item> */}
       </SubMenu>
       <SubMenu key="lessons" icon={<ReadOutlined />} title="Lessons">
         <Menu.Item key="/lessons">
           <Link to="/lessons">View Lessons</Link>
         </Menu.Item>
-        {/* <Menu.Item key="/lesson/add">
-          <Link to="/lesson/add">Add Lesson</Link>
-        </Menu.Item> */}
       </SubMenu>
       <SubMenu key="quizzes" icon={<BookOutlined />} title="Quizzes">
         <Menu.Item key="/quizzes">
           <Link to="/quizzes">View Quizzes</Link>
         </Menu.Item>
-        {/* <Menu.Item key="/quizzes/add">
-          <Link to="/quizzes/add">Add Quiz</Link>
-        </Menu.Item> */}
       </SubMenu>
       <SubMenu key="students" icon={<TeamOutlined />} title="Students">
         <Menu.Item key="/students">

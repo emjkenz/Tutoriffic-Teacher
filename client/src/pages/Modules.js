@@ -3,9 +3,9 @@ import { useMutation, useQuery } from '@apollo/client';
 import { SketchPicker } from 'react-color';
 import { Form, Input, Button } from 'antd';
 import { Row, Col } from 'antd';
-import { CREATE_MODULE } from '../../utils/mutations';
-import { QUERY_MODULES, QUERY_ME } from '../../utils/queries';
-import ModuleList from '../ModuleList';
+import { CREATE_MODULE } from '../utils/mutations';
+import { QUERY_MODULES, QUERY_ME } from '../utils/queries';
+import ModuleList from '../components/ModuleList';
 
 const Modules = () => {
   const [moduleName, setModuleName] = useState('');
