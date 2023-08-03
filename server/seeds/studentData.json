@@ -1,5 +1,5 @@
 [
-  {
+{
     "id": "1",
     "firstName": "Jack",
     "lastName": "Collins",
@@ -8,8 +8,8 @@
     "parentGuardian": "Susan Collins",
     "contact": "1237890",
     "additionalInformation": ""
-  },
-  {
+},
+{
     "id": "2",
     "firstName": "Emily",
     "lastName": "Smith",
@@ -18,8 +18,8 @@
     "parentGuardian": "Paul Smith",
     "contact": "9873210",
     "additionalInformation": ""
-  }, 
-  {
+}, 
+{
 "id": "3",
 "firstName": "Oliver",
 "lastName": "Johnson",
