@@ -25,7 +25,11 @@ const quizSchema = new Schema({
   moduleId: {
     type: Schema.Types.ObjectId,
     ref: 'Module'
-  }
+  },
+  moduleColour: {
+      type: String,
+      required: true,
+  } 
 });
 
 const Quiz = model('Quiz', quizSchema);

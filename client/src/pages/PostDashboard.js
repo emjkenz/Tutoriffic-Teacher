@@ -51,10 +51,10 @@ const Posts = () => {
 
 const styles = {
 
-    container: {
-        backgroundColor: '#f5f5f5',
-        marginTop: '0'
-    },
+  container: {
+    backgroundColor: '#f5f5f5',
+    marginTop: '0'
+  },
   addSection: {
     padding: "30px",
     display: "flex",

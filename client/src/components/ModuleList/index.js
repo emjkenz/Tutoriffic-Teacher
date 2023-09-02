@@ -1,21 +1,25 @@
 import React from 'react';
+import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col } from "antd";
+import { QUERY_MODULES} from '../../utils/queries';
 
-const ModuleList = ({ modules, title }) => {
+const ModuleList = ({ title }) => {
+  const {data} = useQuery(QUERY_MODULES);
+  
     return (
   <div>
     <h3 className="text-primary">Your Modules</h3>
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-      {modules &&
-        modules.map((module) => (
+      {data.modules &&
+        data.modules.map((module) => (
           <div key={module.id} style={{ flex: '0 0 33%', maxWidth: '33%', padding: '10px' }}>
             <Card
               className="content-card enlarge"
               style={{
                 backgroundColor: module.selectedColor,
                 boxShadow: 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px',
-                height: '150px', // You can adjust the height as needed
+                height: '150px',
               }}
             >
               <Link

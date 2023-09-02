@@ -16,7 +16,7 @@ const QuizCreator = () => {
   const [errors, setErrors] = useState({});
 
   const location = useLocation();
-  const { moduleId } = location.state;
+  const { moduleId, moduleColour } = location.state;
 
   const [saveQuiz] = useMutation(SAVE_QUIZ);
 
@@ -59,7 +59,8 @@ const QuizCreator = () => {
         description: quizDescription,
         date: date,
         questions: questions,
-        moduleId: moduleId
+        moduleId: moduleId,
+        moduleColour: moduleColour
       };
       const { data } = await saveQuiz({
         variables: { quizData: dataToSend },

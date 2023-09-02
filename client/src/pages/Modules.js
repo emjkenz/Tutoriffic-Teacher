@@ -84,8 +84,8 @@ const Modules = () => {
       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       padding: '2rem',
       textAlign: 'center',
-      zIndex: 1, // Add a higher z-index value
-      borderRadius: '5px', // Add border-radius for rounded corners
+      zIndex: 1,
+      borderRadius: '5px'
     },
   };
 
@@ -124,7 +124,7 @@ const Modules = () => {
             {loading ? (
               <div>Loading...</div>
             ) : (
-              <ModuleList modules={modules} title="Your modules" />
+              <ModuleList title="Your modules" />
             )}
           </div>
         </div>

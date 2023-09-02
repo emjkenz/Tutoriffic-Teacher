@@ -12,7 +12,7 @@ const LessonCreator = () => {
   const [errors, setErrors] = useState({});
 
   const location = useLocation();
-  const { moduleId } = location.state;
+  const { moduleId, moduleColour } = location.state;
 
   const [saveLesson] = useMutation(SAVE_LESSON);
 
@@ -71,7 +71,7 @@ const LessonCreator = () => {
     }
 
     // Proceed with saving the lesson if there are no validation errors
-    const dataToSend = { id: generateUniqueId(), title: lessonTitle, date: date, sections: sections, moduleId: moduleId };
+    const dataToSend = { id: generateUniqueId(), title: lessonTitle, date: date, sections: sections, moduleId: moduleId, moduleColour: moduleColour };
 
     try {
       const { data } = await saveLesson({

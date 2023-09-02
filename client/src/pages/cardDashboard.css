@@ -7,10 +7,9 @@
 }
 
 .card-dashboard {
-  background-color: #c3deed;
+  color: #fff;
   padding: 0;
   position: relative;
-  border: 1px solid #e67e22;
   box-shadow: 2px 2px 10px rgb(216, 215, 215);
   margin: 20px;
   font-weight: 200;
@@ -30,6 +29,7 @@
 }
 
 .delete-button {
+  color: #fff;
   position: absolute;
   top: 8px;
   right: 8px;

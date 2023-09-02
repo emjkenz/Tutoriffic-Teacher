@@ -11,7 +11,7 @@ import '../../pages/cardDashboard.css'
 
 
 
-const QuizList = ({ quizzes, title }) => {
+const QuizList = ({ quizzes }) => {
     const [deleteQuiz, { error }] = useMutation(DELETE_QUIZ, {
         update(cache, { data: { removeQuiz } }) {
             try {
@@ -54,7 +54,7 @@ const QuizList = ({ quizzes, title }) => {
       <div className="flex-row justify-space-between my-4">
         {quizzes &&
           quizzes.map((quizz) => (
-            <Card key={quizz.id} className="col-10 col-xl-5 card-dashboard enlarge">
+            <Card key={quizz.id} className="col-10 col-xl-5 card-dashboard enlarge" style={{ backgroundColor: quizz.moduleColour}}>
               <Link
                 to={`/quizzes/${quizz.id}`}
                 className="link"

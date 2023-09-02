@@ -5,6 +5,7 @@ export const QUERY_ALL_QUIZZES = gql`
     quizzes {
       id
       title
+      moduleColour
     }
   }
 `;
@@ -33,6 +34,7 @@ export const QUIZ_BY_MODULE = gql`
       date
       createdBy
       moduleId
+      moduleColour
     }
   }
 `;
@@ -84,11 +86,7 @@ export const QUERY_ALL_LESSONS = gql `
     lessons {
       id
       title
-      sections {
-        heading
-        subheading
-        text
-      }
+      moduleColour
     }
   }
 `;
@@ -120,6 +118,7 @@ export const LESSON_BY_MODULE = gql `
       }
       createdBy
       moduleId
+      moduleColour
     }
   }
 `;
@@ -181,6 +180,15 @@ export const QUERY_MODULES = gql `
   query modules {
     modules {
       id
+      moduleName
+      selectedColor
+    }
+  }
+`;
+
+export const QUERY_MODULE = gql `
+  query module($moduleId: ID!) {
+    module(id: $moduleId) {
       moduleName
       selectedColor
     }

@@ -22,7 +22,11 @@ const lessonSchema = new Schema({
     moduleId: {
         type: Schema.Types.ObjectId,
         ref: 'Module'
-    }
+    },
+    moduleColour: {
+        type: String,
+        required: true,
+    } 
 });
 
 const Lesson = model('Lesson', lessonSchema);
