@@ -51,7 +51,7 @@ const Module = () => {
                 </Link>
             </div>
 
-            <div>
+            <div style={{ marginTop: '3rem' }}>
             {lessonLoading ? (
                 <div>Loading...</div>
             ) : (
