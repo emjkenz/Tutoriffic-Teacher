@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SAVE_LESSON } from '../utils/mutations';
 import { DatePicker, Form, Input, Button } from 'antd';
@@ -13,6 +13,8 @@ const LessonCreator = () => {
 
   const location = useLocation();
   const { moduleId, moduleColour } = location.state;
+
+  const navigate = useNavigate();
 
   const [saveLesson] = useMutation(SAVE_LESSON);
 
@@ -83,6 +85,8 @@ const LessonCreator = () => {
       setDate('');
       setSections([{ heading: '', subheading: '', text: '' }]);
       setErrors({});
+
+      navigate(`/modules/${moduleId}`);
     } catch (error) {
       // Handle error here if needed
       console.error(error);
@@ -131,7 +135,7 @@ const LessonCreator = () => {
         </Form.Item>
 
         <Form.Item
-          label="Due Date:"
+          label="Lesson Date:"
           rules={[
             {
               required: true,
