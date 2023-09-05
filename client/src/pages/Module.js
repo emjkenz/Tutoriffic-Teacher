@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import QuizList from '../components/QuizList';
 import LessonList from '../components/LessonList';
-import { QUIZ_BY_MODULE, LESSON_BY_MODULE } from '../utils/queries';
+import { QUIZ_BY_MODULE, LESSON_BY_MODULE, QUERY_MODULE } from '../utils/queries';
 
 const Module = () => {
     const { moduleId } = useParams();
@@ -24,6 +24,12 @@ const Module = () => {
 
     const lessonsByModuleId = lessonData?.lessonsByModuleId || [];
 
+    const { data: moduleData, loading: moduleLoading, error: moduleError, refetch: moduleRefetch } = useQuery(QUERY_MODULE, {
+        variables: { moduleId: moduleId },
+    });
+
+    const moduleColour = moduleData?.module?.selectedColor;
+
     useEffect(() => {
         lessonRefetch();
     }, [lessonRefetch]);
@@ -40,12 +46,12 @@ const Module = () => {
                         quizzes={quizzesByModuleId}
                     />
                 )}
-                <Link to='/quizzes/add' state={{moduleId}} className='enlarge'style={styles.button}>
+                <Link to='/quizzes/add' state={{moduleId, moduleColour}} className='enlarge'style={styles.button}>
                 Add Quiz
-            </Link>
+                </Link>
             </div>
 
-            <div>
+            <div style={{ marginTop: '3rem' }}>
             {lessonLoading ? (
                 <div>Loading...</div>
             ) : (
@@ -53,7 +59,7 @@ const Module = () => {
                     lessons={lessonsByModuleId}
                 />
                 )}
-                <Link to='/lesson/add' state={{moduleId}} className='enlarge'style={styles.button}>
+                <Link to='/lesson/add' state={{moduleId, moduleColour}} className='enlarge'style={styles.button}>
                 Add Lesson
             </Link>
             </div>

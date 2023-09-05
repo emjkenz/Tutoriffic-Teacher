@@ -42,7 +42,6 @@ const Posts = () => {
       ) : (
         <PostList
           posts={posts}
-          title="Here's the current list of available posts..."
         />
       )}
     </div>
@@ -51,10 +50,10 @@ const Posts = () => {
 
 const styles = {
 
-    container: {
-        backgroundColor: '#f5f5f5',
-        marginTop: '0'
-    },
+  container: {
+    backgroundColor: '#f5f5f5',
+    marginTop: '0'
+  },
   addSection: {
     padding: "30px",
     display: "flex",

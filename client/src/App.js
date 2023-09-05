@@ -60,59 +60,25 @@ const client = new ApolloClient({
 });
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(null);
+  const token = localStorage.getItem("id_token");
+  // Initialize loggedIn state
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn()); 
 
-    useEffect(() => {
-    const token = localStorage.getItem("id_token");
-    setLoggedIn(Boolean(token));
-  }, []);
-
-  useEffect(() => {
-    setLoggedIn(isLoggedIn());
-  }, []);
-
-    const handleLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem('id_token');
-    setLoggedIn(false);
+    // Update the loggedIn state when logging out
+    setLoggedIn(false); 
   };
-
-  if (!loggedIn) {
-    return (
-      <Router>
-        <ApolloProvider client={client}>
-          <div className="app">
-            <header>
-              <div class="header-image">
-                <div class="overlay">
-                  <div class="heading">
-                    <a href="/">T U T O R I F F I C</a>
-                  </div>
-                  <p>teacher</p>
-                </div>
-              </div>
-            </header>
-            <main>
-              <Routes>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignupPage /> }/>
-                <Route path="/*" element={<Navigate to="/login" />} />
-              </Routes>
-            </main>
-          </div>
-        </ApolloProvider>
-      </Router>
-    );
-  }
 
   return (
     <Router>
       <ApolloProvider client={client}>
         <div className="app">
           <header>
-            <div class="header-container">
-            <div class="header-image">
-              <div class="overlay">
-                <div class="heading">
+            <div className="header-container">
+            <div className="header-image">
+              <div className="overlay">
+                <div className="heading">
                   <a href="/">T U T O R I F F I C</a>
                 </div>
                 <p>teacher</p>
@@ -126,24 +92,35 @@ const App = () => {
           </nav>
           <main>
             <Routes>
-              <Route exact path="/" element={<Dashboard />} />
-              <Route path="/modules" element={<Modules />} />
-              <Route path="/modules/:moduleId" element={<Module />} />
-              <Route path="/quizzes" element={<Quizzes />} />
-              <Route path="/quizzes/:quizId" element={<Quiz />} />
-              <Route path="/quizzes/add" element={<QuizCreator />} />
-              <Route path="/students" element={<Students />} />
-              <Route path="/students/grades" element={<Grades />} />
+              {/* Public routes accessible to all */}
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/lesson/add" element={<LessonCreator />} />
-              <Route path="/lessons" element={<Lessons />} />
-              <Route path="/lessons/:lessonId" element={<Lesson />} />
-              <Route path="/posts/add" element={<PostCreator />} />
-              <Route path="/posts" element={<Posts />} />
-              <Route path="/posts/:postId" element={<Post />} />
+
+              {/* Private routes accessible only when logged in */}
+              {loggedIn ? (
+                <>
+                  <Route exact path="/" element={<Dashboard />} />
+                  <Route path="/modules" element={<Modules />} />
+                  <Route path="/modules/:moduleId" element={<Module />} />
+                  <Route path="/quizzes" element={<Quizzes />} />
+                  <Route path="/quizzes/:quizId" element={<Quiz />} />
+                  <Route path="/quizzes/add" element={<QuizCreator />} />
+                  <Route path="/students" element={<Students />} />
+                  <Route path="/students/grades" element={<Grades />} />
+                  <Route path="/calendar" element={<Calendar />} />
+                  <Route path="/lesson/add" element={<LessonCreator />} />
+                  <Route path="/lessons" element={<Lessons />} />
+                  <Route path="/lessons/:lessonId" element={<Lesson />} />
+                  <Route path="/posts/add" element={<PostCreator />} />
+                  <Route path="/posts" element={<Posts />} />
+                  <Route path="/posts/:postId" element={<Post />} />
+                </>
+              ) : (
+                // Redirect to login if not logged in
+                <Route path="/*" element={<Navigate to="/login" />} />
+              )}
             </Routes>
+
           </main>
         </div>
 

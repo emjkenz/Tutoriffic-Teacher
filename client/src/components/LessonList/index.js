@@ -8,7 +8,7 @@ import "../../pages/cardDashboard.css";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Empty } from 'antd'
 
-const LessonList = ({ lessons, title }) => {
+const LessonList = ({ lessons }) => {
   const [deleteLesson, { error }] = useMutation(DELETE_LESSON, {
     update(cache, { data: { removeLesson } }) {
       try {
@@ -46,14 +46,13 @@ const LessonList = ({ lessons, title }) => {
     }
   };
 
-
   return (
     <div>
       <h3>Your Lessons</h3>
       <div className="flex-row justify-space-between my-4">
         {lessons &&
           lessons.map((lesson) => (
-            <Card key={lesson.id} className="col-10 col-xl-5 card-dashboard enlarge">
+            <Card key={lesson.id} className="col-10 col-xl-5 card-dashboard enlarge" style={{ backgroundColor: lesson.moduleColour}}>
               <Link className="link" to={`/lessons/${lesson.id}`}>
                 {lesson.title} 
               </Link>

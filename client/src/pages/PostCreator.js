@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SAVE_POST } from '../utils/mutations';
 import { Form, Input, Button } from 'antd';
@@ -8,6 +9,8 @@ const PostCreator = () => {
     const [postTitle, setPostTitle] = useState('');
     const [postText, setPostText] = useState('');
     const [errors, setErrors] = useState({});
+
+    const navigate = useNavigate();
 
     const [savePost] = useMutation(SAVE_POST);
 
@@ -47,6 +50,8 @@ const PostCreator = () => {
             setPostTitle('');
             setPostText('');
             setErrors({});
+
+            navigate(`/posts`);
         } catch (error) {
             // Handle error here if needed
             console.error(error);

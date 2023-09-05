@@ -28,7 +28,6 @@ const Lessons = () => {
             ) : (
                 <LesssonList
                     lessons={lessons}
-                    title="Here's the current list of avilable lessons..."
                 />
             )}
         </div>

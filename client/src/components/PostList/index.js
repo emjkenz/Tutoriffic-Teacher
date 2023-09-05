@@ -58,7 +58,11 @@ const PostList = ({ posts, title }) => {
                                         to={`/posts/${post.id}`}
                                     >
                                         {post.title}
+                                    <div style={{ textAlign: "end", fontSize: "1rem", fontWeight: "400" }}>
+                                        ~ {post.createdBy}
+                                    </div>
                                     </Link>
+
                                     <Button style={styles.deleteButton} onClick={() => handleDelete(post.id)}>  <DeleteOutlined />  Delete</Button>
                                 </div>
                             </div>
@@ -95,7 +99,7 @@ container: {
   titleLink: {
     display: 'block',
     width: '100%',
-    height: '80%',
+    height: '100%',
     backgroundColor: '#9cb9ca',
     color: 'black',
     fontWeight: '900',

@@ -16,8 +16,8 @@ const postSchema = new Schema({
     },
     comments: [commentSchema],
     createdBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true,
     }
 });
 

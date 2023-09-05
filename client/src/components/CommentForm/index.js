@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_LOGEDIN } from '../../utils/queries';
 import { ADD_COMMENT } from '../../utils/mutations';
 import { Form, Input, Button } from 'antd';
 import '../card.css'
@@ -9,6 +10,15 @@ const CommentForm = ({ postId }) => {
     const [errors, setErrors] = useState({});
 
     const [addComment] = useMutation(ADD_COMMENT);
+
+    const { data, loading, error } = useQuery(QUERY_LOGEDIN);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    
+    const user = data.loggedInUser;
+    const userName = `${user.firstName} ${user.lastName}`
 
     const handleTextChange = (e) => {
         setCommentText(e.target.value);
@@ -29,7 +39,7 @@ const CommentForm = ({ postId }) => {
 
         // Proceed with saving the comment if there are no validation errors
         await addComment({
-            variables: { postId: postId, comment: { text: commentText } }
+            variables: { postId: postId, comment: { text: commentText, createdBy: userName } }
         });
 
         setCommentText('');

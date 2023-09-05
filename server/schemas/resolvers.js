@@ -89,6 +89,13 @@ const resolvers = {
 
       return userModules;
     },
+    module: async (parent, { id }) => {
+      const foundModule = await Module.findOne({ _id: id });
+      if (!foundModule) {
+        throw new Error('Cannot find a module with this id!');
+      }
+      return foundModule;
+    },
     me: async (parent, args, context) => {
         if (context.user) {
             return User.findOne({ _id: context.user._id });
@@ -102,7 +109,7 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in to create a quiz.');
       }
 
-      const { id, title, description, date, questions, moduleId } = quizData;
+      const { id, title, description, date, questions, moduleId, moduleColour } = quizData;
 
       return await Quiz.create({
         id,
@@ -111,7 +118,8 @@ const resolvers = {
         date,
         questions,
         createdBy: user._id,
-        moduleId
+        moduleId,
+        moduleColour
       })
     }, 
     removeQuiz: async (parent, { id }) => {
@@ -132,7 +140,7 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in to create a quiz.');
       }
 
-      const { id, title, date, sections, moduleId } = lessonData;
+      const { id, title, date, sections, moduleId, moduleColour } = lessonData;
 
       return await Lesson.create({
         id,
@@ -140,7 +148,8 @@ const resolvers = {
         date,
         sections,
         createdBy: user._id,
-        moduleId
+        moduleId,
+        moduleColour
       })
     },
     removeLesson: async (parent, { id }) => {
@@ -167,7 +176,7 @@ const resolvers = {
         id,
         title,
         text,
-        createdBy: user._id
+        createdBy: `${user.firstName} ${user.lastName}`
       });
     },
     removePost: async (parent, { id }) => {
@@ -183,7 +192,11 @@ const resolvers = {
 
       return { id, title, text, comments };
     },
-    addCommentToPost: async (parent, { postId, comment }) => {
+    addCommentToPost: async (parent, { postId, comment }, { user }) => {
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to create a post.');
+      }
+
       try {
         const post = await Post.findOne({ id: postId });
         if (!post) {
@@ -192,6 +205,7 @@ const resolvers = {
 
         const newComment = {
           text: comment.text,
+          createdBy: comment.createdBy
         };
 
         post.comments.push(newComment);

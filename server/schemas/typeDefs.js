@@ -23,6 +23,7 @@ const typeDefs = gql`
     questions: [Questions]!
     createdBy: ID!
     moduleId: ID!
+    moduleColour: String!
 
   }
 
@@ -49,6 +50,7 @@ const typeDefs = gql`
     date: String!
     questions: [QuestionInput!]!
     moduleId: ID!
+    moduleColour: String!
 
   }
 
@@ -71,6 +73,7 @@ const typeDefs = gql`
     sections: [Sections]!
     createdBy: ID!
     moduleId: ID!
+    moduleColour: String!
   }
 
   type Sections {
@@ -85,6 +88,7 @@ const typeDefs = gql`
     date: String!
     sections: [SectionInput]!
     moduleId: ID!
+    moduleColour: String!
   }
 
   input SectionInput {
@@ -98,12 +102,13 @@ const typeDefs = gql`
     title: String!
     text: String!
     comments: [Comments]
-    createdBy: ID!
+    createdBy: String!
   }
 
   type Comments {
     _id: ID!
     text: String!
+    createdBy: String!
   }
 
   input PostInput {
@@ -115,6 +120,7 @@ const typeDefs = gql`
 
   input CommentInput {
     text: String!
+    createdBy: String!
   }
 
   type Module {
@@ -143,6 +149,7 @@ const typeDefs = gql`
     users: [User]
     loggedInUser: User
     modules: [Module]
+    module(id: ID!): Module
     quizzesByModuleId(moduleId: ID!): [Quiz]
     lessonsByModuleId(moduleId: ID!): [Lesson]
     me: User
