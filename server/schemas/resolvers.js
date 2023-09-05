@@ -170,6 +170,8 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in to create a post.');
       }
 
+      console.log(`${user.firstName} ${user.lastName}`);
+
       const { id, title, text } = postData;
 
       return await Post.create({
