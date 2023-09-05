@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, Row, Col } from "antd";
 import { QUERY_MODULES} from '../../utils/queries';
 
-const ModuleList = ({ title }) => {
+const ModuleList = () => {
   const {data} = useQuery(QUERY_MODULES);
   
     return (

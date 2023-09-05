@@ -124,7 +124,7 @@ const Modules = () => {
             {loading ? (
               <div>Loading...</div>
             ) : (
-              <ModuleList title="Your modules" />
+              <ModuleList />
             )}
           </div>
         </div>

@@ -102,12 +102,13 @@ const typeDefs = gql`
     title: String!
     text: String!
     comments: [Comments]
-    createdBy: ID!
+    createdBy: String!
   }
 
   type Comments {
     _id: ID!
     text: String!
+    createdBy: String!
   }
 
   input PostInput {
@@ -119,6 +120,7 @@ const typeDefs = gql`
 
   input CommentInput {
     text: String!
+    createdBy: String!
   }
 
   type Module {

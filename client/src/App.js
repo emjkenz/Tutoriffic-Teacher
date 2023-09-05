@@ -70,8 +70,6 @@ const App = () => {
     setLoggedIn(false); 
   };
 
-  console.log("loggedIn: ", loggedIn)
-
   return (
     <Router>
       <ApolloProvider client={client}>

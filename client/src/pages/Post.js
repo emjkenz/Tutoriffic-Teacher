@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
 import { Card } from "antd";
-import { QUERY_POST, QUERY_COMMENTS_BY_POST } from "../utils/queries";
+import { QUERY_POST } from "../utils/queries";
 import "./forum.css";
 
 const Post = () => {
@@ -26,6 +26,7 @@ const Post = () => {
       <Card className="bubble post">
         <h2>{post.title}</h2>
         <h4>{post.text}</h4>
+        <h6 style={{fontSize: "0.95rem", textAlign: "start", fontWeight: "400", paddingLeft: "1.3rem"}}>~ {post.createdBy}</h6>
       </Card>
     </div>
     <div className="comment-container"> 
@@ -35,8 +36,6 @@ const Post = () => {
           <CommentList
             className="comment-list"
             postId={postId}
-            comments={post.comments}
-            title="Here's the current list of avilable comments..."
           />
         )}
         </div>

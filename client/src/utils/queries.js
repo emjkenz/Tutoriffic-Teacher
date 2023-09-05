@@ -138,6 +138,7 @@ export const QUERY_ALL_POSTS = gql `
       id
       title
       text
+      createdBy
     }
   } 
 `;
@@ -148,6 +149,7 @@ export const QUERY_POST = gql `
       id
       title
       text
+      createdBy
       comments {
         _id
         text
@@ -162,6 +164,7 @@ export const QUERY_COMMENTS_BY_POST = gql`
       comments {
         _id
         text
+        createdBy
       }
     }
   }

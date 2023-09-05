@@ -170,15 +170,13 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in to create a post.');
       }
 
-      console.log(`${user.firstName} ${user.lastName}`);
-
       const { id, title, text } = postData;
 
       return await Post.create({
         id,
         title,
         text,
-        createdBy: user._id
+        createdBy: `${user.firstName} ${user.lastName}`
       });
     },
     removePost: async (parent, { id }) => {
@@ -194,7 +192,11 @@ const resolvers = {
 
       return { id, title, text, comments };
     },
-    addCommentToPost: async (parent, { postId, comment }) => {
+    addCommentToPost: async (parent, { postId, comment }, { user }) => {
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to create a post.');
+      }
+
       try {
         const post = await Post.findOne({ id: postId });
         if (!post) {
@@ -203,6 +205,7 @@ const resolvers = {
 
         const newComment = {
           text: comment.text,
+          createdBy: comment.createdBy
         };
 
         post.comments.push(newComment);

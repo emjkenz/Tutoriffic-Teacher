@@ -42,7 +42,6 @@ const Posts = () => {
       ) : (
         <PostList
           posts={posts}
-          title="Here's the current list of available posts..."
         />
       )}
     </div>
